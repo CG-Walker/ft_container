@@ -22,7 +22,7 @@ public:
 
 	stack & operator=( const stack & other );
 	{
-		c = other.c;
+		this->c = other.c;
 		return(*this);
 	}
 
@@ -39,7 +39,7 @@ public:
 	// Capacity
 	bool empty() const
 	{
-		if (size() == 0)
+		if (this->c.size() == 0)
 			return (true);
 		else
 			return (false);
@@ -47,18 +47,18 @@ public:
 
 	size_type size() const
 	{
-		return (c.size());
+		return (this->c.size());
 	}
 
 	// Modifiers
 	void push( const value_type & value )
 	{
-		c.push_back(value)
+		this->c.push_back(value)
 	}
 
 	void pop()
 	{
-		c.pop_back();
+		this->c.pop_back();
 	}
 
 private:
@@ -69,7 +69,7 @@ private:
 template< class T, class Container >
 bool operator==( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-	if (lhs == rhs) // .c ou pas ?
+	if (lhs.c == rhs.c)
 		return (true);
 	else
 		return (false);
@@ -78,7 +78,7 @@ bool operator==( const ft::stack<T,Container> & lhs, const ft::stack<T,Container
 template< class T, class Container >
 bool operator!=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-	if (lhs != rhs)
+	if (lhs.c != rhs.c)
 		return (true);
 	else
 		return (false);
@@ -87,7 +87,7 @@ bool operator!=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container
 template< class T, class Container >
 bool operator<( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-  	if (lhs < rhs)
+  	if (lhs.c < rhs.c)
 		return (true);
 	else
 		return (false);
@@ -96,7 +96,7 @@ bool operator<( const ft::stack<T,Container> & lhs, const ft::stack<T,Container>
 template< class T, class Container >
 bool operator<=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-  	if (lhs <= rhs)
+  	if (lhs.c <= rhs.c)
 		return (true);
 	else
 		return (false);
@@ -105,7 +105,7 @@ bool operator<=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container
 template< class T, class Container >
 bool operator>( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-  	if (lhs > rhs)
+  	if (lhs.c > rhs.c)
 		return (true);
 	else
 		return (false);
@@ -114,10 +114,10 @@ bool operator>( const ft::stack<T,Container> & lhs, const ft::stack<T,Container>
 template< class T, class Container >
 bool operator>=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 {
-  	if (lhs >= rhs)
+  	if (lhs.c >= rhs.c)
 		return (true);
 	else
 		return (false);
 }
 
-} // Namespace FT
+} // Namespace ft
