@@ -1,7 +1,7 @@
 CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = Ft_container
+NAME = ft_container
 SRC_STACK = tester_stack.cpp
 
 all: $(NAME)
