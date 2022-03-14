@@ -12,23 +12,28 @@ public:
 	// Destructeur
     ~stack();
 	// Operator =
-    stack& operator=( const stack& other );
+    stack& operator=( const stack& other )
     {
         c = other.c;
         return(*this);
     }
 	// Top
-    reference top();
+    reference top()
     { 
          return (this->ct.back());
     }
-    const_reference top() const;
+    const_reference top() const
     { 
          return (this->ct.back());
     }
 	// Empty
 	// Size
 	// Push
+    void push( const value_type& value )
+    {
+        c.push_back(value)
+    }
+
 	// Pop
 private:
 
