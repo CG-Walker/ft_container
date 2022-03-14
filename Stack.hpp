@@ -17,10 +17,10 @@ namespace ft
 			typedef typename Container::const_reference		const_reference;
 
 			// Constructors, Destructor & Operator
-			explicit stack( const Container & cont = Container() );
-			stack( const stack & other );
+			explicit stack( const Container & cont = Container() ) : c(cont) {};
+			stack( const stack & other ) : c(other.c) {};
 
-			~stack();
+			~stack() {};
 
 			stack & operator=( const stack & other )
 			{
