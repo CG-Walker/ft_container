@@ -60,6 +60,23 @@ namespace ft
 				this->c.pop_back();
 			}
 
+			template <class Tn, class ContainerN>
+				friend bool operator== (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+				friend bool operator!= (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
+			
+			template <class Tn, class ContainerN>
+				friend bool operator< (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+				friend bool operator<= (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+				friend bool operator> (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
+
+			template <class Tn, class ContainerN>
+				friend bool operator>= (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
 		private:
 			Container c;
 	}; // Class Vector
@@ -68,37 +85,37 @@ namespace ft
 	template< class T, class Container >
 	bool operator==( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c == rhs.c)
+		return (lhs.c == rhs.c);
 	}
 
 	template< class T, class Container >
 	bool operator!=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c != rhs.c)
+		return (lhs.c != rhs.c);
 	}
 
 	template< class T, class Container >
 	bool operator<( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c < rhs.c)
+		return (lhs.c < rhs.c);
 	}
 
 	template< class T, class Container >
 	bool operator<=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c <= rhs.c)
+		return (lhs.c <= rhs.c);
 	}
 
 	template< class T, class Container >
 	bool operator>( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c > rhs.c)
+		return (lhs.c > rhs.c);
 	}
 
 	template< class T, class Container >
 	bool operator>=( const ft::stack<T,Container> & lhs, const ft::stack<T,Container> & rhs )
 	{
-		return (lhs.c >= rhs.c)
+		return (lhs.c >= rhs.c);
 	}
 } // Namespace ft
 

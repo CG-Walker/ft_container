@@ -34,4 +34,18 @@ int main(void)
 	std::cout << "___TEST OPERATOR = ___" << std::endl;
 	std::cout << tmp.size() << std::endl;
 	std::cout << ft_stack.size() << std::endl;
+
+	std::cout << "___TEST construtor by copy ___" << std::endl;
+	ft::stack<int> clone(ft_stack);
+	std::cout << clone.size() << std::endl;
+
+	tmp.pop();
+	if (clone == ft_stack)
+		std::cout << "clone == ft_stack" << std::endl;
+	if (tmp != clone)
+		std::cout << "tmp != clone" << std::endl;
+	if (clone > tmp)
+		std::cout << "clone > tmpk" << std::endl;
+	if (tmp < clone)
+		std::cout << "tmp < clone" << std::endl;
 }

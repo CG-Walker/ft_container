@@ -9,11 +9,12 @@ all: $(NAME)
 $(NAME): $(SRC_STACK)
 	$(CPP) $(CPPFLAGS) $^ -o $@
 	
-STACK : $(SRC_STACK)
+stack : $(SRC_STACK)
 		$(CPP) $(CPPFLAGS) $^ -o $@
+		./stack
 
 clean:
-	rm -f $(NAME)
+	rm -f $(NAME) stack
 
 fclean: clean
 
