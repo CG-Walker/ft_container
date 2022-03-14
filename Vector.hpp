@@ -5,7 +5,7 @@
 
 namespace ft
 {
-	template <class T, class Allocator = std::allocator<T>>
+	template <class T, class Allocator = std::allocator<T> >
 	class vector
 	{
 		public:
@@ -24,12 +24,12 @@ namespace ft
 			//typedef typename const_reverse_iterator			const_iterator;		// À implémenter
 
 			// Constructors, Destructor & Operator
-			vector();
+			vector() : _ptr(nullptr), _size(0), _capacity(0) {};
 			explicit vector( const Allocator & alloc );
 			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator());
 			vector( const vector & other );
 			
-			~vector();
+			~vector() {};
 
 			// Element access
 
@@ -38,7 +38,7 @@ namespace ft
 			// Capacity
 			void reserve( size_type new_cap )
 			{
-				if (new_cap <= this->capacity() || new_cap == 0)
+				if (new_cap <= this->_capacity || new_cap == 0)
 					return ;
 				allocator_type alloc;
 				pointer new_ptr;
