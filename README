@@ -1,0 +1,16 @@
+Sites références :
+
+- cplusplus.com
+- cppreference.com
+
+
+2 itérateurs
+
+reverse_iterator compatible avec iterator de vector et iterator de map
+
+enable_if
+is_integral
+equal et/ou lexicographical_compare
+std::pair juste pour map
+
+st::uninitialized_copy
