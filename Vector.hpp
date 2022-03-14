@@ -18,27 +18,46 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
-			//typedef typename iterator							iterator;		// À implémenter
-			//typedef typename const_iterator					const_iterator;	// À implémenter
-			//typedef typename reverse_iterator					iterator;		// À implémenter
-			//typedef typename const_reverse_iterator			const_iterator;	// À implémenter
-
+			//typedef typename iterator							iterator;			// À implémenter
+			//typedef typename const_iterator					const_iterator;		// À implémenter
+			//typedef typename reverse_iterator					reverse_iterator;	// À implémenter
+			//typedef typename const_reverse_iterator			const_iterator;		// À implémenter
 
 			// Constructors, Destructor & Operator
+			vector();
+			explicit vector( const Allocator & alloc );
+			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator());
+			vector( const vector & other );
+			
+			~vector();
 
 			// Element access
 
 			// Iterators
 
 			// Capacity
-
+			void reserve( size_type new_cap )
+			{
+				if (new_cap <= this->capacity() || new_cap == 0)
+					return ;
+				allocator_type alloc;
+				pointer new_ptr;
+				new_ptr = alloc.allocate(new_cap);
+				for (size_type i = 0; i < this->_size; i++)
+				{
+					alloc.construct(& new_ptr[i], this->_ptr[i]);
+					alloc.destroy(& this->_ptr[i]);
+				}
+				alloc.deallocate(this->_ptr, this->_capacity);
+				this->_ptr = new_ptr;
+				this->_capacity = new_cap;
+			}
 			// Modifiers
 
 		private:
-			allocator_type	_alloc;
-			pointer 		_ptr;
-			size_t			_size;
-			size_t			_capacity;
+			pointer			_ptr;
+			size_type		_size;
+			size_type		_capacity;
 	}; // class Vector
 
 	// Non-member functions
