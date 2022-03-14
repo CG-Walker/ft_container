@@ -28,11 +28,11 @@ public:
 	// Top
     reference top()
     { 
-         return (this->ct.back());
+         return (this->c.back());
     }
     const_reference top() const
     { 
-         return (this->ct.back());
+         return (this->c.back());
     }
 	// Empty
 	bool empty() const
@@ -52,13 +52,27 @@ public:
     {
         c.push_back(value)
     }
-
 	// Pop
+    void pop()
+    {
+        c.pop_back();
+    }
+
 private:
 
 }; // Class Vector
 
 // Fonctions non membre :
 // == != < <= > >=
+
+//!=
+template< class T, class Container >
+bool operator!=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )
+{
+    if(lhs != rhs)
+        return(true);
+    else
+        return(false);
+}
 
 } // Namespace FT
