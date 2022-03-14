@@ -41,10 +41,7 @@ namespace ft
 			// Capacity
 			bool empty() const
 			{
-				if (this->c.size() == 0)
-					return (true);
-				else
-					return (false);
+				return (this->c.empty());
 			};
 
 			size_type size() const
