@@ -6,7 +6,7 @@
 namespace ft
 {
     template <typename T>
-	class Iterator
+	class iterator
     {
         public:
             typedef std::random_access_iterator_tag iterator_category;
@@ -16,13 +16,13 @@ namespace ft
             typedef std::ptrdiff_t                  difference_type;
 
             // constructor and destructor
-            Iterator(void) : _ptr(NULL) {};
-            Iterator(const Iterator & other) {};
-            ~Iterator(void) {};
+            iterator(void) : _ptr(NULL) {};
+            iterator(const iterator & other) {};
+            ~iterator(void) {};
 
         private:
             pointer _ptr;
-            //Iterator(pointer elem) : _ptr(elem);  
+            //iterator(pointer elem) : _ptr(elem);  
     };
 }
 
