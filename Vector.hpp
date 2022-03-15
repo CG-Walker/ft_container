@@ -70,6 +70,24 @@ namespace ft
 				return (*this);
 			}
 
+			allocator_type get_allocator() const { return this->_alloc };
+
+			void assign( size_type count, const T & value )
+			{
+				if (count > this->_capacity)
+				{
+					this->clear();
+					this->reserve(count);
+		            std::uninitialized_fill_n(this->_first, count, value);
+				}
+				else
+				{
+					this->clear();
+					std::fill_n(this->_first, count, value);
+				}
+				this->_last = this->_first + count;
+			}
+
 			// Element access
 			reference at( size_type pos ) 
 			{
@@ -86,6 +104,18 @@ namespace ft
 			}
 
 			reference operator[]( size_type pos ) {	return *(this->_first + pos);	};
+
+			reference front() { return *(this->begin()) };
+
+			const_reference front() const { return *(this->begin()) };
+
+			reference back() { return *(this->end() - 1) };
+
+			const_reference back() const { return *(this->end() - 1) };
+
+			T * data() { return (this->_first); };
+
+			const T * data() const { return (this->_first); };
 
 			// Iterators
 			iterator begin() { return iterator(this->_first); };
@@ -109,7 +139,10 @@ namespace ft
 
 			size_type size() const { return (this->_last - this->_first); };
 
-			size_type max_size() const; // À implémenter
+			size_type max_size() const;
+			{
+				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), this->_alloc.max_size()));
+			}
 
 			void reserve( size_type new_cap )
 			{
@@ -132,9 +165,50 @@ namespace ft
 			// Modifiers
 			void clear()
 			{
-				for (pointer now = this->_first; now != this->_last; now++)
-					this->_alloc.destroy(now);
+				pointer now = this->_last;
+				while (now != this->_first)
+				{
+					this->_alloc.destroy(--now);
+				}
+				this->_last = this->_first;
 			}
+
+			iterator insert( iterator pos, const value_type & value ); // TODO
+
+			void insert( iterator pos, size_type count, const value_type & value ) // TODO
+			{
+				size_type new_size = this->size() + count;
+				size_type offset = pos - begin();
+				
+				if (new_size > this->_capacity)
+				{
+					new_size = calc_new_capacity(new_size);
+					size_type old_capacity = this->_capacity;
+					size_type old_size = this->size();
+					pointer new_first = this->_alloc.allocate(new_size);
+
+					std::uninitialized_copy(this->begin(), pos, new_first);
+					std::uninitialized_fill_n(new_first + offset, count, value);
+					std::uninitialized_copy(pos, this->end(), new_first + offset + count);
+
+					clear();
+					this->_alloc.deallocate(this->_first, old_capacity);
+					this->_first = new_first;
+					this->_last = first + old_size + count;
+					this->_capacity = first + new_size;
+				}
+				else
+				{
+					// Tout décaler
+				}
+			}
+
+			template <class InputIt>
+			void insert( iterator pos, InputIt first, InputIt last ); // TODO
+
+			iterator erase( iterator pos ); // TODO
+
+			iterator erase( iterator first, iterator last ); // TODO
 
 			void push_back( const value_type & value )
 			{
@@ -145,53 +219,32 @@ namespace ft
 				this->_last++;
 			}
 
-			iterator insert( iterator pos, const value_type & value );
+			void pop_back(); // TODO
 
-			void insert( iterator pos, size_type count, const value_type & value )
-			{
-				size_type new_size = this->size() + count;
-				size_type offset = pos - begin();
-				
-				if (new_size > this->_capacity)
-				{
-					std::cout << "TODO\n";
-				}
-				else
-				{
-					for (size_type i = 0; i < count; i++)
-					{
-						if (offset + i >= this->size())
-						{
-							this->_alloc.construct(&this->_first[offset + i], value);
-						}
-						else
-						{
-							this->_first[offset + 1] = value;
-						}
-					}
-					
-				}
-			}
+			void resize( size_type count ); // TODO
 
-			//template <class InputIt>
-			//void insert( iterator pos, InputIt first, InputIt last );
+			void resize( size_type count, T value = T() ); // TODO
 
- 			size_type calc_new_capacity(size_type new_cap)
-        	{
-				size_type max_cap = 500;//max_size();
-				if (new_cap > max_cap)
-					throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
-				size_type cap = this->_capacity;
-				if (cap >= max_cap / 2)
-					return max_cap;
-				return std::max(cap * 2, new_cap);
-       		}
+			void swap( vector& other ); // TODO
 
 		private:
 			allocator_type	_alloc;
 			pointer			_first;
 			pointer			_last;
 			size_type		_capacity;
+
+		// Private member functions
+
+		size_type calc_new_capacity(size_type new_cap)
+        {
+			size_type max_cap = max_size();
+			if (new_cap > max_cap)
+				throw std::length_error("allocator<T>::allocate(size_t n) 'n' exceeds maximum supported size");
+			size_type cap = this->_capacity;
+			if (cap >= max_cap / 2)
+				return max_cap;
+			return std::max(cap * 2, new_cap);
+       	}
 	}; // class Vector
 
 	// Non-member functions
