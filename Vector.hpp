@@ -218,7 +218,11 @@ namespace ft
 				this->_last++;
 			}
 
-			void pop_back(); // TODO
+			void pop_back()
+			{
+				this->_alloc.destroy((this->_last - 1));
+				this->_last--;
+			}
 
 			void resize( size_type count ); // TODO
 
