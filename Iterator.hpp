@@ -19,7 +19,7 @@ namespace ft
 			// constructor and destructor
 			iterator(void) : _ptr(NULL) {};
 			iterator(pointer elem) : _ptr(elem) {};
-			iterator(const _iterator & other) {};
+			//iterator(const _iterator & other) {};
 			~iterator(void) {};
 
 			_iterator &operator=(const _iterator &other)
