@@ -59,14 +59,14 @@ namespace ft
 			_iterator operator++(int)
 			{
 				iterator ite = *this;
-				++(*this)->_ptr;
-				return(*ite);
+				++this->_ptr;
+				return ite;
 			}
 	
 			_iterator operator--(int)
 			{
 				iterator ite = *this;
-				--(*this)->_ptr;
+				--this->_ptr;
 				return(*ite);
 			}
 
@@ -99,7 +99,7 @@ namespace ft
 		template <typename _T>
 		friend bool operator<=(const iterator<_T> &lhs, const iterator<_T> &rhs);
 
-		private:
+		protected:
 			pointer _ptr;
 	};
 	template <typename T>

@@ -6,18 +6,19 @@
 
 namespace ft
 {
-template <typename T>
-	class reverse_iterator
+template <class T>
+	class reverse_iterator : public ft::iterator<T>
 	{
 	public:
 		typedef T										iterator_type;
 		typedef typename iterator<T>::difference_type	difference_type;
 		typedef typename iterator<T>::value_type		value_type;
 		typedef typename iterator<T>::reference			reference;
+		typedef typename iterator<T>::pointer			pointer;
 		typedef typename iterator<T>::iterator_category	iterator_category;
-		typedef reverse_iterator<T> _reverse_iterator;
+		typedef reverse_iterator<T> 					_reverse_iterator;
 		
-		reverse_iterator() _base(0){};
+		reverse_iterator(): _base(0){};
 		reverse_iterator(T base) : _base(base) {};
 		reverse_iterator(const  _reverse_iterator & other) : _base(other._base){};
 		~reverse_iterator() {};
@@ -65,6 +66,13 @@ template <typename T>
             return *this;
         }
 
+		reference operator*() const
+        {
+            T tmp = this->_base;
+            --tmp;
+            return *tmp;
+        }
+
         pointer operator->() const
         {
             return &(operator*());
@@ -83,17 +91,18 @@ template <typename T>
 		friend bool operator<(const reverse_iterator<_T> &lhs, const reverse_iterator<_T> &rhs);
 		template <typename _T>
     	friend bool operator<=(const reverse_iterator<_T> &lhs, const reverse_iterator<_T> &rhs);
+		template <typename _T>
 		friend bool operator>(const reverse_iterator<_T> &lhs, const reverse_iterator<_T> &rhs);
 		template <typename _T>
     	friend bool operator>=(const reverse_iterator<_T> &lhs, const reverse_iterator<_T> &rhs);
 		template <typename _T>
     	friend reverse_iterator<_T> operator+(typename reverse_iterator<_T>::difference_type n, const reverse_iterator<_T> &rev_it);
+		template <typename _T>
 		friend reverse_iterator<_T> operator-(typename reverse_iterator<_T>::difference_type n, const reverse_iterator<_T> &rev_it);
 
 	private:
 		T _base;
-
-	}
+	};
 	template <typename _T>
     bool operator==(const reverse_iterator<_T> &lhs,
                     const reverse_iterator<_T> &rhs)
@@ -145,6 +154,7 @@ template <typename T>
     {
         return rhs.base() - lhs.base();
     }
+
 }
 
 #endif
