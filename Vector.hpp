@@ -2,6 +2,8 @@
 # define VECTOR_HPP
 
 # include <memory>
+# include <stdexcept>
+	
 
 # include "Iterator.hpp"
 
@@ -33,25 +35,31 @@ namespace ft
 			
 			~vector() {};
 
+			vector & operator=( const vector & other )
+			{
+				if (other == *this)
+					return (*this);
+				this->clear();
+				this->insert(this->end(), other.begin(), other.end());
+				return (*this);
+			}
+
 			// Element access
 			reference at( size_type pos ) 
 			{
-				if !(pos < this->_size)
+				if (!(pos < this->_size))
 					throw (std::out_of_range("vector::at: "));
 				return (*this[pos]);
 			}
 
 			const_reference at( size_type pos ) const
 			{
-				if !(pos < this->_size)
+				if (!(pos < this->_size))
 					throw (std::out_of_range("vector::at: "));
 				return (*this[pos]);
 			}
 
-			/* reference operator[]( size_type pos )
-			{
-
-			} */
+			reference operator[]( size_type pos ) {	return *(this->_ptr + pos);	};
 
 			// Iterators
 			iterator begin() { return iterator(this->_ptr); };
@@ -65,7 +73,7 @@ namespace ft
 			// Capacity
 			bool empty() const { return !(this->_size); };
 
-			size_type size() const { return (this->_size) };
+			size_type size() const { return (this->_size); };
 
 			size_type max_size() const; // À implémenter
 
@@ -86,7 +94,7 @@ namespace ft
 				this->_capacity = new_cap;
 			}
 
-			size_type capacity() const { return (this->_capacity) };
+			size_type capacity() const { return (this->_capacity); };
 
 			// Modifiers
 			void clear()
@@ -98,6 +106,13 @@ namespace ft
 				}
 				this->_size = 0;
 			}
+
+			iterator insert( iterator pos, const T& value );
+
+			void insert( iterator pos, size_type count, const T& value );
+
+			template <class InputIt>
+			void insert( iterator pos, InputIt first, InputIt last );
 
 		private:
 			pointer			_ptr;
