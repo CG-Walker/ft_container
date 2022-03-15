@@ -22,7 +22,8 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
-			typedef ft::iterator<T>								iterator;			// À implémenter
+			typedef ft::iterator<T>								iterator;
+			typedef ft::iterator<const T>						const_iterator;
 			//typedef typename const_iterator					const_iterator;		// À implémenter
 			//typedef typename reverse_iterator					reverse_iterator;	// À implémenter
 			//typedef typename const_reverse_iterator			const_iterator;		// À implémenter
@@ -64,11 +65,11 @@ namespace ft
 			// Iterators
 			iterator begin() { return iterator(this->_ptr); };
 
-			//const_iterator begin() const { return (this->_ptr) };
+			const_iterator begin() const { return (this->_ptr); };
 
 			iterator end() { return iterator(this->_ptr + this->_size); };
 
-			//const_iterator end() const { return (this->_ptr + this->_size); };
+			const_iterator end() const { return (this->_ptr + this->_size); };
 
 			// Capacity
 			bool empty() const { return !(this->_size); };
