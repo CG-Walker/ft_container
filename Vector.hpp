@@ -3,6 +3,7 @@
 
 # include <memory>
 # include <stdexcept>
+# include <limits>
 
 # include <iostream>
 	
@@ -44,7 +45,7 @@ namespace ft
 			}
 			template<class InputIt>
 			//vector( InputIt first, InputIt last, const Allocator & alloc = Allocator() );
-			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free
+			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free, normal ?
 			{
 				size_type size = other.size();
 				if (size > 0)
@@ -62,16 +63,13 @@ namespace ft
 				this->_alloc.deallocate(this->_first, this->_capacity);
 			}
 
-			vector & operator=( const vector & other ) // À terminer
+			vector & operator=( const vector & other )
 			{
-				if (other == *this)
-					return (*this);
-				this->clear();
-				this->insert(this->end(), other.begin(), other.end());
+				assign(other._first, other._last);
 				return (*this);
 			}
 
-			allocator_type get_allocator() const { return this->_alloc };
+			allocator_type get_allocator() const { return (this->_alloc); };
 
 			void assign( size_type count, const T & value )
 			{
@@ -106,13 +104,13 @@ namespace ft
 
 			reference operator[]( size_type pos ) {	return *(this->_first + pos);	};
 
-			reference front() { return *(this->begin()) };
+			reference front() { return *(this->begin()); };
 
-			const_reference front() const { return *(this->begin()) };
+			const_reference front() const { return *(this->begin()); };
 
-			reference back() { return *(this->end() - 1) };
+			reference back() { return *(this->end() - 1); };
 
-			const_reference back() const { return *(this->end() - 1) };
+			const_reference back() const { return *(this->end() - 1); };
 
 			T * data() { return (this->_first); };
 
@@ -140,7 +138,7 @@ namespace ft
 
 			size_type size() const { return (this->_last - this->_first); };
 
-			size_type max_size() const;
+			size_type max_size() const
 			{
 				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), this->_alloc.max_size()));
 			}
@@ -195,8 +193,8 @@ namespace ft
 					clear();
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
-					this->_last = first + old_size + count;
-					this->_capacity = first + new_size;
+					this->_last = this->_first + old_size + count;
+					this->_capacity = this->_first + new_size;
 				}
 				else
 				{
