@@ -318,6 +318,11 @@ namespace ft
     {
         return !(lhs < rhs);
     }
+	template< class T, class Alloc >
+	void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
+	{
+		lhs.swap(rhs);
+	}
 } // namespace ft
 
  #endif
