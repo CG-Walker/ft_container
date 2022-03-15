@@ -207,7 +207,7 @@ namespace ft
 
 			iterator erase( iterator pos ) { return this->erase(pos, pos + 1); };
 
-			iterator erase( iterator first, iterator last );
+			iterator erase( iterator first, iterator last )
 			{
 				difference_type offset = std::distance(this->_first, this->_last);
 				for (iterator it = first; it + offset != this->end(); ++it)
@@ -236,7 +236,7 @@ namespace ft
 
 			void resize( size_type count, T value = T() )
 			{
-				if (n < size())
+				if (count < size())
 				{
 					this->erase(this->begin() + count, this->end());
 				}
