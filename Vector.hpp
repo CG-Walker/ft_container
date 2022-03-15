@@ -234,9 +234,17 @@ namespace ft
 				this->_last--;
 			}
 
-			void resize( size_type count ); // TODO
-
-			void resize( size_type count, T value = T() ); // TODO
+			void resize( size_type count, T value = T() )
+			{
+				if (n < size())
+				{
+					this->erase(this->begin() + count, this->end());
+				}
+				else if (count > this->size())
+				{
+					insert(this->end(), count - this->size(), value);
+				}
+			}
 
 			void swap( vector& other ); // TODO
 
