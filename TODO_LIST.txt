@@ -1,0 +1,3 @@
+ALEX:
+    ft::iterator<const int>	ft_it;
+    ft_it = ft_vec.begin();
