@@ -3,6 +3,8 @@
 
 # include <memory>
 
+# include "Iterator.hpp"
+
 namespace ft
 {
 	template <class T, class Allocator = std::allocator<T> >
@@ -18,13 +20,13 @@ namespace ft
 			typedef typename allocator_type::const_reference	const_reference;
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
-			//typedef typename iterator							iterator;			// À implémenter
+			typedef ft::iterator<T>								iterator;			// À implémenter
 			//typedef typename const_iterator					const_iterator;		// À implémenter
 			//typedef typename reverse_iterator					reverse_iterator;	// À implémenter
 			//typedef typename const_reverse_iterator			const_iterator;		// À implémenter
 
 			// Constructors, Destructor & Operator
-			vector() : _ptr(nullptr), _size(0), _capacity(0) {};
+			vector() : _ptr(0), _size(0), _capacity(0) {};
 			explicit vector( const Allocator & alloc );
 			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator());
 			vector( const vector & other );
@@ -32,10 +34,41 @@ namespace ft
 			~vector() {};
 
 			// Element access
+			reference at( size_type pos ) 
+			{
+				if !(pos < this->_size)
+					throw (std::out_of_range("vector::at: "));
+				return (*this[pos]);
+			}
+
+			const_reference at( size_type pos ) const
+			{
+				if !(pos < this->_size)
+					throw (std::out_of_range("vector::at: "));
+				return (*this[pos]);
+			}
+
+			/* reference operator[]( size_type pos )
+			{
+
+			} */
 
 			// Iterators
+			iterator begin() { return iterator(this->_ptr); };
+
+			//const_iterator begin() const { return (this->_ptr) };
+
+			iterator end() { return iterator(this->_ptr + this->_size); };
+
+			//const_iterator end() const { return (this->_ptr + this->_size); };
 
 			// Capacity
+			bool empty() const { return !(this->_size); };
+
+			size_type size() const { return (this->_size) };
+
+			size_type max_size() const; // À implémenter
+
 			void reserve( size_type new_cap )
 			{
 				if (new_cap <= this->_capacity || new_cap == 0)
@@ -52,7 +85,19 @@ namespace ft
 				this->_ptr = new_ptr;
 				this->_capacity = new_cap;
 			}
+
+			size_type capacity() const { return (this->_capacity) };
+
 			// Modifiers
+			void clear()
+			{
+				allocator_type alloc;
+				for (size_type i = 0; i < this->_size; i++)
+				{
+					alloc.destroy(this->_ptr[i]);
+				}
+				this->_size = 0;
+			}
 
 		private:
 			pointer			_ptr;
