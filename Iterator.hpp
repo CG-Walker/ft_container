@@ -24,20 +24,20 @@ namespace ft
 			iterator(const _iterator & other)  : _ptr(other._ptr){}
 			~iterator(void) {};
 
-			iterator &operator=(_iterator const &other)
+			_iterator &operator=(_iterator const &other)
 			{
 				_ptr = other._ptr;
 				return (*this);
 			}
 
-			iterator &operator+(_iterator const &other)
+			_iterator &operator+(size_t nb)
 			{
-				_ptr += other._ptr;
+				_ptr += nb;
 				return (*this);
 			}
-			iterator &operator-(_iterator const &other)
+			_iterator &operator-(size_t nb)
 			{
-				_ptr -= other._ptr;
+				_ptr -= nb;
 				return (*this);
 			}
 			// prefix increment
