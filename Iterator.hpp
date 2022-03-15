@@ -14,50 +14,51 @@ namespace ft
 			typedef T *								pointer;
 			typedef T &								reference;
 			typedef std::ptrdiff_t					difference_type;
+			typedef iterator<T> 					_iterator;
 
 			// constructor and destructor
 			iterator(void) : _ptr(NULL) {};
-			iterator(pointer elem) : _ptr(elem);
-			iterator(const iterator & other) {};
+			iterator(pointer elem) : _ptr(elem) {};
+			iterator(const _iterator & other) {};
 			~iterator(void) {};
 
-			iterator &operator=(const iterator &other)
+			_iterator &operator=(const _iterator &other)
 			{
 				this->_ptr = other->_ptr;
 				return (*this);
 			}
 			// prefix increment
-			iterator &operator++()
+			_iterator &operator++()
 			{
 				++this->_ptr;
 				return(*this);
 			}
-			iterator &operator--()
+			_iterator &operator--()
 			{
 				--this->_ptr;
 				return(*this);
 			}
 
 			// postfix increment
-			iterator operator++(int)
+			_iterator operator++(int)
 			{
 				iterator ite = *this;
 				++this->_ptr;
 				return(*ite);
 			}
-			iterator operator--(int)
+			_iterator operator--(int)
 			{
 				iterator ite = *this;
 				--this->_ptr;
 				return(*ite);
 			}
 
-			iterator &operator+=(const iterator &other)
+			_iterator &operator+=(const _iterator &other)
 			{
 				this->_ptr += other->_ptr;
 				return (*this);
 			}
-			iterator &operator-=(const iterator &other)
+			_iterator &operator-=(const _iterator &other)
 			{
 				this->_ptr -= other->_ptr;
 				return (*this);
