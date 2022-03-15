@@ -17,16 +17,11 @@ int main()
 
 	//ft::vector<int> ft_vec3(ft_vec2);
 
-	for (ft::reverse_iterator<int> it = ft_vec.rbegin(); it != ft_vec.rend(); it++)
+	ft_vec.swap(ft_vec2);
+	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
 	{
 		std::cout << "ft_vec : " << *it << std::endl;
 	}
-
-	for (ft::iterator<int> it = ft_vec2.begin(); it != ft_vec2.end(); it++)
-	{
-		std::cout << "ft_vec2 : " << *it << std::endl;
-	}
-
 /* 	for (ft::iterator<int> it = ft_vec3.begin(); it != ft_vec3.end(); it++)
 	{
 		std::cout << "ft_vec3 : " << *it << std::endl;
