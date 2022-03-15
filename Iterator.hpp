@@ -1,6 +1,8 @@
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
 
+#include <cstddef>
+
 namespace ft
 {
     template <typename T>
@@ -20,9 +22,8 @@ namespace ft
 
         private:
             pointer _ptr;
-            Iterator(pointer elem) : _ptr(elem);
-            
-    }
+            //Iterator(pointer elem) : _ptr(elem);  
+    };
 }
 
 #endif
