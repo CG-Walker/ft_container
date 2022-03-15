@@ -224,7 +224,21 @@ namespace ft
 
 			void resize( size_type count, T value = T() ); // TODO
 
-			void swap( vector& other ); // TODO
+			void swap( vector& other )
+			{
+
+				pointer buffer_first = other._first;
+				pointer buffer_last = other._last;
+				size_type buffer_capacity = other._capacity;
+
+				other._first = this->_first;
+				other._last = this->_last;
+				other._capacity = this->_capacity;
+
+				this->_first = buffer_first;
+				this->_last = buffer_last;
+				this->_capacity = buffer_capacity;
+			}
 
 		private:
 			allocator_type	_alloc;
