@@ -29,6 +29,17 @@ namespace ft
 				_ptr = other._ptr;
 				return (*this);
 			}
+
+			iterator &operator+(_iterator const &other)
+			{
+				_ptr += other._ptr;
+				return (*this);
+			}
+			iterator &operator-(_iterator const &other)
+			{
+				_ptr -= other._ptr;
+				return (*this);
+			}
 			// prefix increment
 			_iterator &operator++()
 			{
@@ -41,17 +52,6 @@ namespace ft
 				return(*this);
 			}
 
-			_iterator &operator-(int nb)
-			{
-				_ptr -= nb;
-				return(*this);
-			}
-
-			_iterator &operator+(int nb)
-			{
-				_ptr += nb;
-				return(*this);
-			}
 			// postfix increment
 			_iterator operator++(int)
 			{
