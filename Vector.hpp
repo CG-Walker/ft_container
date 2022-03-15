@@ -205,9 +205,19 @@ namespace ft
 			template <class InputIt>
 			void insert( iterator pos, InputIt first, InputIt last ); // TODO
 
-			iterator erase( iterator pos ); // TODO
+			iterator erase( iterator pos ) { return this->erase(pos, pos + 1); };
 
-			iterator erase( iterator first, iterator last ); // TODO
+			iterator erase( iterator first, iterator last );
+			{
+				difference_type offset = std::distance(this->_first, this->_last);
+				for (iterator it = first; it + offset != this->end(); ++it)
+					*it = *(it + offset);
+				pointer now = this->_last;
+				while (now != (this->_last - offset))
+					this->_alloc.destroy(--now);
+				this->_last = (this->_last - offset);
+				return (this->_first);
+			}
 
 			void push_back( const value_type & value )
 			{
@@ -218,11 +228,23 @@ namespace ft
 				this->_last++;
 			}
 
-			void pop_back(); // TODO
+			void pop_back()
+			{
+				this->_alloc.destroy((this->_last - 1));
+				this->_last--;
+			}
 
-			void resize( size_type count ); // TODO
-
-			void resize( size_type count, T value = T() ); // TODO
+			void resize( size_type count, T value = T() )
+			{
+				if (n < size())
+				{
+					this->erase(this->begin() + count, this->end());
+				}
+				else if (count > this->size())
+				{
+					insert(this->end(), count - this->size(), value);
+				}
+			}
 
 			void swap( vector& other )
 			{
