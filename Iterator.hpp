@@ -105,32 +105,32 @@ namespace ft
 	template <typename T>
 	bool operator==(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e == rhs._e);
+		return (lhs._ptr == rhs._ptr);
 	}
 	template <typename T>
 	bool operator!=(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e != rhs._e);
+		return (lhs._ptr != rhs._ptr);
 	}
 	template <typename T>
 	bool operator>(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e > rhs._e);
+		return (lhs._ptr > rhs._ptr);
 	}
 	template <typename T>
 	bool operator<(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e < rhs._e);
+		return (lhs._ptr < rhs._ptr);
 	}
 	template <typename T>
 	bool operator>=(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e >= rhs._e);
+		return (lhs._ptr >= rhs._ptr);
 	}
 	template <typename T>
 	bool operator<=(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
-		return (lhs._e <= rhs._e);
+		return (lhs._ptr <= rhs._ptr);
 	}
 }
 
