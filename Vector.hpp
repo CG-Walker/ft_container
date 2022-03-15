@@ -107,9 +107,12 @@ namespace ft
 				this->_size = 0;
 			}
 
-			iterator insert( iterator pos, const T& value );
+			iterator insert( iterator pos, const value_type & value )
+			{
+			
+			}
 
-			void insert( iterator pos, size_type count, const T& value );
+			void insert( iterator pos, size_type count, const value_type & value );
 
 			template <class InputIt>
 			void insert( iterator pos, InputIt first, InputIt last );
