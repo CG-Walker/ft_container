@@ -29,36 +29,18 @@ namespace ft
 			}
 
 			// Element access
-			reference top()
-			{ 
-				return (this->c.back());
-			}
-			const_reference top() const
-			{ 
-				return (this->c.back());
-			}
+			reference top()	{ return (this->c.back()); };
+			const_reference top() const { return (this->c.back()); }
 
 			// Capacity
-			bool empty() const
-			{
-				return (this->c.empty());
-			};
+			bool empty() const { return (this->c.empty()); };
 
-			size_type size() const
-			{
-				return (this->c.size());
-			}
+			size_type size() const { return (this->c.size()); };
 
 			// Modifiers
-			void push( const value_type & value )
-			{
-				this->c.push_back(value);
-			}
+			void push( const value_type & value ) {	this->c.push_back(value); };
 
-			void pop()
-			{
-				this->c.pop_back();
-			}
+			void pop() { this->c.pop_back(); }
 
 			template <class Tn, class ContainerN>
 				friend bool operator== (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
