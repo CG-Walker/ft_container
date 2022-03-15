@@ -3,6 +3,8 @@
 
 # include <memory>
 # include <stdexcept>
+
+# include <iostream>
 	
 
 # include "Iterator.hpp"
@@ -34,9 +36,9 @@ namespace ft
 			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator());
 			vector( const vector & other );
 			
-			~vector() {};
+			~vector() {}; // À terminer
 
-			vector & operator=( const vector & other )
+			vector & operator=( const vector & other ) // À terminer
 			{
 				if (other == *this)
 					return (*this);
@@ -65,11 +67,11 @@ namespace ft
 			// Iterators
 			iterator begin() { return iterator(this->_ptr); };
 
-			const_iterator begin() const { return (this->_ptr); };
+			const_iterator begin() const { return const_iterator(this->_ptr); };
 
 			iterator end() { return iterator(this->_ptr + this->_size); };
 
-			const_iterator end() const { return (this->_ptr + this->_size); };
+			const_iterator end() const { return const_iterator(this->_ptr + this->_size); };
 
 			// Capacity
 			bool empty() const { return !(this->_size); };
@@ -108,15 +110,17 @@ namespace ft
 				this->_size = 0;
 			}
 
-			iterator insert( iterator pos, const value_type & value )
+			iterator insert( iterator pos, const value_type & value );
+
+			void insert( iterator pos, size_type count, const value_type & value )
 			{
-			
+				size_type new_size = this->size() + count;
+				size_type offset = pos - begin();
+				std::cout << offset << std::endl;
 			}
 
-			void insert( iterator pos, size_type count, const value_type & value );
-
-			template <class InputIt>
-			void insert( iterator pos, InputIt first, InputIt last );
+			//template <class InputIt>
+			//void insert( iterator pos, InputIt first, InputIt last );
 
 		private:
 			pointer			_ptr;
