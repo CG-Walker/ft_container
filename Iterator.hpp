@@ -12,19 +12,21 @@ namespace ft
 			typedef std::random_access_iterator_tag iterator_category;
 			typedef T								value_type;
 			typedef T *								pointer;
+			typedef T const *						const_pointer;
 			typedef T &								reference;
+			typedef T const &						const_reference;
 			typedef std::ptrdiff_t					difference_type;
-			typedef iterator<T> 					_iterator;
+			typedef iterator<T> 					_iterator;	
 
 			// constructor and destructor
-			iterator(void) : _ptr(NULL) {};
-			iterator(pointer elem) : _ptr(elem) {};
-			//iterator(const _iterator & other) {};
+			iterator(void) : _ptr(NULL) {}
+			iterator(pointer elem) : _ptr(elem) {}
+			iterator(const _iterator & other)  : _ptr(other._ptr){}
 			~iterator(void) {};
 
-			_iterator &operator=(const _iterator &other)
+			iterator &operator=(_iterator const &other)
 			{
-				this->_ptr = other->_ptr;
+				_ptr = other._ptr;
 				return (*this);
 			}
 			// prefix increment
@@ -39,6 +41,17 @@ namespace ft
 				return(*this);
 			}
 
+			_iterator &operator-(int nb)
+			{
+				_ptr -= nb;
+				return(*this);
+			}
+
+			_iterator &operator+(int nb)
+			{
+				_ptr += nb;
+				return(*this);
+			}
 			// postfix increment
 			_iterator operator++(int)
 			{
@@ -90,6 +103,7 @@ namespace ft
 		friend bool operator>=(const iterator<_T> &lhs, const iterator<_T> &rhs);
 		template <typename _T>
 		friend bool operator<=(const iterator<_T> &lhs, const iterator<_T> &rhs);
+
 		private:
 			pointer _ptr;
 	};
