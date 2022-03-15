@@ -6,8 +6,8 @@
 
 # include <iostream>
 	
-
 # include "Iterator.hpp"
+# include "ReverseIterator.hpp"
 
 namespace ft
 {
@@ -26,16 +26,40 @@ namespace ft
 			typedef typename allocator_type::const_pointer		const_pointer;
 			typedef ft::iterator<T>								iterator;
 			typedef ft::iterator<const T>						const_iterator;
-			//typedef typename const_iterator					const_iterator;		// À implémenter
-			//typedef typename reverse_iterator					reverse_iterator;	// À implémenter
-			//typedef typename const_reverse_iterator			const_iterator;		// À implémenter
+			typedef ft::reverse_iterator<T>						reverse_iterator;
+			typedef ft::reverse_iterator<const T>				const_reverse_iterator;
 
-			// Constructors, Destructor & Operator
+			// Constructors & Destructor
 			explicit vector( const Allocator & alloc = allocator_type()) : _alloc(alloc), _first(NULL), _last(NULL), _capacity(0) {};
-			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator());
-			vector( const vector & other );
+			explicit vector( size_type count, const T & value = T(), const Allocator & alloc = Allocator()) : _alloc(alloc), _first(NULL), _last(NULL), _capacity(0)
+			{
+				if (count > 0)
+				{
+					this->_first = this->_alloc.allocate(count);
+					this->_last = _first + count;
+					this->_capacity = count;
+					std::uninitialized_fill_n(this->_first, count, value);
+				}
+			}
+			template<class InputIt>
+			//vector( InputIt first, InputIt last, const Allocator & alloc = Allocator() );
+			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free
+			{
+				size_type size = other.size();
+				if (size > 0)
+				{
+					this->_first = this->_alloc.allocate(size);
+					this->_last = _first + size;
+					this->_capacity = other._capacity;
+					std::uninitialized_copy(other._first, other._last, this->_first);
+				}
+			}
 			
-			~vector() {}; // À terminer
+			~vector()
+			{
+				this->clear();
+				this->_alloc.deallocate(this->_first, this->_capacity);
+			}
 
 			vector & operator=( const vector & other ) // À terminer
 			{
@@ -68,7 +92,15 @@ namespace ft
 
 			const_iterator begin() const { return const_iterator(this->_first); };
 
+			reverse_iterator rbegin() { return reverse_iterator(this->_last); };
+
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(this->_last); };
+
 			iterator end() { return iterator(this->_last); };
+
+			reverse_iterator rend() { return reverse_iterator(this->_first); };
+
+			const_reverse_iterator rend() const { return const_reverse_iterator(this->_first); };
 
 			const_iterator end() const { return const_iterator(this->_last); };
 
@@ -101,9 +133,7 @@ namespace ft
 			void clear()
 			{
 				for (pointer now = this->_first; now != this->_last; now++)
-				{
 					this->_alloc.destroy(now);
-				}
 			}
 
 			void push_back( const value_type & value )

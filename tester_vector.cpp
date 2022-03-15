@@ -4,8 +4,8 @@
 
 int main()
 {
-	std::vector<int>		std_vec;
 	ft::vector<int>		ft_vec;
+	ft::vector<int>		ft_vec2(5, 42);
 	ft::iterator<int>	   ft_it;
 
 	//ft_vec.reserve(20);
@@ -15,10 +15,20 @@ int main()
 	ft_vec.push_back(487);
 	ft_vec.push_back(21);
 
-	std_vec.push_back(42);
+	//ft::vector<int> ft_vec3(ft_vec2);
 
-	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
+	for (ft::reverse_iterator<int> it = ft_vec.rbegin(); it != ft_vec.rend(); it++)
 	{
-		std::cout << "first : " << *it << std::endl;
+		std::cout << "ft_vec : " << *it << std::endl;
 	}
+
+	for (ft::iterator<int> it = ft_vec2.begin(); it != ft_vec2.end(); it++)
+	{
+		std::cout << "ft_vec2 : " << *it << std::endl;
+	}
+
+/* 	for (ft::iterator<int> it = ft_vec3.begin(); it != ft_vec3.end(); it++)
+	{
+		std::cout << "ft_vec3 : " << *it << std::endl;
+	} */
 }
