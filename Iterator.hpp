@@ -30,20 +30,6 @@ namespace ft
 				return (*this);
 			}
 
-			_iterator & operator+(_iterator const & other)
-			{
-				_iterator new_it;
-				new_it._ptr = this->_ptr + other._ptr;
-				return (new_it);
-			}
-
-			_iterator & operator-(_iterator const & other)
-			{
-				_iterator new_it;
-				new_it._ptr = this->_ptr - other._ptr;
-				return (new_it);
-			}
-
 			difference_type operator+(_iterator const & other)
 			{
 				difference_type ret = this->_ptr + other._ptr;
