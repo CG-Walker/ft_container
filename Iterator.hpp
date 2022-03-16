@@ -9,14 +9,14 @@ namespace ft
 	class iterator 
 	{
 		public:
-			//typedef std::random_access_iterator_tag iterator_category;
-			//typedef T								value_type;
-			typedef  typename ft::iterator_traits<T*>::pointer			pointer;
-            typedef  typename ft::iterator_traits<const T*>::pointer    const_pointer;
-            typedef  typename ft::iterator_traits<T*>::reference		reference;
-			typedef  typename ft::iterator_traits<const T*>::reference	const_reference;
-			typedef  typename ft::iterator_traits<T*>::difference_type	difference_type;
-			typedef iterator<T> 					_iterator;
+			typedef std::random_access_iterator_tag						iterator_category;
+			typedef T													value_type;
+			typedef typename ft::iterator_traits<T*>::pointer			pointer;
+            typedef typename ft::iterator_traits<const T*>::pointer    	const_pointer;
+            typedef typename ft::iterator_traits<T*>::reference			reference;
+			typedef typename ft::iterator_traits<const T*>::reference	const_reference;
+			typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
+			typedef iterator<T> 										_iterator;
 
 			// Constructors and Destructor
 			iterator(void) : _ptr(NULL) {};
