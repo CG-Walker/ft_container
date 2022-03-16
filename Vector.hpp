@@ -52,7 +52,7 @@ namespace ft
 				this->_capacity = new_size;
 				std::uninitialized_copy(first, last, this->_first);
 			}
-			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free, normal ?
+			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0)
 			{
 				size_type size = other.size();
 				if (size > 0)
@@ -113,6 +113,7 @@ namespace ft
 				{
 					this->clear();
 					std::copy(first, last, this->_first);
+					this->_last = this->_first + new_size;
 				}
 			}
 
