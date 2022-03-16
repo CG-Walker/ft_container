@@ -4,11 +4,13 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = ft_container
 SRC_STACK = tester_stack.cpp
 SRC_VECTOR = tester_vector.cpp
+SRC_ALL = all_test.cpp
 
 all: $(NAME)
 
-$(NAME): $(SRC_STACK)
+$(NAME): $(SRC_ALL)
 	$(CPP) $(CPPFLAGS) $^ -o $@
+	./ft_container
 
 stack_exec :$(SRC_STACK)
 			@$(CPP) $(CPPFLAGS) $^ -o $@
