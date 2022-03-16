@@ -172,9 +172,14 @@ namespace ft
 				this->_last = this->_first;
 			}
 
-			iterator insert( iterator pos, const value_type & value ); // TODO
+			iterator insert( iterator pos, const value_type & value )
+			{
+				size_type offset = pos - this->begin();
+				insert(pos, 1, value);
+				return (this->begin() + offset);
+			}
 
-			void insert( iterator pos, size_type count, const value_type & value ) // TODO
+			void insert( iterator pos, size_type count, const value_type & value )
 			{
 				size_type new_size = this->size() + count;
 				size_type offset = pos - begin();
@@ -198,12 +203,71 @@ namespace ft
 				}
 				else
 				{
-					// Tout décaler
+					size_type old_size = this->size();
+					for (size_type i = 0; i < old_size - offset; i++)
+					{
+						if (new_size - i > old_size)
+							this->_alloc.construct(&this->_first[new_size - i - 1], this->_first[old_size - i - 1]);
+						else
+							this->_first[new_size - i - 1] = this->_first[old_size - i - 1];
+					}
+					for (size_type i = 0; i < count; i++)
+					{
+						if (offset + i >= size())
+							this->_alloc.construct(&this->_first[offset + i, *this->_first]);
+						else
+							this->_first[offset + i] = *this->_first;
+						++this->_first;
+					}
+					this->_last += count;
 				}
 			}
 
 			template <class InputIt>
-			void insert( iterator pos, InputIt first, InputIt last ); // TODO
+			void insert( iterator pos, InputIt first, InputIt last )
+			{
+				size_type count = std::distance(first, last);
+				size_type new_size = this->size() + count;
+				size_type offset = pos - begin();
+				
+				if (new_size > this->_capacity)
+				{
+					new_size = calc_new_capacity(new_size);
+					size_type old_capacity = this->_capacity;
+					size_type old_size = this->size();
+					pointer new_first = this->_alloc.allocate(new_size);
+
+					std::uninitialized_copy(this->begin(), pos, new_first);
+					std::uninitialized_copy(first, last, new_first + offset);
+					std::uninitialized_copy(pos, this->end(), new_first + offset + count);
+
+					clear();
+					this->_alloc.deallocate(this->_first, old_capacity);
+					this->_first = new_first;
+					this->_last = this->_first + old_size + count;
+					this->_capacity = this->_first + new_size;
+				}
+				else
+				{
+					size_type old_size = this->size();
+					for (size_type i = 0; i < old_size - offset; i++)
+					{
+						if (new_size - i > old_size)
+							this->_alloc.construct(&this->_first[new_size - i - 1], this->_first[old_size - i - 1]);
+						else
+							this->_first[new_size - i - 1] = this->_first[old_size - i - 1];
+					}
+					for (size_type i = 0; i < count; i++)
+					{
+						if (offset + i >= size())
+							this->_alloc.construct(&this->_first[offset + i, *this->_first]);
+						else
+							this->_first[offset + i] = *this->_first;
+						++this->_first;
+					}
+					this->_last += count;
+				}
+			}
 
 			iterator erase( iterator pos ) { return this->erase(pos, pos + 1); };
 
@@ -319,7 +383,7 @@ namespace ft
         return !(lhs < rhs);
     }
 	template< class T, class Alloc >
-	void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
+	void swap( ft::vector<T,Alloc> & lhs, ft::vector<T,Alloc> & rhs )
 	{
 		lhs.swap(rhs);
 	}
