@@ -44,7 +44,14 @@ namespace ft
 				}
 			}
 			template<class InputIt>
-			//vector( InputIt first, InputIt last, const Allocator & alloc = Allocator() ); Besoin de enable_if & is_integral?
+			vector( InputIt first, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type last, const Allocator & alloc = Allocator() ) : _alloc(alloc)
+			{
+				size_type new_size = std::distance(first, last);
+				this->_first = this->_alloc.allocate(new_size);
+				this->_last = this->_first + new_size;
+				this->_capacity = new_size;
+				std::uninitialized_copy(first, last, this->_first);
+			}
 			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free, normal ?
 			{
 				size_type size = other.size();
@@ -88,7 +95,7 @@ namespace ft
 			}
 
 			template<class InputIt>
-			void assign( InputIt first, InputIt last ) // need is_integral et enable_if
+			void assign( InputIt first, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type last )
 			{
 				size_type new_size = std::distance(first, last);
 				if (new_size > this->_capacity)
