@@ -41,6 +41,12 @@ namespace ft
 				difference_type ret = this->_ptr - other._ptr;
 				return (ret);
 			}
+
+			_iterator operator-(size_t n)
+			{
+				_iterator ret = this->_ptr - n;
+				return (ret);
+			}
 			
 			// Prefix increment
 			_iterator & operator++()

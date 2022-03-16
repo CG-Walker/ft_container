@@ -47,6 +47,8 @@ int main()
 	SHOW(ft_vector_1, "ft_vector_1", "<<< ft_vector_1 after swapping >>>");
 	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after swapping >>>");
 
+	std::cout << "ft_vector_2.back() : " << ft_vector_2.back() << std::endl;
+
 	ft_vector_2.assign(4, 8);
 	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after assign(4, 8) >>>");
 
