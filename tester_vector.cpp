@@ -1,68 +1,84 @@
 #include "Vector.hpp"
 #include <iostream>
 #include <vector>
+#include <string>
+#include <iterator>
+
+template <class T>
+void SHOW(ft::vector<T> vector, std::string vector_name, std::string msg)
+{
+	std::cout << msg << std::endl;
+	std::cout << vector_name << " : [ ";
+	for (ft::iterator<T> it = vector.begin(); it != vector.end(); it++)
+		std::cout << *it << ", ";
+	std::cout << "]" << std::endl << std::endl;
+}
+
+template <class T>
+void SHOW(std::vector<T> vector, std::string vector_name, std::string msg)
+{
+	std::cout << msg << std::endl;
+	std::cout << vector_name << " : [ ";
+	for (typename std::vector<T>::iterator it = vector.begin(); it != vector.end(); it++)
+		std::cout << *it << ", ";
+	std::cout << "]" << std::endl;
+}
 
 int main()
 {
-	ft::vector<int>		ft_vec;
-	std::vector<int>    std_vec;
-	ft::vector<int>		ft_vec2(5, 42);
-	ft::iterator<int>	   ft_it;
+	std::vector<int>		std_vector_1;
+	std::vector<int>		std_vector_2(5, 42);
 
-	ft_vec.push_back(1);
-	ft_vec.push_back(2);
-	ft_vec.push_back(3);
-	ft_vec.push_back(4);
+	ft::vector<int>			ft_vector_1;
+	ft::vector<int>			ft_vector_2(5, 42);
 
-	std_vec.push_back(4);
-	std_vec.push_back(5);
-	std_vec.push_back(6);
-	std_vec.push_back(7);
+	for (size_t i = 0; i < 5; i++)
+		ft_vector_1.push_back(i);
 
-	std::cout << "ft_vec after push_back" << std::endl;
-	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
-	{
-		std::cout << "ft_vec : " << *it << std::endl;
-	}
-	std::cout << "ft_vec after push_back but in reverse" << std::endl;
-	for (ft::reverse_iterator<int> it = ft_vec.rbegin(); it != ft_vec.rend(); it++)
-	{
-		std::cout << "ft_vec : " << *it << std::endl;
-	}
-	ft_vec.swap(ft_vec2);
-	std::cout << "ft_vec after swap with ft_vec2" << std::endl;
-	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
-	{
-		std::cout << "ft_vec : " << *it << std::endl;
-	}
-	ft_vec2.assign(4, 8);
-	std::cout << "ft_vec2 after assign(4, 8)" << std::endl;
-	for (ft::iterator<int> it = ft_vec2.begin(); it != ft_vec2.end(); it++)
-	{
-		std::cout << "ft_vec2 : " << *it << std::endl;
-	}
-	 std::cout << "ft_vec size : " << ft_vec.size() << std::endl;
-   std::cout << "ft_vec at 1 :" << ft_vec.at(1) << std::endl;
-   std::cout << "empty ft_vec" << std::endl;
-   ft_vec.empty();
-	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
-	{
-		std::cout << "ft_vec : " << *it << std::endl;
-	}
-	ft::vector<int>		ft_vec3;
-	ft::vector<int>		ft_vec4;
-	ft_vec3.push_back(1);
-	ft_vec3.push_back(2);
+	for (size_t i = 0; i < 5; i++)
+		std_vector_1.push_back(i);
 
-	ft_vec4.push_back(1);
-	if (ft_vec3 == ft_vec3)
-		std::cout << "ft_vec == ft_vec" << std::endl;
-	if (ft_vec3 != ft_vec4)
-		std::cout << "ft_vec != ft_vec2" << std::endl;
-	if (ft_vec3 > ft_vec4)
-		std::cout << "ft_vec2 > ft_vec" << std::endl;
-	if (ft_vec4 < ft_vec3)
-		std::cout << "ft_vec < ft_vec2" << std::endl;
+	SHOW(ft_vector_1, "ft_vector_1", "<<< ft_vector_1 after 5 push_back() >>>");
+	SHOW(std_vector_1, "std_vector_1", "<<< std_vector_1 after 5 push_back() >>>");
+
+	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 >>>");
+	std::cout << "<<< swapping ft_vector_1 with ft_vector_2 >>>" << std::endl;
+	ft_vector_1.swap(ft_vector_2);
+	SHOW(ft_vector_1, "ft_vector_1", "<<< ft_vector_1 after swapping >>>");
+	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after swapping >>>");
+
+	ft_vector_2.assign(4, 8);
+	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after assign(4, 8) >>>");
+
+	std::cout << "ft_vector_1 size : " << ft_vector_1.size() << std::endl;
+	std::cout << "ft_vector_1 at() 1 :" << ft_vector_1.at(1) << std::endl;
+	std::cout << "is ft_vector_1 empty() ?" << ft_vector_1.empty() << std::endl;
+
+	ft::vector<int>		ft_vector_3;
+	ft::vector<int>		ft_vector_4;
+
+	for (size_t i = 0; i < 3; i++)
+		ft_vector_3.push_back(i);
+	ft_vector_4.push_back(1);
+
+	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after 3 push_back() >>>");
+	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after 1 push_back() >>>");
+
+	std::cout << "<<< assignation de ft_vector_4 avec ft_vector_3 (ft_vector_4 = ft_vector_3) >>>" << std::endl;
+	ft_vector_4 = ft_vector_3;
+
+	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after assignation >>>");
+	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after assignation >>>");
+
+	std::cout << "<<< Tests de comparaison >>>" << std::endl;
+	if (ft_vector_3 == ft_vector_3)
+		std::cout << "ft_vector_3 == ft_vector_3 : True" << std::endl;
+	if (ft_vector_3 != ft_vector_4)
+		std::cout << "ft_vector_3 != ft_vector_4 : True" << std::endl;
+	if (ft_vector_3 > ft_vector_4)
+		std::cout << "ft_vector_3 > ft_vector_4 : True" << std::endl;
+	if (ft_vector_4 < ft_vector_3)
+		std::cout << "ft_vector_4 < ft_vector_3 : True" << std::endl;
 	
 	return(0);
 }
