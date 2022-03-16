@@ -123,19 +123,12 @@ int main()
 	for (size_t i = 0; i < 3; i++)
 		ft_vector_3.push_back(i);
 	ft_vector_4.push_back(1);
+		
 
 	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after 3 push_back() >>>");
 	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after 1 push_back() >>>");
 
-	std::cout << "<<< assignation de ft_vector_4 avec ft_vector_3 (ft_vector_4 = ft_vector_3) >>>" << std::endl;
-	ft_vector_4 = ft_vector_3;
-
-	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after assignation >>>");
-	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after assignation >>>");
-	std::cout << std::endl;
-
-	// TEST DE ERASE ET RESIZE
-
+	
 	// TEST DE COMPARAISONS
 	std::cout << "========== TEST DE COMPARAISONS ==========\n";
 	if (ft_vector_3 == ft_vector_3)
@@ -146,6 +139,15 @@ int main()
 		std::cout << "ft_vector_3 > ft_vector_4 : True" << std::endl;
 	if (ft_vector_4 < ft_vector_3)
 		std::cout << "ft_vector_4 < ft_vector_3 : True" << std::endl;
+	std::cout << "<<< assignation de ft_vector_4 avec ft_vector_3 (ft_vector_4 = ft_vector_3) >>>" << std::endl;
+	ft_vector_4 = ft_vector_3;
+
+	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after assignation >>>");
+	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after assignation >>>");
+	std::cout << std::endl;
+
+	// TEST DE ERASE ET RESIZE
+
 	
 	return(0);
 }
