@@ -45,13 +45,13 @@ namespace ft
 			// Prefix increment
 			_iterator & operator++()
 			{
-				++(*this)->_ptr;
+				++(this)->_ptr;
 				return(*this);
 			}
 
 			_iterator & operator--()
 			{
-				--(*this)->_ptr;
+				--(this)->_ptr;
 				return(*this);
 			}
 

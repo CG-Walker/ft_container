@@ -1,3 +1,7 @@
 ALEX:
     ft::iterator<const int>	ft_it;
     ft_it = ft_vec.begin();
+
+COCO:
+    Vector.hpp:95:13: error: no match for ‘operator*’ (operand type is ‘ft::vector<int>’)
+    95 |     return (*(this[pos]));

@@ -62,13 +62,13 @@ namespace ft
 				this->clear();
 				this->_alloc.deallocate(this->_first, this->_capacity);
 			}
-
+        /*
 			vector & operator=( const vector & other )
 			{
 				assign(other._first, other._last);
 				return (*this);
 			}
-
+        */
 			allocator_type get_allocator() const { return (this->_alloc); };
 
 			void assign( size_type count, const T & value )
@@ -92,7 +92,7 @@ namespace ft
 			{
 				if (!(pos < this->size()))
 					throw (std::out_of_range("vector::at: "));
-				return (*this[pos]);
+				return (*(this[pos]));
 			}
 
 			const_reference at( size_type pos ) const
@@ -284,7 +284,7 @@ namespace ft
 
 	// Non-member functions
 	template <class T, class Alloc>
-	bool operator==(const vector<T> & lhs, const vector<T> & rhs)
+	bool operator==(const vector<T, Alloc> & lhs, const vector<T, Alloc> & rhs)
 	{
 		return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
@@ -319,7 +319,7 @@ namespace ft
         return !(lhs < rhs);
     }
 	template< class T, class Alloc >
-	void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
+	void swap( ft::vector<T,Alloc>& lhs, ft::vector<T,Alloc>& rhs )
 	{
 		lhs.swap(rhs);
 	}
