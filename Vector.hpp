@@ -44,7 +44,7 @@ namespace ft
 				}
 			}
 			template<class InputIt>
-			//vector( InputIt first, InputIt last, const Allocator & alloc = Allocator() );
+			//vector( InputIt first, InputIt last, const Allocator & alloc = Allocator() ); Besoin de enable_if & is_integral?
 			vector( const vector & other ) : _alloc(other._alloc), _first(NULL), _last(NULL), _capacity(0) // Double free, normal ?
 			{
 				size_type size = other.size();
@@ -90,16 +90,16 @@ namespace ft
 			// Element access
 			reference at( size_type pos ) 
 			{
-				if (!(pos < this->size()))
-					throw (std::out_of_range("vector::at: "));
-				return (*this[pos]);
+				if (!(pos >= this->size()))
+					throw (std::out_of_range("vector::at:"));
+				return (this->_first[pos]);
 			}
 
 			const_reference at( size_type pos ) const
 			{
-				if (!(pos < this->size()))
-					throw (std::out_of_range("vector::at: "));
-				return (*this[pos]);
+				if (!(pos >= this->size()))
+					throw (std::out_of_range("vector::at:"));
+				return (this->_first[pos]);
 			}
 
 			reference operator[]( size_type pos ) {	return *(this->_first + pos);	};
@@ -348,7 +348,7 @@ namespace ft
 
 	// Non-member functions
 	template <class T, class Alloc>
-	bool operator==(const vector<T> & lhs, const vector<T> & rhs)
+	bool operator==(const vector<T, Alloc> & lhs, const vector<T, Alloc> & rhs)
 	{
 		return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
