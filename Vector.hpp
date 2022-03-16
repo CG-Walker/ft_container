@@ -92,7 +92,7 @@ namespace ft
 			{
 				if (!(pos < this->size()))
 					throw (std::out_of_range("vector::at: "));
-				return (*(this[pos]));
+				return (this->_first[pos]);
 			}
 
 			const_reference at( size_type pos ) const
