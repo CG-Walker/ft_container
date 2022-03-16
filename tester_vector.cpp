@@ -32,11 +32,19 @@ int main()
 	ft::vector<int>			ft_vector_1;
 	ft::vector<int>			ft_vector_2(5, 42);
 
+
 	for (size_t i = 0; i < 5; i++)
 		ft_vector_1.push_back(i);
 
 	for (size_t i = 0; i < 5; i++)
 		std_vector_1.push_back(i);
+	
+	std::vector<int>		std_vector_5(std_vector_1.begin(), std_vector_1.end());
+	//ft::vector<int>			ft_vector_5(ft_vector_1.begin(), ft_vector_1.end());
+
+	//SHOW(ft_vector_5, "ft_vector_5", "<<< ft_vector_5 >>>");
+	SHOW(std_vector_5, "std_vector_5", "<<< std_vector_5 >>>");
+
 
 	SHOW(ft_vector_1, "ft_vector_1", "<<< ft_vector_1 after 5 push_back() >>>");
 	SHOW(std_vector_1, "std_vector_1", "<<< std_vector_1 after 5 push_back() >>>");
