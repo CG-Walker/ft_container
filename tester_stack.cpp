@@ -3,6 +3,16 @@
 #include <stack>
 #include <iostream>
 
+/* template <class T>
+void SHOW(ft::stack<T> stack, std::string stack_name, std::string msg)
+{
+	std::cout << msg << std::endl;
+	std::cout << stack_name << " : [ ";
+	for (ft::iterator<T> it = stack.begin(); it != stack.end(); it++)
+		std::cout << *it << ", ";
+	std::cout << "]" << std::endl << std::endl;
+} */
+
 int main(void)
 {
 	std::stack<int> std_stack;
@@ -26,11 +36,15 @@ int main(void)
 	std::cout << std_stack.size() << std::endl;
 	std::cout << ft_stack.size() << std::endl;
 
-    ft_stack.push (45);
-    ft_stack.push (42);
-    ft_stack.push (45);
+    ft_stack.push(45);
+    ft_stack.push(42);
+    ft_stack.push(45);
 
     tmp = ft_stack;
+	std::cout << "tmp top() : " << tmp.top() << std::endl;
+
+	//SHOW(tmp, "tmp", "<<< tmp after assignation >>>");
+
 	std::cout << "___TEST OPERATOR = ___" << std::endl;
 	std::cout << tmp.size() << std::endl;
 	std::cout << ft_stack.size() << std::endl;
@@ -48,4 +62,6 @@ int main(void)
 		std::cout << "clone > tmpk" << std::endl;
 	if (tmp < clone)
 		std::cout << "tmp < clone" << std::endl;
+	std::cout << "Fin du test." << std::endl;
+	return (0);
 }

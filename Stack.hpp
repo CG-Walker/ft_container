@@ -25,8 +25,10 @@ namespace ft
 
 			stack & operator=( const stack & other )
 			{
+				std::cout << "dans operator=\n";
 				this->c = other.c;
-				return(*this);
+				std::cout << "size dans operator= " << other.size() << std::endl;
+				return (*this);
 			}
 
 			// Element access

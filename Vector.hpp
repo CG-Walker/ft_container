@@ -72,7 +72,12 @@ namespace ft
 
 			vector & operator=( const vector & other )
 			{
-				assign(other._first, other._last);
+				this->clear();
+				size_type new_size = other.size();
+				this->_first = this->_alloc.allocate(new_size);
+				this->_last = this->_first + new_size;
+				this->_capacity = new_size;
+				std::uninitialized_copy(other._first, other._last, this->_first);
 				return (*this);
 			}
 
