@@ -6,7 +6,7 @@ int main()
 {
 	ft::vector<int>		ft_vec;
 	std::vector<int>    std_vec;
-	ft::vector<int>		ft_vec2(1, 42);
+	ft::vector<int>		ft_vec2(5, 42);
 	ft::iterator<int>	   ft_it;
 
 	ft_vec.push_back(1);
@@ -41,7 +41,8 @@ int main()
 	{
 		std::cout << "ft_vec2 : " << *it << std::endl;
 	}
-   // std::cout << "ft_vec at 1" << ft_vec.at(1) << std::endl;
+	 std::cout << "ft_vec size : " << ft_vec.size() << std::endl;
+   std::cout << "ft_vec at 1 :" << ft_vec.at(1) << std::endl;
    std::cout << "empty ft_vec" << std::endl;
    ft_vec.empty();
 	for (ft::iterator<int> it = ft_vec.begin(); it != ft_vec.end(); it++)
