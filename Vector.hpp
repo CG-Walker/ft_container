@@ -51,8 +51,8 @@ namespace ft
 				if (size > 0)
 				{
 					this->_first = this->_alloc.allocate(size);
-					this->_last = _first + size;
-					this->_capacity = other._capacity;
+					this->_last = this->_first + size;
+					this->_capacity = other._capacity; // Attention
 					std::uninitialized_copy(other._first, other._last, this->_first);
 				}
 			}
@@ -85,6 +85,23 @@ namespace ft
 					std::fill_n(this->_first, count, value);
 				}
 				this->_last = this->_first + count;
+			}
+
+			template<class InputIt>
+			void assign( InputIt first, InputIt last ) // need is_integral et enable_if
+			{
+				size_type new_size = std::distance(first, last);
+				if (new_size > this->_capacity)
+				{
+					this->clear();
+					this->reserve(new_size);
+					std::uninitialized_copy(first, last, this->_first);
+				}
+				else
+				{
+					this->clear();
+					std::copy(first, last, this->_first);
+				}
 			}
 
 			// Element access
