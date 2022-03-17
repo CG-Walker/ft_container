@@ -75,10 +75,10 @@ namespace ft
 		
 			void initialize()
 			{
-				this->nil_ = this->_alloc.allocate(1);
+				this->_nil = this->_alloc.allocate(1);
 				this->_alloc.construct(this->_nil);
-				this->nil_->left = this->_nil;
-				this->nil_->right = this->_nil;
+				this->_nil->left = this->_nil;
+				this->_nil->right = this->_nil;
 
 				this->_end = this->_alloc.allocate(1);
 				this->_alloc.construct(this->_end);
@@ -110,7 +110,7 @@ namespace ft
 					else
 						tmp = node->right;
 				}	
-				if (node != _end && !compare_(key, node->value))
+				if (node != _end && !_compare(key, node->value))
 					return node;
 				return _end;
 			}
@@ -118,6 +118,3 @@ namespace ft
 }
 
 #endif
-
-
-    };
