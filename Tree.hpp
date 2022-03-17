@@ -21,7 +21,7 @@ namespace ft
 		node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
 
-	template <class Key, class T, class Compare, class Allocator = std::allocator<T>>
+	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
 	class tree
 	{
 		private:
@@ -31,13 +31,16 @@ namespace ft
 			typedef node<T> *													link_type;
 			typedef const node<T> *												const_link_type;
 			typedef typename Allocator::size_type 								size_type;
-			typedef typename Allocator::template rebind<rb_node_<T> >::other 	node_allocator_type;
+			typedef typename Allocator::template rebind<node<T> >::other 	node_allocator_type;
        		typedef typename node_allocator_type::difference_type 				difference_type;
 
 		public:
 			// Constructors & Destructor
-			tree( const Compare & comp, const Allocator & alloc ) : _compare(comp), _alloc(alloc), _size(0) { initialize(); };
-			tree( const tree & other) : _compare(other._compare ), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
+            typedef ft::iterator<T>								iterator;
+		    typedef ft::iterator<const T>						const_iterator;
+			tree(const Compare &compare, const Allocator &allocator)  : _compare(compare), _alloc(node_allocator_type(allocator)), _size(0){initialize();};
+
+			tree(const tree &tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
 			~tree()
 			{
 				destroy(this->_end->left);
@@ -139,7 +142,7 @@ namespace ft
 					if (!this->_compare(tmp->value, key))
 					{	
 						node = tmp;
-						tmp = node->left
+						tmp = node->left;
 					}
 					else
 						tmp = node->right;
@@ -150,7 +153,7 @@ namespace ft
 			}
 			void clear()
 			{
-				destroy(this->_end->left)
+				destroy(this->_end->left);
 				this->_begin = this->_end;
 				this->_end->left = this->_nil;
 				this->_size = 0;
@@ -165,9 +168,9 @@ namespace ft
 					new_node->parent = this->_end;
 					this->_end->left = new_node;
 				}
-				else if (this->_compare(node->value, insert_place->value)) // Si le value est plus petite que celle de la place
+				else if (this->_compare(new_node->value, insert_place->value)) // Si le value est plus petite que celle de la place
 					insert_place->left = new_node;
-				else if (this->_compare(insert_place->value, node->value)) // Si le value est plus grande que celle de la place
+				else if (this->_compare(insert_place->value, new_node->value)) // Si le value est plus grande que celle de la place
 					insert_place->right = new_node;
 				else // Si la value existe déjà
 				{
@@ -181,8 +184,8 @@ namespace ft
 
 			link_type create_node( const value_type & value )
 			{
-				link_type new_node = alloc_.allocate(1);
-				alloc_.construct(new_node, this->_nil, value);
+				link_type new_node = _alloc.allocate(1);
+				_alloc.construct(new_node, this->_nil, value);
 				return (new_node);
 			}
 
