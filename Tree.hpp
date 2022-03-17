@@ -38,6 +38,12 @@ namespace ft
 			// Constructors & Destructor
 			tree(const Compare & comp, const Allocator & alloc) : _compare(comp), _alloc(alloc), _size(0) { initialize(); };
 			tree(const tree & other) : _compare(other._compare), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
+			~tree()
+			{
+				destroy(_end->left);
+				delete_node(_nil);
+				delete_node(_end);
+			}
 
 		private:
 			link_type			_nil;
@@ -58,6 +64,35 @@ namespace ft
 				this->_alloc.construct(this->_end);
 				this->_end->left = this->_nil;
 				this->_begin = this->_end;
+			}
+
+			void delete_node(link_type node)
+        	{
+         	   _alloc.destroy(node);
+        	    _alloc.deallocate(node, 1);
+        	}
+			iterator find(const key_type &key)
+			{
+				link_type node = find_node(key);
+            	return iterator(node, _nil);
+			}
+			link_type find_node(const key_type &key) const
+			{
+				link_type node = _end;
+				link_type tmp = _end->left;
+				while(tmp != _nil)
+				{
+					if(!_compare(tmp->value, key))
+					{	
+						node = tmp;
+						tmp = node->left
+					}
+					else
+						tmp = node->right;
+				}	
+				if (node != _end && !compare_(key, node->value))
+					return node;
+				return _end;
 			}
 	};
 }
