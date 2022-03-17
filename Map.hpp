@@ -42,7 +42,11 @@ namespace ft
 					Compare comp;
 					value_compare( Compare c ) : comp(c) {};
 			}
-
+			map() {};
+			explicit map( const Compare& comp, const Allocator& alloc = Allocator() ) {};
+			template< class InputIt >
+			map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() ) {};
+			~map(){};
 		private:
 			key_compare		_key_comp;
 			value_compare	_value_comp;
