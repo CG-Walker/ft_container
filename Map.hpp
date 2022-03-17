@@ -28,6 +28,7 @@ namespace ft
 			typedef ft::iterator<const T>						const_iterator;
 			typedef ft::reverse_iterator<T>						reverse_iterator;
 			typedef ft::reverse_iterator<const T>				const_reverse_iterator;
+			typedef ft::tree									tree_type;
 
 			class value_compare : std::binary_function<value_type, value_type, bool>
 			{
@@ -42,14 +43,43 @@ namespace ft
 					Compare comp;
 					value_compare( Compare c ) : comp(c) {};
 			}
+						
+			// Constructors & Destructor
 			map() {};
-			explicit map( const Compare& comp, const Allocator& alloc = Allocator() ) {};
-			template< class InputIt >
-			map( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator() ) {};
-			~map(){};
+			explicit map( const Compare & comp, const Allocator & alloc = Allocator() ) : _key_comp(comp), value_comp(value_compare(comp)), _tree(/*TODO*/){};
+			/* template <class InputIt>
+			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) {}; */
+			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree)
+			{
+				// TODO
+			};
+			~map() {};
+
+			// Element access 
+
+			// Iterators
+			iterator begin() { return (this->_tree.begin()) };
+			const_iterator begin() const { return (this->_tree.begin()) };
+			iterator end() { return (this->_tree.end()) };
+			const_iterator end() const { return (this->_tree.end()) };
+			reverse_iterator rbegin() { return (reverse_iterator(this->begin())) };
+			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->begin())) };
+			reverse_iterator rend() { return (reverse_iterator(this->end())) };
+			const_reverse_iterator rend() const { return (const_reverse_iterator(this->end())) };
+
+			// Capacity
+			bool empty() const { return (this->begin() == this->end()) };
+			size_type size() const { return (this->_tree.size()) };
+			// Modifiers
+
+			// Lookup
+
+			// Observers
+
 		private:
 			key_compare		_key_comp;
 			value_compare	_value_comp;
+			tree_type		_tree;
 	};
 } // namespace ft
 
