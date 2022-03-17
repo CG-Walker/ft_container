@@ -31,14 +31,14 @@ namespace ft
 			typedef node<T> *													link_type;
 			typedef const node<T> *												const_link_type;
 			typedef typename Allocator::size_type 								size_type;
-			typedef typename Allocator::template rebind<node<T> >::other 	node_allocator_type;
+			typedef typename Allocator::template rebind<node<T> >::other		node_allocator_type;
        		typedef typename node_allocator_type::difference_type 				difference_type;
 
 		public:
 			// Constructors & Destructor
             typedef ft::iterator<T>								iterator;
 		    typedef ft::iterator<const T>						const_iterator;
-			tree(const Compare &compare, const Allocator &allocator)  : _compare(compare), _alloc(node_allocator_type(allocator)), _size(0){initialize();};
+			tree(const Compare & compare, const Allocator & allocator)  : _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 
 			tree(const tree &tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
 			~tree()
