@@ -44,6 +44,7 @@ namespace ft
 				delete_node(_nil);
 				delete_node(_end);
 			}
+			//Member fonction
 			iterator begin(){return iterator(_begin, _nil);}
 			
 			const_iterator begin() const{return const_iterator(_begin, _nil);}
@@ -52,6 +53,18 @@ namespace ft
 			const_iterator end() const{return const_iterator(_end, _nil);};
 
 			size_type size() const{return _size;};
+
+			tree &operator=(const tree &other)
+			{
+				if (this !=other)
+				{
+					clear();
+					_compare = other._compare;
+					for (iterator iter = other.begin(); iter != other.end(); ++iter)
+                		insert(*iter);
+				}
+				return(*this);
+			}
 		private:
 			link_type			_nil;
 			link_type			_begin;
