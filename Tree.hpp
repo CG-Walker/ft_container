@@ -44,30 +44,12 @@ namespace ft
 				delete_node(this->_nil);
 				delete_node(this->_end);
 			}
-<<<<<<< HEAD
 
 			tree & operator=( const tree & other )
 			{
-				if (this !=other)
+				if (this != other)
 				{
 					this->clear();
-=======
-			//Member fonction
-			iterator begin(){return iterator(this->_begin, this->_nil);}
-			
-			const_iterator begin() const{return const_iterator(this->_begin, this->_nil);}
-
-			iterator end(){return iterator(this->_end, this->_nil);}
-			const_iterator end() const{return const_iterator(this->_end, this->_nil);};
-
-			size_type size() const{return this->_size;};
-
-			tree &operator=(const tree &other)
-			{
-				if (this !=other)
-				{
-					clear();
->>>>>>> 7f792d4a525a276424ae0fc2ca09c7011d81d2e9
 					this->_compare = other._compare;
 					for (iterator iter = other.begin(); iter != other.end(); ++iter)
                 		this->insert(*iter);
