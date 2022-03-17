@@ -12,25 +12,25 @@ namespace ft
 	template <class Key, class Value, class Compare> // Pas encore compris
     class map_value_compare : private Compare
     {
-    public:
-        map_value_compare_() : Compare() {}
-        map_value_compare_(Compare c) : Compare(c) {}
+		public:
+			map_value_compare() : Compare() {}
+			map_value_compare(Compare c) : Compare(c) {}
 
-        bool operator()(const Value &lhs, const Value &rhs) const
-        {
-            return static_cast<const Compare &>(*this)(lhs.first, rhs.first);
-        }
-        bool operator()(const Value &lhs, const Key &rhs) const
-        {
-            return static_cast<const Compare &>(*this)(lhs.first, rhs);
-        }
-        bool operator()(const Key &lhs, const Value &rhs) const
-        {
-            return static_cast<const Compare &>(*this)(lhs, rhs.first);
-        }
+			bool operator()(const Value &lhs, const Value &rhs) const
+			{
+				return static_cast<const Compare &>(*this)(lhs.first, rhs.first);
+			}
+			bool operator()(const Value &lhs, const Key &rhs) const
+			{
+				return static_cast<const Compare &>(*this)(lhs.first, rhs);
+			}
+			bool operator()(const Key &lhs, const Value &rhs) const
+			{
+				return static_cast<const Compare &>(*this)(lhs, rhs.first);
+			}
     };
 
-	template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T>>>
+	template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 		public:
@@ -52,29 +52,29 @@ namespace ft
 			typedef ft::reverse_iterator<const T>						const_reverse_iterator;
 		
 		private:
-		    typedef map_value_compare<key_type, value_type, key_compare>	tree_compare;
-			typedef ft::tree<key_type, value_type, , allocator_type>		tree_type;
+		    typedef map_value_compare<key_type, value_type, key_compare>				tree_compare;
+			typedef ft::tree<key_type, value_type, tree_compare, allocator_type>		tree_type;
 
 
 		public:
 
 			class value_compare : std::binary_function<value_type, value_type, bool>
 			{
-				public:
-					// Member types
-					typedef bool 		result_type;
-					typedef value_type 	first_argument_type;
-					typedef value_type 	second_argument_type;
+			public:
+				Compare comp;
+				value_compare(Compare c) : comp(c) {}
 
-					bool operator()( const value_type & lhs, const value_type & rhs ) const { return (comp(lhs.first, rhs.first)); };
-				protected:
-					Compare comp;
-					value_compare( Compare c ) : comp(c) {};
-			}
+				typedef bool 		result_type;
+				typedef value_type	first_argument_type;
+				typedef value_type	second_argument_type;
+
+				bool operator()(const value_type &lhs, const value_type &rhs) const { return (comp(lhs.first, rhs.first)); }
+			};
 						
 			// Constructors & Destructor
-			map() {};
-			explicit map( const Compare & comp, const Allocator & alloc = Allocator() ) : _key_comp(comp), value_comp(value_compare(comp)), _tree(tree_compare(comp), alloc) {};
+			//map() {};
+			explicit map( const key_compare & comp = key_compare(), const allocator_type & alloc = allocator_type() ) : _key_comp(comp), _value_comp(value_compare(comp)), _tree(tree_compare(comp), alloc) {};
+			
 			/* template <class InputIt>
 			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) {}; */
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree)
@@ -86,25 +86,25 @@ namespace ft
 			// Element access 
 
 			// Iterators
-			iterator begin() { return (this->_tree.begin()) };
-			const_iterator begin() const { return (this->_tree.begin()) };
-			iterator end() { return (this->_tree.end()) };
-			const_iterator end() const { return (this->_tree.end()) };
-			reverse_iterator rbegin() { return (reverse_iterator(this->begin())) };
-			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->begin())) };
-			reverse_iterator rend() { return (reverse_iterator(this->end())) };
-			const_reverse_iterator rend() const { return (const_reverse_iterator(this->end())) };
+			iterator begin() { return (this->_tree.begin()); };
+			const_iterator begin() const { return (this->_tree.begin()); };
+			iterator end() { return (this->_tree.end()); };
+			const_iterator end() const { return (this->_tree.end()); };
+			reverse_iterator rbegin() { return (reverse_iterator(this->begin())); };
+			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->begin())); };
+			reverse_iterator rend() { return (reverse_iterator(this->end())); };
+			const_reverse_iterator rend() const { return (const_reverse_iterator(this->end())); };
 
 			// Capacity
-			bool empty() const { return (this->begin() == this->end()) };
-			size_type size() const { return (this->_tree.size()) };
+			bool empty() const { return (this->begin() == this->end()); };
+			size_type size() const { return (this->_tree.size()); };
 		
 			// Modifiers
 			iterator insert(iterator pos, const value_type & value) { return (this->_tree.insert(pos, value)); };
 
 			// Lookup
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };
-			const_iterator find(const key_type & key) const { return this->_tree.find(key)); };
+			const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
 
 			// Observers
 
