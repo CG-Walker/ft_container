@@ -27,6 +27,12 @@ int main(void)
 	std::cout << std_stack.size() << std::endl;
 	std::cout << ft_stack.size() << std::endl;
 
+    
+	std::cout << "___TEST COPY___" << std::endl;
+    ft::stack<int>  copy(ft_stack);
+    std::cout << std_stack.top() << std::endl;
+    std::cout << ft_stack.size() << std::endl;
+
 	std_stack.pop();
 	ft_stack.pop();
 	std::cout << "___TEST POP AND EMPTY___" << std::endl;
@@ -62,6 +68,8 @@ int main(void)
 		std::cout << "clone > tmpk" << std::endl;
 	if (tmp < clone)
 		std::cout << "tmp < clone" << std::endl;
+
+    
 	std::cout << "Fin du test." << std::endl;
 	return (0);
 }
