@@ -44,7 +44,8 @@ namespace ft
 			}
 
 		private:
-
+			key_compare		_key_comp;
+			value_compare	_value_comp;
 	};
 } // namespace ft
 
