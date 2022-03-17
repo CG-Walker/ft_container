@@ -14,79 +14,36 @@ namespace ft
 			node	*left;
 			node	*right;
 			T		value;
-		
+	
 		node() : parent(NULL), left(NULL), right(NULL) {};
-		node(node *other, const T *value) : parent(other), left(other), right(other), value(value) {};
+		node(node *nil, const T *value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
-
-	template <class T>
-	class node_utils
+	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
+    class tree
 	{
-		public:
-			node<T> *tree_min(node <T> *node, node <T> *other) const
-			{
-				while (node->left != other)
-					node = node->left;
-				return node;
-			}
-
-			node<T> *tree_max(node <T> *node, node <T> *other) const
-			{
-				while (node->right != other)
-					node = node->right;
-				return node;	
-			}
-			bool is_left_child(rb_node_<T> *node) const
-       		{
-            	return node == node->parent->left;
-       		}
-
-			bool is_right_child(rb_node_<T> *node) const
-			{
-				return node == node->parent->right;
-			}
-			node<T> *search_next_node(node <T> node, node <T> other) const
-			{
-				if (node->right != other)
-				{
-					return(tree_min(node->left, other));
-				}
-				 while (!is_left_child(node))
-            	{
-               		node = node->parent;
-            	}
-            	return node->parent;
-			}
-			node<T> *search_prev_node(node <T> node, node <T> other) const
-			{
-				if (node->right != other)
-				{
-					return(tree_max(node->left, other));
-				}
-				 while (!is_right_child(node))
-            	{
-               		node = node->parent;
-            	}
-            	return node->parent;
-			}
-	}
-
-	template <class T>
-	class tree_iterator : public ft::iterator_trait(T *)
-	{
-		public:
-			typedef typename iterator_traits<T>::iterator_category iterator_category;
-       		typedef typename iterator_traits<T>::value_type value_type;
-        	typedef typename iterator_traits<T>::difference_type difference_type;
-        	typedef typename iterator_traits<T>::pointer pointer;
-        	typedef typename iterator_traits<T>::reference reference;
-			typedef node<value_type> *link_type;
-
 		private:
-        	link_type _current_node;
-       		link_type _other;
-        	node_utils<value_type> _utils;
+			typedef Key key_type;
+			typedef T value_type;
+			typedef node<T> *link_type;
+			typedef const node<T> *const_link_type;
+			typedef typename Allocator::size_type size_type;
+			typedef typename Allocator::template rebind<rb_node_<T> >::other node_allocator_type;
+       		typedef typename node_allocator_type::difference_type difference_type;
+
+			link_type _nil;
+     		link_type _begin;
+        	link_type _end;
+			Compare             _compare;
+			size_type           _size;
+            node_allocator_type _alloc;            
+
+		public:
+			tree(const Compare &compare, const Allocator &allocator) : _compare(compare),  {};
 	}
+
 }
 
 #endif
+
+
+    };
