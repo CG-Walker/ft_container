@@ -40,26 +40,26 @@ namespace ft
 			tree(const tree & other) : _compare(other._compare), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
 			~tree()
 			{
-				destroy(_end->left);
-				delete_node(_nil);
-				delete_node(_end);
+				destroy(this->_end->left);
+				delete_node(this->_nil);
+				delete_node(this->_end);
 			}
 			//Member fonction
-			iterator begin(){return iterator(_begin, _nil);}
+			iterator begin(){return iterator(this->_begin, this->_nil);}
 			
-			const_iterator begin() const{return const_iterator(_begin, _nil);}
+			const_iterator begin() const{return const_iterator(this->_begin, this->_nil);}
 
-			iterator end(){return iterator(_end, _nil);}
-			const_iterator end() const{return const_iterator(_end, _nil);};
+			iterator end(){return iterator(this->_end, this->_nil);}
+			const_iterator end() const{return const_iterator(this->_end, this->_nil);};
 
-			size_type size() const{return _size;};
+			size_type size() const{return this->_size;};
 
 			tree &operator=(const tree &other)
 			{
 				if (this !=other)
 				{
 					clear();
-					_compare = other._compare;
+					this->_compare = other._compare;
 					for (iterator iter = other.begin(); iter != other.end(); ++iter)
                 		insert(*iter);
 				}
@@ -88,19 +88,19 @@ namespace ft
 
 			void delete_node(link_type node)
         	{
-         	   _alloc.destroy(node);
-        	    _alloc.deallocate(node, 1);
+         	   this->_alloc.destroy(node);
+        	   this->_alloc.deallocate(node, 1);
         	}
 			iterator find(const key_type &key)
 			{
 				link_type node = find_node(key);
-            	return iterator(node, _nil);
+            	return iterator(node, this->_nil);
 			}
 			link_type find_node(const key_type &key) const
 			{
-				link_type node = _end;
-				link_type tmp = _end->left;
-				while(tmp != _nil)
+				link_type node = this->_end;
+				link_type tmp = this->_end->left;
+				while(tmp != this->_nil)
 				{
 					if(!_compare(tmp->value, key))
 					{	
@@ -110,9 +110,16 @@ namespace ft
 					else
 						tmp = node->right;
 				}	
-				if (node != _end && !_compare(key, node->value))
+				if (node != this->_end && !_compare(key, node->value))
 					return node;
-				return _end;
+				return this->_end;
+			}
+			void clear(void);
+			{
+				destroy(this->_end->left)
+				this->_begin = this->_end;
+				this->_end->left = this->_nil;
+				this->_size = 0;
 			}
 	};
 }
