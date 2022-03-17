@@ -159,6 +159,16 @@ namespace ft
 				this->_size = 0;
 			}
 
+            void destroy(link_type node)
+            {
+                if (node != _nil)
+                {
+                    destroy(node->left);
+                    destroy(node->right);
+                    delete_node(node);
+                }
+            }
+
 			pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
 			{
 				link_type new_node = create_node(value);
