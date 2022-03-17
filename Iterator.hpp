@@ -24,6 +24,8 @@ namespace ft
 			iterator(const _iterator & other)  : _ptr(other._ptr){};
 			~iterator(void) {};
 
+            pointer base() const {return (_ptr;}
+
 			_iterator & operator=(_iterator const & other)
 			{
 				_ptr = other._ptr;
