@@ -36,7 +36,18 @@ namespace ft
 
 		public:
 			// Constructors & Destructor
-			tree(const Compare & comp, const Allocator & alloc) : _compare(comp), _alloc(alloc), _size(0) 
+			tree(const Compare & comp, const Allocator & alloc) : _compare(comp), _alloc(alloc), _size(0) { initialize(); };
+			tree(const tree & other) : _compare(other._compare), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
+
+		private:
+			link_type			_nil;
+			link_type			_begin;
+			link_type			_end;
+			Compare				_compare;
+			size_type			_size;
+			node_allocator_type	_alloc;
+		
+			void initialize()
 			{
 				this->nil_ = this->_alloc.allocate(1);
 				this->_alloc.construct(this->_nil);
@@ -47,16 +58,7 @@ namespace ft
 				this->_alloc.construct(this->_end);
 				this->_end->left = this->_nil;
 				this->_begin = this->_end;
-			};
-
-
-		private:
-			link_type			_nil;
-     		link_type			_begin;
-        	link_type			_end;
-			Compare				_compare;
-			size_type			_size;
-            node_allocator_type	_alloc;            
+			}
 	};
 }
 
