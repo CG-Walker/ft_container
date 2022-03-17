@@ -39,6 +39,37 @@ namespace ft
 			tree(const Compare & comp, const Allocator & alloc) : _compare(comp), _alloc(alloc), _size(0) { initialize(); };
 			tree(const tree & other) : _compare(other._compare), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
 
+			// Modifiers
+       		pair<iterator, bool> insert(const value_type & value)
+			{
+				link_type insert_place = search_insert_place(value);
+				return (insert_node(value, insert_place));
+			};
+/* 		    iterator insert(iterator pos, const value_type & value)
+			{
+				if (pos == this->end()) // Si on veut ajouter à la fin
+				{
+					iterator max = end();
+					if (this->size() > 0 && this->_compare(*(--max), value))
+						return
+					else
+						return
+				}
+				if (this->_compare(value, *pos)) // Si la value est plus petite que celle de la pos
+				{
+					if (pos == this->begin())
+						return (insert_node(value, this->_begin).first)
+					iterator prev = pos - 1;
+					if (this->_compare(*prev, value))
+					{
+						if (prev.base()->right == this->_nil)
+							return (insert_node(value, prev.base()).first);
+						else
+							return (insert_node(value, pos.base()).first);
+					}
+				}
+			} */
+
 		private:
 			link_type			_nil;
 			link_type			_begin;
@@ -59,10 +90,54 @@ namespace ft
 				this->_end->left = this->_nil;
 				this->_begin = this->_end;
 			}
+
+			pair<iterator, bool> insert_node(const value_type & value, link_type insert_place)
+			{
+				link_type new_node = create_node(value);
+				new_node->parent = insert_place;
+				if (insert_place == this->_nil) // Si l'arbre est vide
+				{
+					new_node->parent = this->_end;
+					this->_end->left = new_node;
+				}
+				else if (this->_compare(node->value, insert_place->value)) // Si le value est plus petite que celle de la place
+					insert_place->left = new_node;
+				else if (this->_compare(insert_place->value, node->value)) // Si le value est plus grande que celle de la place
+					insert_place->right = new_node;
+				else // Si la value existe déjà
+				{
+					this->_alloc.destroy(new_node);
+					this->_alloc.deallocate(new_node, 1);
+					return (ft::make_pair(iterator(insert_place, this->_nill), false));
+				}
+				this->_size++;
+				return (ft::make_pair(iterator(new_node, this->_nill), true));
+			}
+
+			link_type create_node(const value_type & value)
+			{
+				link_type new_node = alloc_.allocate(1);
+				alloc_.construct(new_node, this->_nil, value);
+				return (new_node);
+			}
+
+			link_type search_insert_place(const value_type &value)
+			{
+				link_type prev_node = this->_nil;
+				link_type root = this->_end->left;
+				while (root != this->_nil)
+				{
+					prev_node = root;
+					if (compare_(value, root->value))
+						root = root->left;
+					else if (compare_(root->value, value))
+						root = root->right;
+					else
+						return root;
+				}
+				return prev_node;
+        	}
 	};
 }
 
 #endif
-
-
-    };
