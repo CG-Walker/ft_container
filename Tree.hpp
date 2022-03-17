@@ -18,6 +18,7 @@ namespace ft
 		node() : parent(NULL), left(NULL), right(NULL) {};
 		node(node *nil, const T *value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
+
 	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
     class tree
 	{
@@ -38,7 +39,30 @@ namespace ft
             node_allocator_type _alloc;            
 
 		public:
-			tree(const Compare &compare, const Allocator &allocator) : _compare(compare),  {};
+			tree(const Compare &compare, const Allocator &allocator) : _compare(compare), _alloc(node_allocator_type(allocator)); _size(0) 
+            {
+                initialize();
+            }
+            tree(const tree &tree) : _compare(tree._compare), _alloc(node_allocator_type(allocator)), _size(0)
+			{
+				initialize();
+			}
+        private :
+
+            void initialize()
+            {
+                this->_nil = _alloc.allocate(1);
+                this->_alloc.construct(_nil);
+
+                this->_nil->left = _nil;
+                this->_nil->right = _nil;
+
+                this->_end = alloc_.allocate(1);
+                this->_alloc.construct(_end);
+
+                this->_end->left = _nil;
+                this->_begin = _end;
+            }
 	}
 
 }
