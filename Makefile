@@ -4,6 +4,7 @@ CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = ft_container
 SRC_STACK = tester_stack.cpp
 SRC_VECTOR = tester_vector.cpp
+SRC_MAP = tester_map.cpp
 SRC_ALL = all_test.cpp
 
 all: $(NAME)
@@ -26,6 +27,13 @@ vector_exec :	$(SRC_VECTOR)
 vector : 
 		@rm -f vector_exec
 		@make vector_exec
+
+map_exec :	$(SRC_MAP) 
+			@$(CPP) $(CPPFLAGS) $^ -o $@
+			@./map_exec
+map : 
+		@rm -rf map_exec
+		@make map_exec
 
 clean:
 	rm -f $(NAME) stack_exec vector_exec
