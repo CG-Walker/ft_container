@@ -44,7 +44,14 @@ namespace ft
 				delete_node(_nil);
 				delete_node(_end);
 			}
+			iterator begin(){return iterator(_begin, _nil);}
+			
+			const_iterator begin() const{return const_iterator(_begin, _nil);}
 
+			iterator end(){return iterator(_end, _nil);}
+			const_iterator end() const{return const_iterator(_end, _nil);};
+
+			size_type size() const{return _size;};
 		private:
 			link_type			_nil;
 			link_type			_begin;
