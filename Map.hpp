@@ -36,9 +36,11 @@ namespace ft
 					typedef bool 		result_type;
 					typedef value_type 	first_argument_type;
 					typedef value_type 	second_argument_type;
+
+					bool operator()( const value_type & lhs, const value_type & rhs ) const { return (comp(lhs.first, rhs.first)); };
 				protected:
 					Compare comp;
-					value_compare( Compare c )
+					value_compare( Compare c ) : comp(c) {};
 			}
 
 		private:
