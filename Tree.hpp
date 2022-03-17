@@ -40,16 +40,34 @@ namespace ft
 			tree( const tree & other) : _compare(other._compare ), _alloc(node_allocator_type(allocator)), _size(0) { initialize(); };
 			~tree()
 			{
-				destroy(_end->left);
-				delete_node(_nil);
-				delete_node(_end);
+				destroy(this->_end->left);
+				delete_node(this->_nil);
+				delete_node(this->_end);
 			}
+<<<<<<< HEAD
 
 			tree & operator=( const tree & other )
 			{
 				if (this !=other)
 				{
 					this->clear();
+=======
+			//Member fonction
+			iterator begin(){return iterator(this->_begin, this->_nil);}
+			
+			const_iterator begin() const{return const_iterator(this->_begin, this->_nil);}
+
+			iterator end(){return iterator(this->_end, this->_nil);}
+			const_iterator end() const{return const_iterator(this->_end, this->_nil);};
+
+			size_type size() const{return this->_size;};
+
+			tree &operator=(const tree &other)
+			{
+				if (this !=other)
+				{
+					clear();
+>>>>>>> 7f792d4a525a276424ae0fc2ca09c7011d81d2e9
 					this->_compare = other._compare;
 					for (iterator iter = other.begin(); iter != other.end(); ++iter)
                 		this->insert(*iter);
@@ -134,9 +152,9 @@ namespace ft
 			{
 				link_type node = this->_end;
 				link_type tmp = this->_end->left;
-				while(tmp != this->_nil)
+				while (tmp != this->_nil)
 				{
-					if(!this->_compare(tmp->value, key))
+					if (!this->_compare(tmp->value, key))
 					{	
 						node = tmp;
 						tmp = node->left
@@ -147,6 +165,13 @@ namespace ft
 				if (node != this->_end && !this->_compare(key, node->value))
 					return (node);
 				return (this->_end);
+			}
+			void clear()
+			{
+				destroy(this->_end->left)
+				this->_begin = this->_end;
+				this->_end->left = this->_nil;
+				this->_size = 0;
 			}
 
 			pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
