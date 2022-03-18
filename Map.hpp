@@ -37,7 +37,7 @@ namespace ft
 			// Member types
 			typedef Key													key_type;
 			typedef T													mapped_type;
-			typedef typename std::pair<const Key, T>					value_type;
+			typedef typename ft::pair<const Key, T>						value_type;
 			typedef typename Allocator::size_type						size_type;
 			typedef typename Allocator::difference_type					difference_type;
 			typedef Compare												key_compare;
@@ -46,8 +46,8 @@ namespace ft
 			typedef const value_type &									const_reference;
 			typedef typename Allocator::pointer							pointer;
 			typedef typename Allocator::const_pointer					const_pointer;
-			typedef ft::iterator<T>										iterator;
-			typedef ft::iterator<const T>								const_iterator;
+			typedef ft::iterator<T>										iterator; // PAS BON
+			typedef ft::iterator<const T>								const_iterator; // PAS BON
 			typedef ft::reverse_iterator<T>								reverse_iterator;
 			typedef ft::reverse_iterator<const T>						const_reverse_iterator;
 		
