@@ -17,8 +17,8 @@ namespace ft
 			node *	right;
 			T		value;
 	
-		node() : parent(NULL), left(NULL), right(NULL) {};
-		node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
+			node() : parent(NULL), left(NULL), right(NULL) {};
+			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
 
 	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
@@ -31,8 +31,11 @@ namespace ft
 			typedef node<T> *													link_type;
 			typedef const node<T> *												const_link_type;
 			typedef typename Allocator::size_type 								size_type;
+			//typedef typename Allocator::template rebind<node<T> >::other		node_allocator_type;
+
 			typedef typename Allocator::template rebind<node<T> >::other		node_allocator_type;
-       		typedef typename node_allocator_type::difference_type 				difference_type;
+
+			typedef typename node_allocator_type::difference_type 				difference_type;
 
 		public:
 			// Constructors & Destructor
@@ -40,7 +43,7 @@ namespace ft
 		    typedef ft::iterator<const T>						const_iterator;
 			tree(const Compare & compare, const Allocator & allocator)  : _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 
-			tree(const tree &tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
+			tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
 			~tree()
 			{
 				destroy(this->_end->left);
@@ -55,7 +58,7 @@ namespace ft
 					this->clear();
 					this->_compare = other._compare;
 					for (iterator iter = other.begin(); iter != other.end(); ++iter)
-                		this->insert(*iter);
+						this->insert(*iter);
 				}
 				return (*this);
 			}
@@ -111,13 +114,14 @@ namespace ft
 		
 			void initialize()
 			{
+				node<T> ptr_empty;
 				this->_nil = this->_alloc.allocate(1);
-				this->_alloc.construct(this->_nil);
+				this->_alloc.construct(this->_nil, ptr_empty);
 				this->_nil->left = this->_nil;
 				this->_nil->right = this->_nil;
 
 				this->_end = this->_alloc.allocate(1);
-				this->_alloc.construct(this->_end);
+				this->_alloc.construct(this->_end, ptr_empty);
 				this->_end->left = this->_nil;
 				this->_begin = this->_end;
 			}
@@ -169,7 +173,7 @@ namespace ft
                 }
             }
 
-			pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
+			ft::pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
 			{
 				link_type new_node = create_node(value);
 				new_node->parent = insert_place;
