@@ -4,7 +4,19 @@
 
 namespace ft
 {
-template <class T>
+    template <class T>
+	class node
+	{
+		public :
+			node *	parent;
+			node *	left;
+			node *	right;
+			T		value;
+	
+			node() : parent(NULL), left(NULL), right(NULL) {};
+			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
+	};
+    template <class T>
     class tree_iterator_ : public std::iterator<std::bidirectional_iterator_tag, T>
     {
     public:
@@ -90,6 +102,6 @@ template <class T>
     private:
         link_type current_;
         link_type nil_;
-        rb_node_utils_<value_type> utils_;
+        node<value_type> utils_;
     };
 }

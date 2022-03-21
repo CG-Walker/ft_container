@@ -9,18 +9,6 @@
 
 namespace ft
 {
-	template <class T>
-	class node
-	{
-		public :
-			node *	parent;
-			node *	left;
-			node *	right;
-			T		value;
-	
-			node() : parent(NULL), left(NULL), right(NULL) {};
-			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
-	};
 
 	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
 	class tree
