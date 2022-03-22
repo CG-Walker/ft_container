@@ -104,7 +104,7 @@ namespace ft
 			// Modifiers
 			std::pair<iterator, bool> insert( const value_type & value ) 
 			{ 
-				return (ft::make_pair(value.first, this->_tree.add_value(value.second));
+				return (this->_tree.insert(value));
 			}
 			//iterator insert( iterator hint, const value_type & value );
 			//template< class InputIt >
@@ -112,7 +112,7 @@ namespace ft
 
 			// Lookup
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };
-			const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
+			//const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
 
 			// Observers
 

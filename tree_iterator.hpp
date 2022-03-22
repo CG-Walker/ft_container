@@ -8,6 +8,19 @@
 namespace ft
 {
     template <class T>
+	class node
+	{
+		public :
+			node *	parent;
+			node *	left;
+			node *	right;
+			T		value;
+	
+			node() : parent(NULL), left(NULL), right(NULL) {};
+			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
+	};
+
+    template <class T>
     class node_utils
     {
     public:
@@ -79,7 +92,7 @@ namespace ft
         typedef typename ft::iterator_traits<T>::reference reference;
 
     private:
-        typedef ft::node<value_type> *link_type;
+        typedef ft::node<value_type> * link_type;
 
     public:
         // Member functions
