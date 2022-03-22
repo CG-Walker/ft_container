@@ -111,17 +111,21 @@ namespace ft
                 link_type root = this->_current;
                 link_type ret = this->_currents;
                 
-                while (ret != value)
+                if (ret != value)
                 {
-                	if (this->_current == value)
+                    while (true)
                     {
-                        ret = this->_current;
-                        this->_current = root;
+                        if (this->_current == value)
+                        {
+                            ret = this->_current;
+                            this->_current = root;
+                            break ;
+                        }
+                        else if (value >= this->_current->value) // tjrs a verifier
+                            this->_current = this->_current->right;
+                        else if (value < this->_current->value)
+                            this->_current = this->_current->left;
                     }
-                    else if (value >= this->_current->value) // tjrs a verifier
-                        this->_current = this->_current->right;
-                    else if (value < this->_current->value)
-                        this->_current = this->_current->left;
                 }
                 return (ret);
             }
