@@ -55,8 +55,8 @@ namespace ft
 			typedef ft::tree<key_type, value_type, tree_compare, allocator_type>		tree_type;
 
 		public:
-			typedef ft::tree_type::iterator									iterator; // PAS BON
-			typedef ft::tree_type::const_iterator							const_iterator; // PAS BON
+			typedef typename tree_type::iterator								iterator; // PAS BON
+			typedef typename tree_type::const_iterator							const_iterator; // PAS BON
 
 		public:
 
@@ -102,7 +102,13 @@ namespace ft
 			size_type size() const { return (this->_tree.size()); };
 		
 			// Modifiers
-			iterator insert(iterator pos, const value_type & value) { return (this->_tree.insert(pos, value)); };
+			std::pair<iterator, bool> insert( const value_type & value ) 
+			{ 
+				return (ft::make_pair(value.first, this->_tree.add_value(value.second));
+			}
+			//iterator insert( iterator hint, const value_type & value );
+			//template< class InputIt >
+			//void insert( InputIt first, InputIt last );
 
 			// Lookup
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };

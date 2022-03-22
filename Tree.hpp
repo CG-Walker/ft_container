@@ -79,7 +79,7 @@ namespace ft
 				this->_nil->right = this->_nil;
 			}
 
-			link_type add_value(const value_type & value)
+			value_type add_value(const value_type & value)
 			{
 				link_type root = this->_current;
 				if (this->_current == NULL) // Signifie que l'arbe est vide
@@ -87,7 +87,7 @@ namespace ft
 					link_type new_node = create_node();
 					new_node->value = value;
 					this->_current = new_node;
-					return (new_node);
+					return (ft::make_pair(iterator(new_node), true));
 				}
 				while (true)
 				{
@@ -103,27 +103,27 @@ namespace ft
 					else if (value < this->_current->value)
 						this->_current = this->_current->left;
 				}
-				return (new_node);
+				return (ft::make_pair(iterator(new_node), true));
 			}
 
-            link_type find(const value_type & value)
+            link_type find(const value_type & key)
             {
                 link_type root = this->_current;
                 link_type ret = this->_currents;
                 
-                if (ret != value)
+                if (this->_compare(this->_current->value, key))
                 {
                     while (true)
                     {
-                        if (this->_current == value)
+               			if (this->_compare(this->_current->value, key))
                         {
                             ret = this->_current;
                             this->_current = root;
                             break ;
                         }
-                        else if (value >= this->_current->value) // tjrs a verifier
+                        else if (this->_compare(this->_current->value, key))
                             this->_current = this->_current->right;
-                        else if (value < this->_current->value)
+                        else if (this->_compare(this->_current->value, key))
                             this->_current = this->_current->left;
                     }
                 }

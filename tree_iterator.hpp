@@ -8,23 +8,10 @@
 namespace ft
 {
     template <class T>
-	class node
-	{
-		public :
-			node *	parent;
-			node *	left;
-			node *	right;
-			T		value;
-	
-			node() : parent(NULL), left(NULL), right(NULL) {};
-			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
-	};
-
-    template <class T>
     class node_utils
     {
     public:
-        node<T> *search_tree_min(node<T> * node, node<T> * nil) const
+        ft::node<T> * search_tree_min(ft::node<T> * node, ft::node<T> * nil) const
         {
             while (node->left != nil)
             {
@@ -33,7 +20,7 @@ namespace ft
             return node;
         }
 
-        node<T> *search_tree_max(node<T> *node, node<T> *nil) const
+        ft::node<T> *search_tree_max(ft::node<T> *node, ft::node<T> *nil) const
         {
             while (node->right != nil)
             {
@@ -42,17 +29,17 @@ namespace ft
             return node;
         }
 
-        bool is_left_child(node<T> *node) const
+        bool is_left_child(ft::node<T> *node) const
         {
             return node == node->parent->left;
         }
 
-        bool is_right_child(node<T> *node) const
+        bool is_right_child(ft::node<T> *node) const
         {
             return node == node->parent->right;
         }
 
-        node<T> *search_next_node(node<T> *node, node<T> *nil) const
+        ft::node<T> *search_next_node(ft::node<T> *node, ft::node<T> *nil) const
         {
             if (node->right != nil)
             {
@@ -65,7 +52,7 @@ namespace ft
             return node->parent;
         }
 
-        node<T> *search_prev_node(node<T> *node, node<T> *nil) const
+        ft::node<T> *search_prev_node(ft::node<T> *node, ft::node<T> *nil) const
         {
             if (node->left != nil)
             {
