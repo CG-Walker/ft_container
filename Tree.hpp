@@ -28,8 +28,8 @@ namespace ft
 
 		public:
 			// Constructors & Destructor
-            typedef ft::tree_iterator_<T>								tree_iterator_;
-		    typedef ft::tree_iterator_<const T>						const_tree_iterator_;
+            typedef ft::tree_iterator_<T>										iterator;
+		    typedef ft::tree_iterator_<const T>									const_iterator;
 			tree(const Compare & compare, const Allocator & allocator)  : _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 
 			tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
@@ -46,20 +46,20 @@ namespace ft
 				{
 					this->clear();
 					this->_compare = other._compare;
-					for (tree_iterator_ iter = other.begin(); iter != other.end(); ++iter)
+					for (iterator iter = other.begin(); iter != other.end(); ++iter)
 						this->insert(*iter);
 				}
 				return (*this);
 			}
 	
 			// Iterators
-			tree_iterator_ begin() { return (tree_iterator_(this->_begin, this->_nil)); }
-			const_tree_iterator_ begin() const { return const_tree_iterator_(this->_begin, this->_nil); }
-			tree_iterator_ end() { return tree_iterator_(this->_end, this->_nil); }
-			const_tree_iterator_ end() const { return const_tree_iterator_(this->_end, this->_nil); };
+			iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
+			iterator end() { return iterator(this->_end, this->_nil); }
+			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
 
 			// Modifiers
-       		pair<tree_iterator_, bool> insert( const value_type & value )
+       		pair<iterator, bool> insert( const value_type & value )
 			{
 				link_type insert_place = search_insert_place(value);
 				return (insert_node(value, insert_place));
@@ -89,6 +89,51 @@ namespace ft
 					}
 				}
 			} */
+
+		iterator insert(iterator position, const value_type &value)
+        {
+            if (position == end())
+            {
+                iterator max = end();
+                if (this->_size > 0 && compare_(*(--max), value))
+                    return insert_node(value, max.base()).first;
+                else
+                    return insert(value).first;
+            }
+            if (compare_(value, *position)) // value < pos
+            {
+                if (position == begin())
+                    return insert_node(value, this->_begin).first;
+                iterator prev = position;
+                --prev;
+                if (compare_(*prev, value))
+                {
+                    if (prev.base()->right == this->_nil)
+                        return insert_node(value, prev.base()).first;
+                    else
+                        return insert_node(value, position.base()).first;
+                }
+                return insert(value).first;
+            }
+            if (compare_(*position, value)) // pos < value
+            {
+                iterator max = end();
+                --max;
+                if (position == max)
+                    return insert_node(value, max.base()).first;
+                iterator next = position;
+                ++next;
+                if (compare_(value, *next))
+                {
+                    if (position.base()->right == this->_nil)
+                        return insert_node(value, position.base()).first;
+                    else
+                        return insert_node(value, next.base()).first;
+                }
+                return insert(value).first;
+            }
+            return position;
+        }
 
 			// Capacity
 			size_type size() const { return (this->_size); };
@@ -120,10 +165,10 @@ namespace ft
          	   this->_alloc.destroy(node);
         	   this->_alloc.deallocate(node, 1);
         	}
-			tree_iterator_ find( const key_type & key )
+			iterator find( const key_type & key )
 			{
 				link_type node = find_node(key);
-            	return (tree_iterator_(node, this->_nil));
+            	return (iterator(node, this->_nil));
 			}
 
 			link_type find_node( const key_type & key ) const
@@ -162,7 +207,7 @@ namespace ft
                 }
             }
 
-			ft::pair<tree_iterator_, bool> insert_node( const value_type & value, link_type insert_place )
+			ft::pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
 			{
 				link_type new_node = create_node(value);
 				new_node->parent = insert_place;
@@ -179,10 +224,10 @@ namespace ft
 				{
 					this->_alloc.destroy(new_node);
 					this->_alloc.deallocate(new_node, 1);
-					return (ft::make_pair(tree_iterator_(insert_place, this->_nill), false));
+					return (ft::make_pair(iterator(insert_place, this->_nill), false));
 				}
 				this->_size++;
-				return (ft::make_pair(tree_iterator_(new_node, this->_nill), true));
+				return (ft::make_pair(iterator(new_node, this->_nill), true));
 			}
 
 			link_type create_node( const value_type & value )

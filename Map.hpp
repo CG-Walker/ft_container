@@ -2,10 +2,11 @@
 # define FT_MAP_HPP
 
 #include <functional>
-#include "Iterator.hpp"
+//#include "Iterator.hpp"
 #include "ReverseIterator.hpp"
 #include "Utils.hpp"
 #include "Tree.hpp"
+#include "tree_iterator.hpp"
 
 namespace ft
 {
@@ -46,8 +47,6 @@ namespace ft
 			typedef const value_type &									const_reference;
 			typedef typename Allocator::pointer							pointer;
 			typedef typename Allocator::const_pointer					const_pointer;
-			typedef ft::iterator<T>										iterator; // PAS BON
-			typedef ft::iterator<const T>								const_iterator; // PAS BON
 			typedef ft::reverse_iterator<T>								reverse_iterator;
 			typedef ft::reverse_iterator<const T>						const_reverse_iterator;
 		
@@ -55,6 +54,9 @@ namespace ft
 		    typedef map_value_compare<key_type, value_type, key_compare>				tree_compare;
 			typedef ft::tree<key_type, value_type, tree_compare, allocator_type>		tree_type;
 
+		public:
+			typedef ft::tree_type::iterator									iterator; // PAS BON
+			typedef ft::tree_type::const_iterator							const_iterator; // PAS BON
 
 		public:
 

@@ -1,6 +1,9 @@
-#include "Utils.hpp"
-#include "Tree.hpp"
-#include "IteratorTrait.hpp"
+#ifndef TREE_ITERATOR_HPP
+# define TREE_ITERATOR_HPP
+
+# include "Utils.hpp"
+# include "Tree.hpp"
+# include "IteratorTrait.hpp"
 
 namespace ft
 {
@@ -16,6 +19,67 @@ namespace ft
 			node() : parent(NULL), left(NULL), right(NULL) {};
 			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
+
+    template <class T>
+    class node_utils
+    {
+    public:
+        node<T> *search_tree_min(node<T> * node, node<T> * nil) const
+        {
+            while (node->left != nil)
+            {
+                node = node->left;
+            }
+            return node;
+        }
+
+        node<T> *search_tree_max(node<T> *node, node<T> *nil) const
+        {
+            while (node->right != nil)
+            {
+                node = node->right;
+            }
+            return node;
+        }
+
+        bool is_left_child(node<T> *node) const
+        {
+            return node == node->parent->left;
+        }
+
+        bool is_right_child(node<T> *node) const
+        {
+            return node == node->parent->right;
+        }
+
+        node<T> *search_next_node(node<T> *node, node<T> *nil) const
+        {
+            if (node->right != nil)
+            {
+                return search_tree_min(node->right, nil);
+            }
+            while (!is_left_child(node))
+            {
+                node = node->parent;
+            }
+            return node->parent;
+        }
+
+        node<T> *search_prev_node(node<T> *node, node<T> *nil) const
+        {
+            if (node->left != nil)
+            {
+                return search_tree_max(node->left, nil);
+            }
+            while (!is_right_child(node))
+            {
+                node = node->parent;
+            }
+            return node->parent;
+        }
+    };
+
+
     template <class T>
     class tree_iterator_ : public std::iterator<std::bidirectional_iterator_tag, T>
     {
@@ -67,6 +131,7 @@ namespace ft
         tree_iterator_ &operator++()
         {
             current_ = utils_.search_next_node(current_, nil_);
+        
             return *this;
         }
         tree_iterator_ operator++(int)
@@ -102,6 +167,8 @@ namespace ft
     private:
         link_type current_;
         link_type nil_;
-        node<value_type> utils_;
+        node_utils<value_type> utils_;
     };
 }
+
+#endif
