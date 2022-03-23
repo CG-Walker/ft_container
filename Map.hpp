@@ -102,8 +102,8 @@ namespace ft
 			size_type size() const { return (this->_tree.size()); };
 		
 			// Modifiers
-			std::pair<iterator, bool> insert( const value_type & value ) 
-			{ 
+			ft::pair<iterator, bool> insert( const value_type & value ) 
+			{
 				return (this->_tree.insert(value));
 			}
 			//iterator insert( iterator hint, const value_type & value );
@@ -111,6 +111,8 @@ namespace ft
 			//void insert( InputIt first, InputIt last );
 
 			// Lookup
+			//	‘ft::node<ft::pair<const int, int> >*’} 
+			//	‘ft::tree_iterator_<ft::pair<const int, int>*>’
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };
 			//const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
 

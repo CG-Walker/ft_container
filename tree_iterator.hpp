@@ -18,6 +18,7 @@ namespace ft
 	
 			node() : parent(NULL), left(NULL), right(NULL) {};
 			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
+            node(node * nil, const T & value) : parent(nil), left(nil), right(nil), value(value) {};
 	};
 
     template <class T>

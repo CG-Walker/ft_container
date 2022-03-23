@@ -6,6 +6,7 @@
 //# include "Iterator.hpp"
 #include "tree_iterator.hpp"
 # include "Utils.hpp"
+#include <iostream>
 
 namespace ft
 {
@@ -50,6 +51,7 @@ namespace ft
 				{
 					link_type new_node = create_node(value);
 					this->_current = new_node;
+					std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				// Vérifier si la clé existe déjà
@@ -58,7 +60,7 @@ namespace ft
 				{
 					if (this->_current == this->_nil)
 					{
-						link_type new_node = create_node(value);
+						new_node = create_node(value);
 						new_node->parent = this->_current->parent;
 						this->_current = root;
 						break ;
@@ -68,32 +70,30 @@ namespace ft
 					else if (value < this->_current->value)
 						this->_current = this->_current->left;
 				}
+				std::cout << new_node << std::endl;
+				std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
 
 			// Element access
-			link_type find(const value_type & key)
+			iterator find(const key_type & key)
 			{
 				link_type root = this->_current;
-				link_type ret = this->_currents;
-				
-				if (this->_compare(this->_current->value, key))
+
+				if (this->_compare(this->_current->value, key)) //   1, 42
 				{
 					while (true)
 					{
 			   			if (this->_compare(this->_current->value, key))
 						{
-							ret = this->_current;
-							this->_current = root;
-							break ;
+							//this->_current = root;
+							return (iterator(this->_current), this->_nil);
 						}
 						else if (this->_compare(this->_current->value, key))
 							this->_current = this->_current->right;
-						else if (this->_compare(this->_current->value, key))
-							this->_current = this->_current->left;
 					}
 				}
-				return (ret);
+				return (iterator(this->_current, this->_nil));
 			}
 
 
@@ -118,13 +118,19 @@ namespace ft
 			}
 
 
+		// void construct(pointer ptr, const Type& val);
+		// new ((void *) ptr) Type(val)
+
+			//node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
+			//  ‘const ft::pair<const int, int>’}
+			//	‘const ft::pair<const int, int>*’
+
 			link_type create_node(const value_type & value)
 			{
 				link_type new_node = this->_alloc.allocate(1);
-				_alloc.construct(new_node, *this->_nil, value); // Ne fonctionne pas
+				_alloc.construct(new_node, node<value_type>(this->_nil, value)); // Ne fonctionne pas
 				return (new_node);
 			}
-
 
 		/* 	void delete_node( link_type node )
 			{
