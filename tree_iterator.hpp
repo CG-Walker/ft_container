@@ -35,8 +35,8 @@ namespace ft
 			typedef ft::node<value_type> * link_type;
 		public:
 			tree_iterator() : _current(NULL) {};
-			~tree_iterator(void) {};
 			explicit tree_iterator(link_type ptr, link_type nil) : _current(ptr), _nil(nil) {};
+			~tree_iterator(void) {};
 
 			link_type base() const {return _current;};
 			link_type get_nil() const {return _nil;};
@@ -118,6 +118,16 @@ namespace ft
 				}
 		}
 	};
+	template <class Iterator1, class Iterator2>
+    bool operator==(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+    {
+        return lhs.base() == rhs.base();
+    }
+    template <class Iterator1, class Iterator2>
+    bool operator!=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+    {
+        return lhs.base() != rhs.base();
+    }
 }
 #endif
 
