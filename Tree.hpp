@@ -50,7 +50,10 @@ namespace ft
 			// Modifiers
 			void clear()
 			{
-
+				this->delete_branch(this->_current);
+				this->_size = 0;
+				this->_begin = this->_end;
+				this->_current = NULL;
 			}
 
 			ft::pair<iterator, bool> insert(const value_type & value)
@@ -130,23 +133,15 @@ namespace ft
 				return (this->end()); // Correct
 				//return (iterator(this->_current, this->_nil)); // PAS BON
 			}
-			//const_iterator find( const Key& key ) const;
 			//ft::pair<iterator,iterator> equal_range( const Key& key );
 			//ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const;
 			//iterator lower_bound( const Key& key );
 			//const_iterator lower_bound( const Key& key ) const;
 			//iterator upper_bound( const Key& key );
 			//const_iterator upper_bound( const Key& key ) const;
-
-			// Observers
-			//key_compare key_comp() const;
-			//ft::map::value_compare value_comp() const;
 			
 			// DEBUG
-			void	print_tree()
-			{
-				print_tree_rec(_current, 0);
-			}
+			void	print_tree() { print_tree_rec(_current, 0); };
 
 		private:
 			link_type			_current;
@@ -175,12 +170,14 @@ namespace ft
 			{
 				for(int i = 0; i < indentation; i++)
 				{
-					std::cout << "    ";
+					std::cout << "\t";
 				}
 			}
 			void	print_tree_rec(link_type root, int level)
 			{
-				if(root == _nil)
+				if (root == NULL)
+					return ;
+				if (root == _nil)
 				{
 					print_tabulation(level);
 					std::cout << "EMPTY" << std::endl;
@@ -201,6 +198,18 @@ namespace ft
 				link_type new_node = this->_alloc.allocate(1);
 				_alloc.construct(new_node, node<value_type>(this->_nil, value)); // Ne fonctionne pas
 				return (new_node);
+			}
+
+			void	delete_branch(link_type node)
+			{
+				if (node != this->_nil)
+				{
+					std::cout << "Deleting (" << node->value.first << ":" << node->value.second << ") ...\n";
+					delete_branch(node->left);
+					delete_branch(node->right);
+					this->_alloc.destroy(node);
+					this->_alloc.deallocate(node, 1);
+				}
 			}
 	};
 }

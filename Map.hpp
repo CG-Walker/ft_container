@@ -85,8 +85,6 @@ namespace ft
 			};
 			~map() {};
 
-			// Element access 
-
 			// Iterators
 			iterator begin() { return (this->_tree.begin()); };
 			const_iterator begin() const { return (this->_tree.begin()); };
@@ -96,16 +94,14 @@ namespace ft
 			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->begin())); };
 			reverse_iterator rend() { return (reverse_iterator(this->end())); };
 			const_reverse_iterator rend() const { return (const_reverse_iterator(this->end())); };
-			void print_tree()
-			{
-				this->_tree.print_tree();
-			}
 
 			// Capacity
 			bool empty() const { return (this->begin() == this->end()); };
 			size_type size() const { return (this->_tree.size()); };
 		
 			// Modifiers
+			void clear() { this->_tree.clear(); };
+
 			ft::pair<iterator, bool> insert( const value_type & value ) 
 			{
 				return (this->_tree.insert(value));
@@ -114,13 +110,17 @@ namespace ft
 			//template< class InputIt >
 			//void insert( InputIt first, InputIt last );
 
-			// Lookup
-			//	‘ft::node<ft::pair<const int, int> >*’} 
-			//	‘ft::tree_iterator_<ft::pair<const int, int>*>’
+			// Element access
+			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) };
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };
-			//const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
+			const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
 
 			// Observers
+			key_compare key_comp() const { return (this->_key_comp); };
+			value_compare value_comp() const { return (this->_value_comp); };
+
+			// DEBUG
+			void print_tree() { this->_tree.print_tree(); };
 
 		private:
 			key_compare		_key_comp;
