@@ -93,7 +93,38 @@ namespace ft
 				}
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
-			//iterator insert( iterator hint, const value_type& value );
+
+			iterator insert( iterator hint, const value_type & value ) // À vérifier
+			{
+				while (this->_current->value != *hint)
+				{
+					else if (this->_compare(this->_current->value, *hint))
+						this->_current = this->_current->right;
+					else
+						this->_current = this->_current->left;
+				}
+				while (true)
+				{
+					if (this->_current == this->_nil)
+					{
+						new_node->parent = this->_current->parent;
+						if (this->_compare(value, this->_current->parent->value))
+							this->_current->parent->left = new_node;
+						else
+							this->_current->parent->right = new_node;
+						new_node->left->parent = new_node;
+						new_node->right->parent = new_node;
+						this->_current = root;
+						this->_size += 1;
+						break ;
+					}
+					else if (this->_compare(value, this->_current->value))
+						this->_current = this->_current->left;
+					else
+						this->_current = this->_current->right;
+				}
+				return (ft::make_pair(iterator(new_node, this->_nil), true));
+			}
 			//template< class InputIt >
 			//void insert( InputIt first, InputIt last );
 			//void erase( iterator pos );
@@ -102,7 +133,6 @@ namespace ft
 			//void swap( map& other );
 
 			// Element access
-			//size_type count( const Key& key ) const;
 			iterator find(const key_type & key)
 			{
 				while (true)
@@ -116,8 +146,7 @@ namespace ft
 					else if (!(this->_compare(key, this->_current->value)))
 						this->_current = this->_current->right;
 				}
-				return (this->end()); // Correct
-				//return (iterator(this->_current, this->_nil)); // PAS BON
+				return (this->end());
 			}
 			//ft::pair<iterator,iterator> equal_range( const Key& key );
 			//ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const;
