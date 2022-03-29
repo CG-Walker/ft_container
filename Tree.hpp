@@ -122,8 +122,6 @@ namespace ft
 			}
 			//template< class InputIt >
 			//void insert( InputIt first, InputIt last );
-			//void erase( iterator pos );
-
 			void    erase(iterator pos)
 			{
 				iterator begin = begin();
@@ -161,13 +159,20 @@ namespace ft
 					delete_node(node);
 				}
 			}
-			//void erase( iterator first, iterator last );
 			void erase(iterator first, iterator last)
 			{
 				while (first != last)
 					erase(first++);
 			}
-			//size_type erase( const Key& key );
+
+			size_type erase( const Key& key );
+			{
+				iterator ite = find(key);
+				if (ite == end())
+					return(0);
+				erase(ite);
+				return(1);
+			}
 			//void swap( map& other );
 
 			// Element access
