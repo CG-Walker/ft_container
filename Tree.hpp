@@ -38,18 +38,21 @@ namespace ft
 			tree & operator=( const tree & other ) {};
 	
 			// Iterators
-			//iterator begin() { return (iterator(this->_begin, this->_nil)); }
-			//const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
-			//iterator end() { return iterator(this->_end, this->_nil); }
-			//const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
+			iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
+			iterator end() { return iterator(this->_end, this->_nil); }
+			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
 
 			// Capacity
-			//bool empty() const;
 			size_type size() const { return (this->_size); };
 			//size_type max_size() const;
 
 			// Modifiers
-			//void clear();
+			void clear()
+			{
+
+			}
+
 			ft::pair<iterator, bool> insert(const value_type & value)
 			{
 				link_type root = this->_current;
@@ -64,15 +67,15 @@ namespace ft
 					this->_size += 1;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
-				//if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-				//	return (ft::make_pair(iterator(value), false));
+				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
+					return (ft::make_pair(iterator(value), false));
 				while (true)
 				{
 					if (this->_current == this->_nil)
 					{
 						new_node = create_node(value);
 						new_node->parent = this->_current->parent;
-						if (this->_compare(value, this->_current->parent->value)) // A vérifier en cas d'égalité
+						if (this->_compare(value, this->_current->parent->value))
 							this->_current->parent->left = new_node;
 						else
 							this->_current->parent->right = new_node;
@@ -82,7 +85,7 @@ namespace ft
 						this->_size += 1;
 						break ;
 					}
-					else if (this->_compare(value, this->_current->value)) // A vérifier en cas d'égalité
+					else if (this->_compare(value, this->_current->value))
 					{
 						std::cout << "(" << this->_current->value.first << ":" << value.first << ") - Direction la gauche\n";
 						this->_current = this->_current->left;
@@ -119,8 +122,8 @@ namespace ft
 					else if (!(this->_compare(key, this->_current->value)))
 						this->_current = this->_current->right;
 				}
-				//return (this->end()); // Correct
-				return (iterator(this->_current, this->_nil)); // PAS BON
+				return (this->end()); // Correct
+				//return (iterator(this->_current, this->_nil)); // PAS BON
 			}
 			//const_iterator find( const Key& key ) const;
 			//ft::pair<iterator,iterator> equal_range( const Key& key );
@@ -143,6 +146,8 @@ namespace ft
 		private:
 			link_type			_current;
 			link_type			_nil;
+			link_type			_begin;
+			link_type			_end;
 			Compare				_compare;
 			size_type			_size;
 			node_allocator_type	_alloc;
@@ -155,6 +160,10 @@ namespace ft
 				this->_nil->left = this->_nil;
 				this->_nil->right = this->_nil;
 				this->_nil->parent = this->_nil; // Pas nécessaire ?
+
+				this->_end = this->_alloc.allocate(1);
+				this->_alloc.construct(this->_end, ptr_empty);
+				this->_begin = this->_begin;
 			}
 
 			void	print_tabulation(int indentation)
