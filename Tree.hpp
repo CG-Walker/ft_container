@@ -162,6 +162,11 @@ namespace ft
 				}
 			}
 			//void erase( iterator first, iterator last );
+			void erase(iterator first, iterator last)
+			{
+				while (first != last)
+					erase(first++);
+			}
 			//size_type erase( const Key& key );
 			//void swap( map& other );
 
