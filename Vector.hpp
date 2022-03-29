@@ -340,7 +340,7 @@ namespace ft
 				}
 			}
 
-			void swap( vector& other )
+			void swap( vector & other )
 			{
 
 				pointer buffer_first = other._first;
