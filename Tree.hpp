@@ -43,7 +43,13 @@ namespace ft
 			iterator end() { return iterator(this->_end, this->_nil); }
 			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
 
+			// Capacity
+			//bool empty() const;
+			size_type size() const { return (this->_size); };
+			//size_type max_size() const;
+
 			// Modifiers
+			//void clear();
 			ft::pair<iterator, bool> insert(const value_type & value)
 			{
 				link_type root = this->_current;
@@ -55,6 +61,7 @@ namespace ft
 					std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 					this->_current->left->parent = this->_current;
 					this->_current->right->parent = this->_current;
+					this->_size += 1;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
@@ -72,6 +79,7 @@ namespace ft
 						new_node->left->parent = new_node;
 						new_node->right->parent = new_node;
 						this->_current = root;
+						this->_size += 1;
 						break ;
 					}
 					else if (this->_compare(value, this->_current->value)) // A vérifier en cas d'égalité
@@ -88,8 +96,16 @@ namespace ft
 				std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
+			//iterator insert( iterator hint, const value_type& value );
+			//template< class InputIt >
+			//void insert( InputIt first, InputIt last );
+			//void erase( iterator pos );
+			//void erase( iterator first, iterator last );
+			//size_type erase( const Key& key );
+			//void swap( map& other );
 
 			// Element access
+			//size_type count( const Key& key ) const;
 			iterator find(const key_type & key)
 			{
 				while (true)
@@ -106,13 +122,23 @@ namespace ft
 				//return (this->end()); // Correct
 				return (iterator(this->_current, this->_nil)); // PAS BON
 			}
+			//const_iterator find( const Key& key ) const;
+			//ft::pair<iterator,iterator> equal_range( const Key& key );
+			//ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const;
+			//iterator lower_bound( const Key& key );
+			//const_iterator lower_bound( const Key& key ) const;
+			//iterator upper_bound( const Key& key );
+			//const_iterator upper_bound( const Key& key ) const;
 
+			// Observers
+			//key_compare key_comp() const;
+			//ft::map::value_compare value_comp() const;
+			
+			// DEBUG
 			void	print_tree()
 			{
 				print_tree_rec(_current, 0);
 			}
-			// Capacity
-			size_type size() const { return (this->_size); };
 
 		private:
 			link_type			_current;
@@ -158,108 +184,29 @@ namespace ft
 				std::cout << "END" << std::endl;
 			}
 
-		// void construct(pointer ptr, const Type& val);
-		// new ((void *) ptr) Type(val)
-
-			//node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
-			//  ‘const ft::pair<const int, int>’}
-			//	‘const ft::pair<const int, int>*’
-
 			link_type create_node(const value_type & value)
 			{
 				link_type new_node = this->_alloc.allocate(1);
 				_alloc.construct(new_node, node<value_type>(this->_nil, value)); // Ne fonctionne pas
 				return (new_node);
 			}
-
-		/* 	void delete_node( link_type node )
-			{
-		 	   this->_alloc.destroy(node);
-			   this->_alloc.deallocate(node, 1);
-			}
-			iterator find( const key_type & key )
-			{
-				link_type node = find_node(key);
-				return (iterator(node, this->_nil));
-			}
-
-			link_type find_node( const key_type & key ) const
-			{
-				link_type node = this->_end;
-				link_type tmp = this->_end->left;
-				while (tmp != this->_nil)
-				{
-					if (!this->_compare(tmp->value, key))
-					{	
-						node = tmp;
-						tmp = node->left;
-					}
-					else
-						tmp = node->right;
-				}	
-				if (node != this->_end && !this->_compare(key, node->value))
-					return (node);
-				return (this->_end);
-			}
-			void clear()
-			{
-				destroy(this->_end->left);
-				this->_begin = this->_end;
-				this->_end->left = this->_nil;
-				this->_size = 0;
-			}
-
-			void destroy(link_type node)
-			{
-				if (node != _nil)
-				{
-					destroy(node->left);
-					destroy(node->right);
-					delete_node(node);
-				}
-			}
-
-			ft::pair<iterator, bool> insert_node( const value_type & value, link_type insert_place )
-			{
-				link_type new_node = create_node(value);
-				new_node->parent = insert_place;
-				if (insert_place == this->_nil) // 
-				{
-					new_node->parent = this->_end;
-					this->_end->left = new_node;
-				}
-				else if (this->_compare(new_node->value, insert_place->value)) // Si le value est plus petite que celle de la place
-					insert_place->left = new_node;
-				else if (this->_compare(insert_place->value, new_node->value)) // Si le value est plus grande que celle de la place
-					insert_place->right = new_node;
-				else // Si la value existe déjà
-				{
-					this->_alloc.destroy(new_node);
-					this->_alloc.deallocate(new_node, 1);
-					return (ft::make_pair(iterator(insert_place, this->_nill), false));
-				}
-				this->_size++;
-				return (ft::make_pair(iterator(new_node, this->_nill), true));
-			}
-
-			link_type search_insert_place( const value_type & value )
-			{
-				link_type prev_node = this->_nil;
-				link_type root = this->_end->left;
-				while (root != this->_nil)
-				{
-					prev_node = root;
-					if (compare_(value, root->value))
-						root = root->left;
-					else if (compare_(root->value, value))
-						root = root->right;
-					else
-						return (root);
-				}
-				return (prev_node);
-			} */
 	};
 }
+
+// Non-member functions
+/* 
+template< class Key, class T, class Compare, class Alloc >
+bool operator==( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
+template< class Key, class T, class Compare, class Alloc >
+bool operator!=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
+template< class Key, class T, class Compare, class Alloc >
+bool operator<( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
+template< class Key, class T, class Compare, class Alloc >
+bool operator<=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
+template< class Key, class T, class Compare, class Alloc >
+bool operator>( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
+template< class Key, class T, class Compare, class Alloc >
+bool operator>=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs ); */
 
 #endif
 
