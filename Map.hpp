@@ -11,8 +11,8 @@
 namespace ft
 {
 	template <class Key, class Value, class Compare> // Pas encore compris
-    class map_value_compare : private Compare
-    {
+	class map_value_compare : private Compare
+	{
 		public:
 			map_value_compare() : Compare() {}
 			map_value_compare(Compare c) : Compare(c) {}
@@ -29,7 +29,7 @@ namespace ft
 			{
 				return static_cast<const Compare &>(*this)(lhs, rhs.first);
 			}
-    };
+	};
 
 	template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map
@@ -51,7 +51,7 @@ namespace ft
 			typedef ft::reverse_iterator<const T>						const_reverse_iterator;
 		
 		private:
-		    typedef map_value_compare<key_type, value_type, key_compare>				tree_compare;
+			typedef map_value_compare<key_type, value_type, key_compare>				tree_compare;
 			typedef ft::tree<key_type, value_type, tree_compare, allocator_type>		tree_type;
 
 		public:
@@ -96,6 +96,10 @@ namespace ft
 			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->begin())); };
 			reverse_iterator rend() { return (reverse_iterator(this->end())); };
 			const_reverse_iterator rend() const { return (const_reverse_iterator(this->end())); };
+			void print_tree()
+			{
+				this->_tree.print_tree();
+			}
 
 			// Capacity
 			bool empty() const { return (this->begin() == this->end()); };
