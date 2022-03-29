@@ -15,8 +15,8 @@ namespace ft
 	{
 		public:
 			// Member types
- 			typedef ft::tree_iterator_<T *>										iterator;
-			typedef ft::tree_iterator_<const T *>								const_iterator;
+ 			typedef ft::tree_iterator<T *>										iterator;
+			typedef ft::tree_iterator<const T *>								const_iterator;
 
 		private:
 			// Member types
