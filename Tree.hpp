@@ -94,6 +94,20 @@ namespace ft
 			//template< class InputIt >
 			//void insert( InputIt first, InputIt last );
 			//void erase( iterator pos );
+            void    erase(iterator pos)
+            {
+                link_type node
+                link_type replaced_node;
+                if (position == end())
+                    return;
+                if (position == begin())
+                    _begin = _begin.next();
+                node = pos.base();
+                if(node->left == _nil && node->right == _nil)
+                {
+                    
+                }
+            }
 			//void erase( iterator first, iterator last );
 			//size_type erase( const Key& key );
 			//void swap( map& other );
