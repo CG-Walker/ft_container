@@ -38,10 +38,10 @@ namespace ft
 			tree & operator=( const tree & other ) {};
 	
 			// Iterators
-			/* iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			iterator begin() { return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
 			iterator end() { return iterator(this->_end, this->_nil); }
-			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; */ // A corriger
+			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
 
 			// Modifiers
 			ft::pair<iterator, bool> insert(const value_type & value)
@@ -57,20 +57,20 @@ namespace ft
 					this->_current->right->parent = this->_current;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
-				// Vérifier si la clé existe déjà
-				// Si c'est le cas -> return (ft::make_pair(iterator(value), false));
+				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
+					return (ft::make_pair(iterator(value), false));
 				while (true)
 				{
 					if (this->_current == this->_nil)
 					{
 						new_node = create_node(value);
 						new_node->parent = this->_current->parent;
-/* 						new_node->left->parent = new_node;
-						new_node->right->parent = new_node; */
 						if (this->_compare(value, this->_current->parent->value)) // A vérifier en cas d'égalité
 							this->_current->parent->left = new_node;
 						else
 							this->_current->parent->right = new_node;
+						new_node->left->parent = new_node;
+						new_node->right->parent = new_node;
 						this->_current = root;
 						break ;
 					}
@@ -85,7 +85,6 @@ namespace ft
 						this->_current = this->_current->right;
 					}
 				}
-				//std::cout << new_node << std::endl;
 				std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
@@ -96,24 +95,15 @@ namespace ft
 				while (true)
 				{
 					if (this->_current == this->_nil)
-					{
-						std::cout << "Pas de " << key << " trouvé, fin de l'arbre.\n";
 						break ;
-					}
 					if (this->_current->value.first == key)
 						return (iterator(this->_current, this->_nil));
-					else if (this->_compare(key, this->_current->value)) // A vérifier en cas d'égalité
-					{
-						std::cout << "Pas de " << key << ", direction la gauche.\n";
+					else if (this->_compare(key, this->_current->value))
 						this->_current = this->_current->left;
-					}
 					else if (!(this->_compare(key, this->_current->value)))
-										{
-						std::cout << "Pas de " << key << ", direction la droite.\n";
 						this->_current = this->_current->right;
-					}
 				}
-				//return (this->end());
+				//return (this->end()); // Correct
 				return (iterator(this->_current, this->_nil)); // PAS BON
 			}
 
