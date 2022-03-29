@@ -56,24 +56,22 @@ namespace ft
 			ft::pair<iterator, bool> insert(const value_type & value)
 			{
 				link_type root = this->_current;
-				link_type new_node = NULL;
+				link_type new_node = create_node(value);
 				if (this->_current == NULL) // Signifie que l'arbe est vide
 				{
-					link_type new_node = create_node(value);
 					this->_current = new_node;
-					std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 					this->_current->left->parent = this->_current;
 					this->_current->right->parent = this->_current;
 					this->_size += 1;
+					this->_begin = new_node;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-					return (ft::make_pair(iterator(value), false));
+					return (ft::make_pair(iterator(new_node, this->_nil), false));
 				while (true)
 				{
 					if (this->_current == this->_nil)
 					{
-						new_node = create_node(value);
 						new_node->parent = this->_current->parent;
 						if (this->_compare(value, this->_current->parent->value))
 							this->_current->parent->left = new_node;
@@ -86,17 +84,10 @@ namespace ft
 						break ;
 					}
 					else if (this->_compare(value, this->_current->value))
-					{
-						std::cout << "(" << this->_current->value.first << ":" << value.first << ") - Direction la gauche\n";
 						this->_current = this->_current->left;
-					}
-					else if (!(this->_compare(value, this->_current->value)))
-					{
-						std::cout << "(" << this->_current->value.first << ":" << value.first << ") - Direction la droite\n";
+					else
 						this->_current = this->_current->right;
-					}
 				}
-				std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
 			//iterator insert( iterator hint, const value_type& value );
