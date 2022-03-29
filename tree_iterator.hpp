@@ -131,4 +131,8 @@ namespace ft
 }
 #endif
 
-
+/*
+					5
+			3				8
+		2		4		7		13
+*/

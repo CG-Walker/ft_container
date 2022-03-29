@@ -76,20 +76,15 @@ namespace ft
 					if (this->_current == this->_nil)
 					{
 						new_node->parent = this->_current->parent;
-						if (this->_compare(value, this->_current->parent->value))
-							this->_current->parent->left = new_node;
-						else
-							this->_current->parent->right = new_node;
+						replace_parent_node(this->_current, new_node);
 						new_node->left->parent = new_node;
 						new_node->right->parent = new_node;
 						this->_current = root;
 						this->_size += 1;
 						break ;
 					}
-					else if (this->_compare(value, this->_current->value))
-						this->_current = this->_current->left;
 					else
-						this->_current = this->_current->right;
+						replace_parent_node(this->_current, this->_current->left);
 				}
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
@@ -128,6 +123,44 @@ namespace ft
 			//template< class InputIt >
 			//void insert( InputIt first, InputIt last );
 			//void erase( iterator pos );
+
+			void    erase(iterator pos)
+			{
+				iterator begin = begin();
+				link_type node
+				link_type replaced_node;
+				if (position == end())
+					return;
+				if (position == begin())
+					_begin = begin.next();
+				node = pos.base();
+				if (node->left == _nil && node->right == _nil)
+				{
+					replace_parent_node(node, _nil);
+					node = _nil;
+					delete_node(node);
+				}
+				else if (node->left != _nil && node->right == _nill)
+				{
+					replace_parent_node(node, node->left);
+					node->left->parent = node->parent;
+					delete_node(node);
+				}
+				else if (node->left == _nil && node->right != _nill)
+				{
+					replace_parent_node(node, node->right);
+					node->right->parent = node->parent;
+					delete_node(node);
+				}
+				else
+				{
+					replace_parent_node(node, node->right);
+					node->left->parent = node->right;
+					node->right->left = node->left;
+					node->right->parent = node->parent;
+					delete_node(node);
+				}
+			}
 			//void erase( iterator first, iterator last );
 			//size_type erase( const Key& key );
 			//void swap( map& other );
@@ -215,6 +248,12 @@ namespace ft
 				return (new_node);
 			}
 
+			void    delete_node(link_type node)
+			{
+				this->_alloc.destroy(node);
+				this->_alloc.deallocate(node, 1);
+			}
+
 			void	delete_branch(link_type node)
 			{
 				if (node != this->_nil)
@@ -222,9 +261,16 @@ namespace ft
 					std::cout << "Deleting (" << node->value.first << ":" << node->value.second << ") ...\n";
 					delete_branch(node->left);
 					delete_branch(node->right);
-					this->_alloc.destroy(node);
-					this->_alloc.deallocate(node, 1);
+					delete_node(node);
 				}
+			}
+
+			void	replace_parent_node(link_type node, link_type new_node)
+			{
+				if (_compare(node->value, node->parent->value))
+						node->parent->left = new_node;
+					else
+						node->parent->right = new_node;
 			}
 	};
 }
