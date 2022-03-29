@@ -21,6 +21,7 @@ namespace ft
 		private:
 			// Member types
 			typedef Key															key_type;
+			// T = value_type de map = ft::pair<const Key, T> 
 			typedef T															value_type;
 			typedef ft::node<T> *												link_type;
 			typedef const ft::node<T> *											const_link_type;
@@ -37,10 +38,10 @@ namespace ft
 			tree & operator=( const tree & other ) {};
 	
 			// Iterators
-			iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			/* iterator begin() { return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
 			iterator end() { return iterator(this->_end, this->_nil); }
-			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
+			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; */ // A corriger
 
 			// Modifiers
 			ft::pair<iterator, bool> insert(const value_type & value)
@@ -52,6 +53,8 @@ namespace ft
 					link_type new_node = create_node(value);
 					this->_current = new_node;
 					std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
+					this->_current->left->parent = this->_current;
+					this->_current->right->parent = this->_current;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				// Vérifier si la clé existe déjà
@@ -62,15 +65,27 @@ namespace ft
 					{
 						new_node = create_node(value);
 						new_node->parent = this->_current->parent;
+/* 						new_node->left->parent = new_node;
+						new_node->right->parent = new_node; */
+						if (this->_compare(value, this->_current->parent->value)) // A vérifier en cas d'égalité
+							this->_current->parent->left = new_node;
+						else
+							this->_current->parent->right = new_node;
 						this->_current = root;
 						break ;
 					}
-					else if (value >= this->_current->value) // A vérifier en cas d'égalité
-						this->_current = this->_current->right;
-					else if (value < this->_current->value)
+					else if (this->_compare(value, this->_current->value)) // A vérifier en cas d'égalité
+					{
+						std::cout << "(" << this->_current->value.first << ":" << value.first << ") - Direction la gauche\n";
 						this->_current = this->_current->left;
+					}
+					else if (!(this->_compare(value, this->_current->value)))
+					{
+						std::cout << "(" << this->_current->value.first << ":" << value.first << ") - Direction la droite\n";
+						this->_current = this->_current->right;
+					}
 				}
-				std::cout << new_node << std::endl;
+				//std::cout << new_node << std::endl;
 				std::cout << "new node created : (" << new_node->value.first << ":" << new_node->value.second << ")" << std::endl;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
@@ -78,24 +93,29 @@ namespace ft
 			// Element access
 			iterator find(const key_type & key)
 			{
-				link_type root = this->_current;
-
-				if (this->_compare(this->_current->value, key)) //   1, 42
+				while (true)
 				{
-					while (true)
+					if (this->_current == this->_nil)
 					{
-			   			if (this->_compare(this->_current->value, key))
-						{
-							//this->_current = root;
-							return (iterator(this->_current), this->_nil);
-						}
-						else if (this->_compare(this->_current->value, key))
-							this->_current = this->_current->right;
+						std::cout << "Pas de " << key << " trouvé, fin de l'arbre.\n";
+						break ;
+					}
+					if (this->_current->value.first == key)
+						return (iterator(this->_current, this->_nil));
+					else if (this->_compare(key, this->_current->value)) // A vérifier en cas d'égalité
+					{
+						std::cout << "Pas de " << key << ", direction la gauche.\n";
+						this->_current = this->_current->left;
+					}
+					else if (!(this->_compare(key, this->_current->value)))
+										{
+						std::cout << "Pas de " << key << ", direction la droite.\n";
+						this->_current = this->_current->right;
 					}
 				}
-				return (iterator(this->_current, this->_nil));
+				//return (this->end());
+				return (iterator(this->_current, this->_nil)); // PAS BON
 			}
-
 
 			// Capacity
 			size_type size() const { return (this->_size); };
@@ -112,9 +132,9 @@ namespace ft
 				node<T> ptr_empty;
 				this->_nil = this->_alloc.allocate(1);
 				this->_alloc.construct(this->_nil, ptr_empty);
-/* 				this->_nil->left = this->_nil;
+				this->_nil->left = this->_nil;
 				this->_nil->right = this->_nil;
-				this->_nil->parent = this->_nil; */ // Pas nécessaire ?
+				this->_nil->parent = this->_nil; // Pas nécessaire ?
 			}
 
 
