@@ -117,6 +117,10 @@ namespace ft
 				return (iterator(this->_current, this->_nil)); // PAS BON
 			}
 
+			void	print_tree()
+			{
+				print_tree_rec(_current, 0);
+			}
 			// Capacity
 			size_type size() const { return (this->_size); };
 
@@ -137,6 +141,32 @@ namespace ft
 				this->_nil->parent = this->_nil; // Pas nécessaire ?
 			}
 
+			void	print_tabulation(int indentation)
+			{
+				for(int i = 0; i < indentation; i++)
+				{
+					std::cout << "    ";
+				}
+			}
+			void	print_tree_rec(link_type root, int level)
+			{
+				if(root == _nil)
+				{
+					print_tabulation(level);
+					std::cout << "EMPTY" << std::endl;
+					return ;
+				}
+				print_tabulation(level);
+				std::cout << "KEY: " << root->value.first <<  " VALUE: " << root->value.second << std::endl;
+				print_tabulation(level);
+				std::cout << "LEFT" << std::endl;
+				print_tree_rec(root->left, level + 1);
+				print_tabulation(level);
+				std::cout << "RIGHT" << std::endl;
+				print_tree_rec(root->right, level + 1);
+				print_tabulation(level);
+				std::cout << "END" << std::endl;
+			}
 
 		// void construct(pointer ptr, const Type& val);
 		// new ((void *) ptr) Type(val)
