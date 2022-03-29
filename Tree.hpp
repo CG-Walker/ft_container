@@ -98,9 +98,9 @@ namespace ft
 				iterator begin = begin();
 				link_type node
 				link_type replaced_node;
-				if (position == end())
+				if (pos == end())
 					return;
-				if (position == begin())
+				if (pos == begin())
 					_begin = begin.next();
 				node = pos.base();
 				if (node->left == _nil && node->right == _nil)
