@@ -38,10 +38,10 @@ namespace ft
 			tree & operator=( const tree & other ) {};
 	
 			// Iterators
-			iterator begin() { return (iterator(this->_begin, this->_nil)); }
-			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
-			iterator end() { return iterator(this->_end, this->_nil); }
-			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
+			//iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			//const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
+			//iterator end() { return iterator(this->_end, this->_nil); }
+			//const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
 
 			// Modifiers
 			ft::pair<iterator, bool> insert(const value_type & value)
@@ -57,8 +57,8 @@ namespace ft
 					this->_current->right->parent = this->_current;
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
-				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-					return (ft::make_pair(iterator(value), false));
+				//if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
+				//	return (ft::make_pair(iterator(value), false));
 				while (true)
 				{
 					if (this->_current == this->_nil)
@@ -147,15 +147,13 @@ namespace ft
 					return ;
 				}
 				print_tabulation(level);
-				std::cout << "KEY: " << root->value.first <<  " VALUE: " << root->value.second << std::endl;
+				std::cout << "(" << root->value.first << ", " << root->value.second << ")"<< std::endl;
 				print_tabulation(level);
 				std::cout << "LEFT" << std::endl;
 				print_tree_rec(root->left, level + 1);
 				print_tabulation(level);
 				std::cout << "RIGHT" << std::endl;
 				print_tree_rec(root->right, level + 1);
-				print_tabulation(level);
-				std::cout << "END" << std::endl;
 			}
 
 		// void construct(pointer ptr, const Type& val);
