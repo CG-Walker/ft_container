@@ -92,7 +92,10 @@ namespace ft
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
+				{
+					//delete_node(new_node);
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
+				}
 				while (true)
 				{
 					if (is_nil)
@@ -242,7 +245,10 @@ namespace ft
 					if (this->_current == this->_nil)
 						break ;
 					if (this->_current->value.first == key)
+					{
+						this->_current = root;
 						return (iterator(this->_current, this->_nil));
+					}
 					else if (this->_compare(key, this->_current->value))
 						this->_current = this->_current->left;
 					else if (!(this->_compare(key, this->_current->value)))
