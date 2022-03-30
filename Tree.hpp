@@ -3,7 +3,7 @@
 
 # include <memory>
 
-//# include "Iterator.hpp"
+# include "Iterator.hpp"
 #include "tree_iterator.hpp"
 # include "Utils.hpp"
 #include <iostream>
