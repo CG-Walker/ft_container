@@ -135,7 +135,6 @@ namespace ft
 				if (node->left == _nil && node->right == _nil)
 				{
 					replace_parent_node(node, _nil);
-					node = _nil;
 					delete_node(node);
 				}
 				else if (node->left != _nil && node->right == _nill)
@@ -159,6 +158,7 @@ namespace ft
 					delete_node(node);
 				}
 			}
+
 			void erase(iterator first, iterator last)
 			{
 				while (first != last)
