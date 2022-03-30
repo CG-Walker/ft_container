@@ -45,7 +45,10 @@ namespace ft
 
 			// Capacity
 			size_type size() const { return (this->_size); };
-			//size_type max_size() const;
+			size_type max_size() const
+			{
+				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), alloc_.max_size()));
+			}
 
 			// Modifiers
 			void clear()
@@ -91,6 +94,9 @@ namespace ft
 
 			iterator insert( iterator hint, const value_type & value ) // À vérifier
 			{
+				link_type root = this->_current;
+				link_type new_node = create_node(value);
+	
 				while (this->_current->value != *hint)
 				{
 					else if (this->_compare(this->_current->value, *hint))
@@ -118,10 +124,17 @@ namespace ft
 					else
 						this->_current = this->_current->right;
 				}
+				this->_current = root;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
-			//template< class InputIt >
-			//void insert( InputIt first, InputIt last );
+
+			template <class InputIt>
+			void insert( InputIt first, InputIt last )
+			{
+				for (InputIt it = first ; it <= last ; it++)
+					insert(*it);
+			}
+
 			void    erase(iterator pos)
 			{
 				iterator begin = begin();
@@ -161,11 +174,11 @@ namespace ft
 
 			void erase(iterator first, iterator last)
 			{
-				while (first != last)
+				while (first <= last)
 					erase(first++);
 			}
 
-			size_type erase( const Key& key );
+			size_type erase( const Key & key );
 			{
 				iterator ite = find(key);
 				if (ite == end())
@@ -191,9 +204,42 @@ namespace ft
 				}
 				return (this->end());
 			}
-			//ft::pair<iterator,iterator> equal_range( const Key& key );
-			//ft::pair<const_iterator,const_iterator> equal_range( const Key& key ) const;
-			//iterator lower_bound( const Key& key );
+
+/* 			ft::pair<iterator,iterator> equal_range( const Key & key )
+			{
+				link_type lower = get_root();
+				link_type upper = end_;
+				while (lower != nil_)
+				{
+					if (compare_(key, lower->value))
+					{
+						upper = lower;
+						lower = lower->left;
+					}
+					else if (compare_(lower->value, key))
+					{
+						lower = lower->right;
+					}
+					else
+					{
+						if (lower->right != nil_)
+							upper = utils_.search_tree_min(lower->right, nil_);
+						ft::pair<link_type, link_type> range = ft::make_pair(lower, upper);
+					}
+				}
+					return ft::make_pair(const_iterator(range.first, nil_), const_iterator(range.second, nil_));
+            	return ft::make_pair(upper, upper);
+			} */
+
+			//ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const;
+/* 			iterator lower_bound( const Key & key ) // Renvoie key <= X
+			{
+				iterator it = this->_begin();
+				while (this->_compare(key, *it)) // if key < *it
+				{
+					
+				}
+			} */
 			//const_iterator lower_bound( const Key& key ) const;
 			//iterator upper_bound( const Key& key );
 			//const_iterator upper_bound( const Key& key ) const;
