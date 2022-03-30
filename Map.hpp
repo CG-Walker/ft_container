@@ -111,7 +111,7 @@ namespace ft
 			//void insert( InputIt first, InputIt last );
 
 			// Element access
-			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) };
+			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) ;};
 			iterator find(const key_type & key) { return (this->_tree.find(key)); };
 			const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
 
