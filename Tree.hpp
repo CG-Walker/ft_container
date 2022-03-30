@@ -9,6 +9,8 @@
 # include <limits>
 #include <iostream>
 
+#include <cmath>
+
 namespace ft
 {
 	template <class Key, class T, class Compare, class Allocator = std::allocator<T> >
@@ -78,6 +80,8 @@ namespace ft
 			{
 				link_type root = this->_current;
 				link_type new_node = create_node(value);
+				bool is_nil = false;
+
 				if (this->_current == NULL) // Signifie que l'arbe est vide
 				{
 					this->_current = new_node;
@@ -91,26 +95,41 @@ namespace ft
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
 				while (true)
 				{
-					if (this->_current == this->_nil)
-					{
-						new_node->parent = this->_current->parent;
-						replace_parent_node(this->_current, new_node);
+					if (is_nil)
+					{			
+						if (this->_compare(value, this->_current->value))
+							this->_current->left = new_node;
+						else
+							this->_current->right = new_node;
 						new_node->left->parent = new_node;
 						new_node->right->parent = new_node;
-						this->_current = root;
 						this->_size += 1;
 						break ;
 					}
+					else if (this->_compare(value, this->_current->value))
+					{
+						if (this->_current->left == this->_nil)
+							is_nil = true;
+						else
+							this->_current = this->_current->left;
+					}
 					else
-						replace_parent_node(this->_current, this->_current->left);
+					{
+						if (this->_current->right == this->_nil)
+							is_nil = true;
+						else
+						this->_current = this->_current->right;
+					}
 				}
+				this->_current = root;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
 
-			iterator insert( iterator hint, const value_type & value ) // À vérifier
+			iterator insert( iterator hint, const value_type & value ) // À vérifier (Si arbre vide ?)
 			{
 				link_type root = this->_current;
 				link_type new_node = create_node(value);
+				bool is_nil = false;
 	
 				while (this->_current->value != *hint)
 				{
@@ -119,25 +138,35 @@ namespace ft
 					else
 						this->_current = this->_current->left;
 				}
+				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
+					return (ft::make_pair(iterator(new_node, this->_nil), false));
 				while (true)
 				{
-					if (this->_current == this->_nil)
-					{
-						new_node->parent = this->_current->parent;
-						if (this->_compare(value, this->_current->parent->value))
-							this->_current->parent->left = new_node;
+					if (is_nil)
+					{			
+						if (this->_compare(value, this->_current->value))
+							this->_current->left = new_node;
 						else
-							this->_current->parent->right = new_node;
+							this->_current->right = new_node;
 						new_node->left->parent = new_node;
 						new_node->right->parent = new_node;
-						this->_current = root;
 						this->_size += 1;
 						break ;
 					}
 					else if (this->_compare(value, this->_current->value))
-						this->_current = this->_current->left;
+					{
+						if (this->_current->left == this->_nil)
+							is_nil = true;
+						else
+							this->_current = this->_current->left;
+					}
 					else
+					{
+						if (this->_current->right == this->_nil)
+							is_nil = true;
+						else
 						this->_current = this->_current->right;
+					}
 				}
 				this->_current = root;
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
@@ -150,7 +179,7 @@ namespace ft
 					insert(*it);
 			}
 
-			void    erase(iterator pos)
+			void erase(iterator pos)
 			{
 				iterator begin = begin();
 				link_type node;
@@ -201,11 +230,13 @@ namespace ft
 				erase(ite);
 				return(1);
 			}
+
 			//void swap( map& other );
 
 			// Element access
 			iterator find(const key_type & key)
 			{
+				link_type root = this->_current;
 				while (true)
 				{
 					if (this->_current == this->_nil)
@@ -217,49 +248,27 @@ namespace ft
 					else if (!(this->_compare(key, this->_current->value)))
 						this->_current = this->_current->right;
 				}
+				this->_current = root;
 				return (this->end());
 			}
 
-/* 			ft::pair<iterator,iterator> equal_range( const Key & key )
-			{
-				link_type lower = get_root();
-				link_type upper = end_;
-				while (lower != nil_)
-				{
-					if (compare_(key, lower->value))
-					{
-						upper = lower;
-						lower = lower->left;
-					}
-					else if (compare_(lower->value, key))
-					{
-						lower = lower->right;
-					}
-					else
-					{
-						if (lower->right != nil_)
-							upper = utils_.search_tree_min(lower->right, nil_);
-						ft::pair<link_type, link_type> range = ft::make_pair(lower, upper);
-					}
-				}
-					return ft::make_pair(const_iterator(range.first, nil_), const_iterator(range.second, nil_));
-            	return ft::make_pair(upper, upper);
-			} */
-
+			//ft::pair<iterator,iterator> equal_range( const Key & key );
 			//ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const;
+
 			iterator lower_bound( const Key & key ) // Renvoie key <= X
 			{
-				iterator it = this->_begin();
-				while (this->_compare(key, *it)) // if key < *it
-					++it;
+				iterator it = this->begin();
+				while (this->_compare(*it, key))
+					it++;
 				return (it);
 			}
+
 			//const_iterator lower_bound( const Key& key ) const;
 			//iterator upper_bound( const Key& key );
 			//const_iterator upper_bound( const Key& key ) const;
 			
 			// DEBUG
-			void	print_tree() { print_tree_rec(_current, 0); };
+			void	print_tree() { printBT("", this->_current, false); };
 
 		private:
 			link_type			_current;
@@ -291,30 +300,30 @@ namespace ft
 					std::cout << "\t";
 				}
 			}
-			void	print_tree_rec(link_type root, int level)
+
+			void printBT(const std::string & prefix, const link_type node, bool isLeft)
 			{
-				if (root == NULL)
-					return ;
-				if (root == _nil)
+				if ( node != NULL )
 				{
-					print_tabulation(level);
-					std::cout << "EMPTY" << std::endl;
-					return ;
+					std::cout << prefix;
+
+					std::cout << (isLeft ? "├──" : "└──" );
+
+					// print the value of the node
+					std::cout << "(" << node->value.first << ", " << node->value.second << ")" << std::endl;
+
+					// enter the next tree level - left and right branch
+					if (node->left != this->_nil)
+						printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
+					if (node->right != this->_nil)
+						printBT( prefix + (isLeft ? "│   " : "    "), node->right, false);
 				}
-				print_tabulation(level);
-				std::cout << "(" << root->value.first << ", " << root->value.second << ")"<< std::endl;
-				print_tabulation(level);
-				std::cout << "LEFT" << std::endl;
-				print_tree_rec(root->left, level + 1);
-				print_tabulation(level);
-				std::cout << "RIGHT" << std::endl;
-				print_tree_rec(root->right, level + 1);
 			}
 
 			link_type create_node(const value_type & value)
 			{
 				link_type new_node = this->_alloc.allocate(1);
-				_alloc.construct(new_node, node<value_type>(this->_nil, value)); // Ne fonctionne pas
+				_alloc.construct(new_node, node<value_type>(this->_nil, value));
 				return (new_node);
 			}
 
@@ -338,9 +347,13 @@ namespace ft
 			void	replace_parent_node(link_type node, link_type new_node)
 			{
 				if (_compare(node->value, node->parent->value))
-						node->parent->left = new_node;
-					else
-						node->parent->right = new_node;
+				{
+					node->parent->left = new_node;
+				}
+				else
+				{
+					node->parent->right = new_node;
+				}
 			}
 	};
 }

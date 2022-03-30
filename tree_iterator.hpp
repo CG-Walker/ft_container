@@ -5,6 +5,7 @@
 # include "Iterator.hpp"
 # include "Tree.hpp"
 # include "IteratorTrait.hpp"
+# include <iostream>
 
 namespace ft
 {
@@ -55,31 +56,31 @@ namespace ft
 			reference operator*() const {return _current->value;};
 			pointer operator->() const {return &_current->value;};
 			
-			// prefix increment
-			tree_iterator &operator++()
+			// Postfix increment
+			tree_iterator & operator++()
 			{
 				this->next();
-				return(*this);
+				return (*this);
 			}
-			tree_iterator &operator--()
+			tree_iterator & operator--()
 			{
 				this->prev();
-				return(*this);
+				return (*this);
 			}
 
-			// Postfix increment
+			// Préfix increment
 			
 			tree_iterator operator++(int)
 			{
 				tree_iterator tmp(*this);
 				++(*this);
-				return tmp;
+				return (tmp);
 			}
 			tree_iterator operator--(int)
 			{
 				tree_iterator tmp(*this);
 				--(*this);
-				return tmp;
+				return (tmp);
 			}
 			
 
@@ -100,10 +101,10 @@ namespace ft
 			}
 			void next() 
 			{
-				if (this->_current->right) 
+				if (this->_current->right != this->_nil) 
 				{
 					this->_current = this->_current->right;
-					while (this->_current->left)
+					while (this->_current->left != this->_nil)
 						this->_current = this->_current->left;
 				}
 				else
