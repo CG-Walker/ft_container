@@ -20,6 +20,8 @@ namespace ft
 			// Member types
  			typedef ft::tree_iterator<T *>										iterator;
 			typedef ft::tree_iterator<const T *>								const_iterator;
+			//typedef ft::reverse_iterator<T>										reverse_iterator; À gérer
+			//typedef ft::reverse_iterator<const T>								const_reverse_iterator; À gérer
 
 		private:
 			// Member types
@@ -59,6 +61,10 @@ namespace ft
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
 			iterator end() { return iterator(this->_end, this->_nil); }
 			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
+			//reverse_iterator rbegin();
+			//const_reverse_iterator rbegin() const;
+			//reverse_iterator rend();
+			//const_reverse_iterator rend() const;
 
 			// Capacity
 			size_type size() const { return (this->_size); };
@@ -263,13 +269,19 @@ namespace ft
 			iterator lower_bound( const Key & key )
 			{
 				iterator it = this->begin();
-				while (this->_compare(*it, key))
+				while (this->_compare(*it, key) && it != this->end())
 					it++;
 				return (it);
 			}
 
-			//iterator upper_bound( const Key & key );
-			
+			iterator upper_bound( const Key & key )
+			{
+				reverse_iterator it = this->rbegin();
+				while (this->_compare(*it, key) && this->rend())
+					it++;
+				return (it);
+			}
+	
 			// DEBUG
 			void	print_tree() { printBT("", this->_current, false); };
 

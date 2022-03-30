@@ -118,8 +118,8 @@ namespace ft
 			//ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const { return (this->_tree.equal_range(key)); };
 			iterator lower_bound( const Key & key ) { return (this->_tree.lower_bound(key)); };
 			const_iterator lower_bound( const Key & key ) const { return (this->_tree.lower_bound(key)); };
-			//iterator upper_bound( const Key & key ) { return (this->_tree.upper_bound(key)); };
-			//const_iterator upper_bound( const Key & key ) const { return (this->_tree.upper_bound(key)); };
+			iterator upper_bound( const Key & key ) { return (this->_tree.upper_bound(key)); };
+			const_iterator upper_bound( const Key & key ) const { return (this->_tree.upper_bound(key)); };
 
 			// Observers
 			key_compare key_comp() const { return (this->_key_comp); };
@@ -133,6 +133,25 @@ namespace ft
 			value_compare	_value_comp;
 			tree_type		_tree;
 	};
+
+	// Non-member functions
+	/* template < class Key, class T, class Compare, class Alloc >
+	bool operator==( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs );
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator!=( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs );
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs );
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator<=( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs );
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs );
+
+	template< class Key, class T, class Compare, class Alloc >
+	bool operator>=( const std::map<Key,T,Compare,Alloc> & lhs, const std::map<Key,T,Compare,Alloc> & rhs ); */
 } // namespace ft
 
 #endif
