@@ -231,7 +231,7 @@ namespace ft
 				return(1);
 			}
 
-			//void swap( map& other );
+			//void swap( map & other );
 
 			// Element access
 			iterator find(const key_type & key)
@@ -253,9 +253,8 @@ namespace ft
 			}
 
 			//ft::pair<iterator,iterator> equal_range( const Key & key );
-			//ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const;
 
-			iterator lower_bound( const Key & key ) // Renvoie key <= X
+			iterator lower_bound( const Key & key )
 			{
 				iterator it = this->begin();
 				while (this->_compare(*it, key))
@@ -263,9 +262,7 @@ namespace ft
 				return (it);
 			}
 
-			//const_iterator lower_bound( const Key& key ) const;
-			//iterator upper_bound( const Key& key );
-			//const_iterator upper_bound( const Key& key ) const;
+			//iterator upper_bound( const Key & key );
 			
 			// DEBUG
 			void	print_tree() { printBT("", this->_current, false); };
