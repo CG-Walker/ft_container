@@ -3,9 +3,10 @@
 
 # include <memory>
 
-//# include "Iterator.hpp"
+# include "Iterator.hpp"
 #include "tree_iterator.hpp"
 # include "Utils.hpp"
+# include <limits>
 #include <iostream>
 
 namespace ft
@@ -61,7 +62,7 @@ namespace ft
 			size_type size() const { return (this->_size); };
 			size_type max_size() const
 			{
-				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), alloc_.max_size()));
+				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), _alloc.max_size()));
 			}
 
 			// Modifiers
@@ -170,7 +171,7 @@ namespace ft
 					node->left->parent = node->parent;
 					delete_node(node);
 				}
-				else if (node->left == _nil && node->right != _nill)
+				else if (node->left == _nil && node->right != _nil)
 				{
 					replace_parent_node(node, node->right);
 					node->right->parent = node->parent;
@@ -192,7 +193,7 @@ namespace ft
 					erase(first++);
 			}
 
-			size_type erase( const Key & key );
+			size_type erase( const Key & key )
 			{
 				iterator ite = find(key);
 				if (ite == end())

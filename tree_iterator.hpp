@@ -56,19 +56,19 @@ namespace ft
 			pointer operator->() const {return &_current->value;};
 			
 			// prefix increment
-			tree_iterator &operator++(int)
+			tree_iterator &operator++()
 			{
 				this->next();
 				return(*this);
 			}
-			tree_iterator &operator--(int)
+			tree_iterator &operator--()
 			{
 				this->prev();
 				return(*this);
 			}
 
 			// Postfix increment
-			/*
+			
 			tree_iterator operator++(int)
 			{
 				tree_iterator tmp(*this);
@@ -81,7 +81,7 @@ namespace ft
 				--(*this);
 				return tmp;
 			}
-			*/
+			
 
 		private:
 			link_type _current;
@@ -119,15 +119,15 @@ namespace ft
 		}
 	};
 	template <class Iterator1, class Iterator2>
-    bool operator==(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
-    {
-        return lhs.base() == rhs.base();
-    }
-    template <class Iterator1, class Iterator2>
-    bool operator!=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
-    {
-        return lhs.base() != rhs.base();
-    }
+	bool operator==(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() == rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
+	bool operator!=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() != rhs.base();
+	}
 }
 #endif
 
@@ -135,4 +135,6 @@ namespace ft
 					5
 			3				8
 		2		4		7		13
+
+		2 3 4 5 7 8 13
 */
