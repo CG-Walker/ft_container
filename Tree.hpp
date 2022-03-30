@@ -32,10 +32,24 @@ namespace ft
 		public:
 			// Constructors & Destructor
 			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
-			//tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
+			tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(tree._size)
+			{
+				for (iterator i = tree.begin(); i != tree.end(); ++i)
+					this.insert(i);
+			}
 			~tree()	{};
 
-			tree & operator=( const tree & other ) {};
+			tree & operator=( const tree & other )
+			{
+				if (this != &other)
+				{
+					clear();
+					_compare = other._compare;
+					for (iterator i = other.begin(); i != other.end(); ++i)
+						this.insert(i);
+				}
+				return(*this);
+			}
 	
 			// Iterators
 			iterator begin() { return (iterator(this->_begin, this->_nil)); }
@@ -99,7 +113,7 @@ namespace ft
 	
 				while (this->_current->value != *hint)
 				{
-					else if (this->_compare(this->_current->value, *hint))
+					if (this->_compare(this->_current->value, *hint))
 						this->_current = this->_current->right;
 					else
 						this->_current = this->_current->left;
@@ -138,7 +152,7 @@ namespace ft
 			void    erase(iterator pos)
 			{
 				iterator begin = begin();
-				link_type node
+				link_type node;
 				link_type replaced_node;
 				if (pos == end())
 					return;
@@ -150,7 +164,7 @@ namespace ft
 					replace_parent_node(node, _nil);
 					delete_node(node);
 				}
-				else if (node->left != _nil && node->right == _nill)
+				else if (node->left != _nil && node->right == _nil)
 				{
 					replace_parent_node(node, node->left);
 					node->left->parent = node->parent;
@@ -331,26 +345,4 @@ namespace ft
 	};
 }
 
-// Non-member functions
-/* 
-template< class Key, class T, class Compare, class Alloc >
-bool operator==( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator!=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator<( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator<=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator>( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator>=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs ); */
-
 #endif
-
-// nodes (parent, left, right, value)
-
-// tree mon_arbre(); -> _current -> NULL
-// mon_arbre.add_value(42); -> if (_current == NULL)
-									// node
-// mon_arbre.add_value(56); current -> right 52
