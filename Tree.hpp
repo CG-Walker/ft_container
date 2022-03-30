@@ -246,14 +246,13 @@ namespace ft
 			} */
 
 			//ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const;
-/* 			iterator lower_bound( const Key & key ) // Renvoie key <= X
+			iterator lower_bound( const Key & key ) // Renvoie key <= X
 			{
 				iterator it = this->_begin();
 				while (this->_compare(key, *it)) // if key < *it
-				{
-					
-				}
-			} */
+					++it;
+				return (it);
+			}
 			//const_iterator lower_bound( const Key& key ) const;
 			//iterator upper_bound( const Key& key );
 			//const_iterator upper_bound( const Key& key ) const;
