@@ -299,26 +299,4 @@ namespace ft
 	};
 }
 
-// Non-member functions
-/* 
-template< class Key, class T, class Compare, class Alloc >
-bool operator==( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator!=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator<( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator<=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator>( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs );
-template< class Key, class T, class Compare, class Alloc >
-bool operator>=( const std::map<Key,T,Compare,Alloc>& lhs, const std::map<Key,T,Compare,Alloc>& rhs ); */
-
 #endif
-
-// nodes (parent, left, right, value)
-
-// tree mon_arbre(); -> _current -> NULL
-// mon_arbre.add_value(42); -> if (_current == NULL)
-									// node
-// mon_arbre.add_value(56); current -> right 52
