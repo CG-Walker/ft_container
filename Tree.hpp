@@ -32,10 +32,24 @@ namespace ft
 		public:
 			// Constructors & Destructor
 			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
-			//tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(0){};
+			tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(tree._size)
+			{
+				for (iterator i = tree.begin(); i != tree.end(); ++i)
+					this.insert(i);
+			}
 			~tree()	{};
 
-			tree & operator=( const tree & other ) {};
+			tree & operator=( const tree & other )
+			{
+				if (this != &other)
+				{
+					clear();
+					_compare = other._compare;
+					for (iterator i = tree.begin(); i != tree.end(); ++i)
+						this.insert(i);
+				}
+				return(*this);
+			}
 	
 			// Iterators
 			iterator begin() { return (iterator(this->_begin, this->_nil)); }
