@@ -100,9 +100,6 @@ namespace ft
 					this->_begin = new_node;
 					this->_current->parent = this->_end;
 					this->_end->left = this->_current;
-					std::cout << "end : " << this->_end << " root->parent : " << this->_current->parent << "\n";
-					std::cout << "root : " << this->_current << " end->left : " << this->_end->left << "\n";
-
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
@@ -115,13 +112,8 @@ namespace ft
 					if (is_nil)
 					{	
 						new_node->parent = this->_current;
-						std::cout << "begin : " << this->_begin->value.first << "\n";
-						std::cout << "new_node : " << new_node->value.first << "\n";
 						if (this->_compare(new_node->value, this->_begin->value))
-						{
-							std::cout << "replacing " << new_node->value.first << " as new begin (old : "<< this->_begin->value.first << ")\n";
 							this->_begin = new_node;
-						}
 						if (this->_compare(value, this->_current->value))
 							this->_current->left = new_node;
 						else
@@ -165,10 +157,13 @@ namespace ft
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
-				while (true)
+								while (true)
 				{
 					if (is_nil)
-					{			
+					{	
+						new_node->parent = this->_current;
+						if (this->_compare(new_node->value, this->_begin->value))
+							this->_begin = new_node;
 						if (this->_compare(value, this->_current->value))
 							this->_current->left = new_node;
 						else
@@ -201,10 +196,7 @@ namespace ft
 			void insert( InputIt first, InputIt last )
 			{
 				for (InputIt it = first ; it != last ; it++)
-				{
-					std::cout << "Trying to insert " << it.base()->value.first << "\n";
 					insert(*it);
-				}
 			}
 
 			void erase( iterator pos )
