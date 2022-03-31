@@ -82,7 +82,7 @@ namespace ft
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree)
 			{
 				insert(other.begin(), other.end());
-			};
+			}
 			~map() {};
 
 			// Iterators
