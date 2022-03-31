@@ -39,6 +39,7 @@ namespace ft
 			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 			tree(const tree & tree) : _current(NULL), _compare(tree._compare), _size(0), _alloc(tree._alloc)
 			{
+                initialize();
 				std::cout << "Constructeur par copie appelé\n";
 				iterator it = tree.end();
 				link_type root_to_copy = it.base()->left;
@@ -341,9 +342,7 @@ namespace ft
 
 			void copy_tree(const link_type node_to_copy, const link_type nil)
 			{
-				// Copier node_to_copy
-
-				// Traverser l'arbre
+                insert(node_to_copy->value);
 				if (node_to_copy->left != nil)	
 					copy_tree(node_to_copy->left, nil);
 				if (node_to_copy->right != nil)
