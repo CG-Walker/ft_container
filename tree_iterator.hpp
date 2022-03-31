@@ -17,7 +17,7 @@ namespace ft
 			node *	left;
 			node *	right;
 			T		value;
-	
+
 			node() : parent(NULL), left(NULL), right(NULL) {};
 			node(node * nil, const T * value) : parent(nil), left(nil), right(nil), value(value) {};
 			node(node * nil, const T & value) : parent(nil), left(nil), right(nil), value(value) {};
@@ -59,7 +59,7 @@ namespace ft
 			// Postfix increment
 			tree_iterator & operator++()
 			{
-                this->next();
+				this->next();
 				return (*this);
 			}
 			tree_iterator & operator--()
@@ -119,6 +119,14 @@ namespace ft
 				}
 		}
 	};
+	
+/*
+					5
+			3				8
+		2		4		7		13
+
+		2 3 4 5 7 8 13
+*/
 	template <class Iterator1, class Iterator2>
 	bool operator==(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
 	{
@@ -131,11 +139,3 @@ namespace ft
 	}
 }
 #endif
-
-/*
-					5
-			3				8
-		2		4		7		13
-
-		2 3 4 5 7 8 13
-*/
