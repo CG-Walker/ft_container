@@ -81,7 +81,7 @@ namespace ft
 			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) {}; */
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree)
 			{
-				// TODO
+				insert(other.begin(), other.end());
 			};
 			~map() {};
 
