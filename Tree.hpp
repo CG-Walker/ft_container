@@ -188,7 +188,7 @@ namespace ft
 					insert(*it);
 			}
 
-			void erase(iterator pos)
+			void erase( iterator pos )
 			{
 				iterator begin = begin();
 				link_type node;
@@ -225,7 +225,7 @@ namespace ft
 				}
 			}
 
-			void erase(iterator first, iterator last)
+			void erase( iterator first, iterator last )
 			{
 				while (first <= last)
 					erase(first++);

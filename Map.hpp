@@ -101,14 +101,13 @@ namespace ft
 		
 			// Modifiers
 			void clear() { this->_tree.clear(); };
-
-			ft::pair<iterator, bool> insert( const value_type & value ) 
-			{
-				return (this->_tree.insert(value));
-			}
-			//iterator insert( iterator hint, const value_type & value );
-			//template< class InputIt >
-			//void insert( InputIt first, InputIt last );
+			ft::pair<iterator, bool> insert( const value_type & value ) { return (this->_tree.insert(value)); };
+			iterator insert( iterator hint, const value_type & value ) { return (this->_tree.insert(hint, value)); };
+			template< class InputIt >
+			void insert( InputIt first, InputIt last ) { return (this->_tree.insert(first, last)); };
+			void erase( iterator pos ) { return (this->_tree.erase(pos)); };
+			void erase( iterator first, iterator last ) { return (this->_tree.erase(first, last)); };
+			size_type erase( const Key & key ) { return (this->_tree.erase(key)); };
 
 			// Element access
 			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) ;};
