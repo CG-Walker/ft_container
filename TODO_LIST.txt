@@ -1,8 +1,5 @@
-- Comprendre ce que renvoie begin() exactement
-- Corriger end() (Vérifier pourquoi ça ne fonctionne pas)
 - Faire swap()
 - Vérifier le binz avec value_compare
-- Segfault avec le constructeur par copie (utilisation d'iterateur, de begin() et end())
 - Faire le dernier constructeur de map
 - Mettre au propre
 - Tout tester
