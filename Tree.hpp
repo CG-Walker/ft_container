@@ -20,8 +20,8 @@ namespace ft
 			// Member types
  			typedef ft::tree_iterator<T *>										iterator;
 			typedef ft::tree_iterator<const T *>								const_iterator;
-			//typedef ft::reverse_iterator<T>										reverse_iterator; À gérer
-			//typedef ft::reverse_iterator<const T>								const_reverse_iterator; À gérer
+			typedef ft::reverse_iterator<T>										reverse_iterator;
+			typedef ft::reverse_iterator<const T>								const_reverse_iterator;
 
 		private:
 			// Member types
@@ -362,13 +362,9 @@ namespace ft
 			void	replace_parent_node(link_type node, link_type new_node)
 			{
 				if (_compare(node->value, node->parent->value))
-				{
 					node->parent->left = new_node;
-				}
 				else
-				{
 					node->parent->right = new_node;
-				}
 			}
 	};
 }
