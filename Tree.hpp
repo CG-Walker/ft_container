@@ -4,12 +4,12 @@
 # include <memory>
 
 # include "Iterator.hpp"
-#include "tree_iterator.hpp"
+# include "tree_iterator.hpp"
 # include "Utils.hpp"
 # include <limits>
-#include <iostream>
+# include <iostream>
 
-#include <cmath>
+# include <cmath>
 
 namespace ft
 {
@@ -264,7 +264,10 @@ namespace ft
 				return (this->end());
 			}
 
-			//ft::pair<iterator,iterator> equal_range( const Key & key );
+			ft::pair<iterator,iterator> equal_range( const Key & key )
+			{
+				return (make_pair(lower_bound(key), upper_bound(key)));
+			}
 
 			iterator lower_bound( const Key & key )
 			{
