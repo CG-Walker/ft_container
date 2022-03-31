@@ -332,21 +332,21 @@ namespace ft
 				this->_begin = this->_end;
 			}
 
-			void	print_tabulation(int indentation)
-			{
-				for(int i = 0; i < indentation; i++)
-				{
-					std::cout << "\t";
-				}
-			}
-
-			void copy_tree(const link_type node_to_copy, const link_type nil)
+            void copy_tree(const link_type node_to_copy, const link_type nil)
 			{
                 insert(node_to_copy->value);
 				if (node_to_copy->left != nil)	
 					copy_tree(node_to_copy->left, nil);
 				if (node_to_copy->right != nil)
 					copy_tree(node_to_copy->right, nil);
+			}
+            
+			void	print_tabulation(int indentation)
+			{
+				for(int i = 0; i < indentation; i++)
+				{
+					std::cout << "\t";
+				}
 			}
 
 			void printBT(const std::string & prefix, const link_type node, bool isLeft)
