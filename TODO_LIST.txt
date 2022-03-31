@@ -1,16 +1,9 @@
-ALEX:
-    ft::iterator<const int>	ft_it;
-    ft_it = ft_vec.begin();
+- Comprendre ce que renvoie begin() exactement
+- Corriger end() (Vérifier pourquoi ça ne fonctionne pas)
+- Faire swap()
+- Vérifier le binz avec value_compare
+- Segfault avec le constructeur par copie (utilisation d'iterateur, de begin() et end())
+- Faire le dernier constructeur de map
+- Mettre au propre
+- Tout tester
 
-COCO:
-    Vector.hpp:95:13: error: no match for ‘operator*’ (operand type is ‘ft::vector<int>’)
-    95 |     return (*(this[pos]));
-
-Pour map :
-
-Le fichier .hpp de map qui va :
-- Utiliser un arbre binaire pour quasiment toutes ses fonctions.
-- Utiliser un iterateur spécialement pour ce container (Qui peut ensuite être utilisé par reverseIterator)
-
-Vis-à-vis de l'iterateur : 
-- Il doit utiliser un pair<> comme argument.
