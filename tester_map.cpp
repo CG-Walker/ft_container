@@ -13,13 +13,15 @@ int main()
 	ft_map.insert(ft::pair<int, int>(10, 1));
 	ft_map.insert(ft::pair<int, int>(9, 1));
 	ft_map.insert(ft::pair<int, int>(8, 1));
-
-	//ft_map.insert(ft::pair<int, int>(1, 42));
+	ft_map.insert(ft::pair<int, int>(1, 42));
 	ft_map.insert(ft::pair<int, int>(11, 3));
-    ft_map.insert(ft::pair<int, int>(12, 5));
-    ft_map.insert(ft::pair<int, int>(13, 4));
+	ft_map.insert(ft::pair<int, int>(12, 5));
+	ft_map.insert(ft::pair<int, int>(13, 4));
 
-    ft_map.print_tree();
+	ft::map<int, int> cpy_map(ft_map);
+	
+	ft_map.print_tree();
+	cpy_map.print_tree();
 	ft::map<int, int>::iterator it = ft_map.lower_bound(0);
 	std::cout << "iterator : " << it.base()->value.first << "\n";
 	/* std::cout << "size before : " << ft_map.size();
@@ -27,8 +29,8 @@ int main()
 	std::cout << "\nsize after : " << ft_map.size();
 	std::cout << "-\n"; */
 	/* ft_map.insert(ft::pair<int, int>(6, 63));
-    ft_map.insert(ft::pair<int, int>(45, 456));
-    ft_map.insert(ft::pair<int, int>(26, 261)); */
+	ft_map.insert(ft::pair<int, int>(45, 456));
+	ft_map.insert(ft::pair<int, int>(26, 261)); */
 	//ft_map.print_tree();
 	//ft::map<int, int>::iterator it = ft_map.find(5);
 	//std::cout << it.base()->value.second << std::endl;
