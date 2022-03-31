@@ -37,10 +37,12 @@ namespace ft
 		public:
 			// Constructors & Destructor
 			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
-			tree(const tree & tree) : _compare(tree._compare), _alloc(tree._alloc), _size(tree._size)
+			tree(const tree & tree) : _current(NULL), _compare(tree._compare), _size(0), _alloc(tree._alloc)
 			{
-				for (iterator i = tree.begin(); i != tree.end(); ++i)
-					this.insert(i);
+				std::cout << "Constructeur par copie appelé\n";
+				iterator it = tree.end();
+				link_type root_to_copy = it.base()->left;
+				copy_tree(root_to_copy, tree.get_nil());
 			}
 			~tree()	{};
 
@@ -95,6 +97,11 @@ namespace ft
 					this->_current->right->parent = this->_current;
 					this->_size += 1;
 					this->_begin = new_node;
+					this->_current->parent = this->_end;
+					this->_end->left = this->_current;
+					std::cout << "end : " << this->_end << " root->parent : " << this->_current->parent << "\n";
+					std::cout << "root : " << this->_current << " end->left : " << this->_end->left << "\n";
+
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
@@ -105,7 +112,15 @@ namespace ft
 				while (true)
 				{
 					if (is_nil)
-					{			
+					{	
+						new_node->parent = this->_current;
+						std::cout << "begin : " << this->_begin->value.first << "\n";
+						std::cout << "new_node : " << new_node->value.first << "\n";
+						if (this->_compare(new_node->value, this->_begin->value))
+						{
+							std::cout << "replacing " << new_node->value.first << " as new begin (old : "<< this->_begin->value.first << ")\n";
+							this->_begin = new_node;
+						}
 						if (this->_compare(value, this->_current->value))
 							this->_current->left = new_node;
 						else
@@ -184,8 +199,11 @@ namespace ft
 			template <class InputIt>
 			void insert( InputIt first, InputIt last )
 			{
-				for (InputIt it = first ; it <= last ; it++)
+				for (InputIt it = first ; it != last ; it++)
+				{
+					std::cout << "Trying to insert " << it.base()->value.first << "\n";
 					insert(*it);
+				}
 			}
 
 			void erase( iterator pos )
@@ -284,6 +302,8 @@ namespace ft
 					it++;
 				return (it);
 			}
+
+			link_type get_nil() const { return (this->_nil); };
 	
 			// DEBUG
 			void	print_tree() { printBT("", this->_current, false); };
@@ -308,7 +328,7 @@ namespace ft
 
 				this->_end = this->_alloc.allocate(1);
 				this->_alloc.construct(this->_end, ptr_empty);
-				this->_begin = this->_begin;
+				this->_begin = this->_end;
 			}
 
 			void	print_tabulation(int indentation)
@@ -317,6 +337,17 @@ namespace ft
 				{
 					std::cout << "\t";
 				}
+			}
+
+			void copy_tree(const link_type node_to_copy, const link_type nil)
+			{
+				// Copier node_to_copy
+
+				// Traverser l'arbre
+				if (node_to_copy->left != nil)	
+					copy_tree(node_to_copy->left, nil);
+				if (node_to_copy->right != nil)
+					copy_tree(node_to_copy->right, nil);
 			}
 
 			void printBT(const std::string & prefix, const link_type node, bool isLeft)

@@ -18,12 +18,22 @@ int main()
 	ft_map.insert(ft::pair<int, int>(12, 5));
 	ft_map.insert(ft::pair<int, int>(13, 4));
 
+	ft::map<int, int>::iterator it_b = ft_map.begin();
+	ft::map<int, int>::iterator it_e = ft_map.end();
+
+	while (it_b != it_e)
+	{
+		std::cout << it_b.base()->value.first << "\n";
+		it_b++;
+	}
+
+
 	ft::map<int, int> cpy_map(ft_map);
 	
 	ft_map.print_tree();
 	cpy_map.print_tree();
-	ft::map<int, int>::iterator it = ft_map.lower_bound(0);
-	std::cout << "iterator : " << it.base()->value.first << "\n";
+	/* ft::map<int, int>::iterator it = ft_map.lower_bound(0);
+	std::cout << "iterator : " << it.base()->value.first << "\n"; */
 	/* std::cout << "size before : " << ft_map.size();
 	ft_map.clear();
 	std::cout << "\nsize after : " << ft_map.size();
