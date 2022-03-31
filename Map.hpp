@@ -79,10 +79,7 @@ namespace ft
 			
 			/* template <class InputIt>
 			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) {}; */
-			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree)
-			{
-				insert(other.begin(), other.end());
-			}
+			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
 			T & operator[]( const Key & key )

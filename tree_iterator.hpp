@@ -111,10 +111,10 @@ namespace ft
 				{
 					link_type tmp = this->_current;
 					this->_current = this->_current->parent;
-					while (this->_current->left != tmp)
+					while (this->_current->left != tmp) // 
 					{
-						tmp = this->_current;
-						this->_current = this->_current->parent;
+						tmp = this->_current; // 10
+						this->_current = this->_current->parent; // end
 					}
 				}
 		}
@@ -128,6 +128,26 @@ namespace ft
 	bool operator!=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
 	{
 		return lhs.base() != rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
+	bool operator>(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() > rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
+	bool operator>=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() >= rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
+	bool operator<(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() < rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
+	bool operator<=(const ft::tree_iterator<Iterator1> &lhs, const ft::tree_iterator<Iterator2> &rhs)
+	{
+		return lhs.base() <= rhs.base();
 	}
 }
 #endif
