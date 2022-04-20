@@ -89,7 +89,7 @@ namespace ft
 					it = insert(value_type(key, mapped_type())).first;
 				return (it->second);
 			}
-
+/*
 			T & at( const Key & key ) 
 			{
 				iterator it = find(key);
@@ -105,7 +105,7 @@ namespace ft
 					throw (std::out_of_range());
 				return (it->second);
 			}
-
+*/
 			// Iterators
 			iterator begin() { return (this->_tree.begin()); };
 			const_iterator begin() const { return (this->_tree.begin()); };
