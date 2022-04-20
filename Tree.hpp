@@ -254,9 +254,7 @@ namespace ft
 
 			void swap( tree & other )
 			{
-				std::cout << "current : " << this->_current->value.first << std::endl;
 				swappy(this->_current, other._current);
-				std::cout << "current : " << this->_current->value.first << std::endl;
 				swappy(_nil, other._nil);
 				swappy(_begin, other._begin);
 				swappy(_end, other._end);

@@ -32,6 +32,10 @@ int main()
 		it_b++;
 	} */
 
+	//ft::map<int, int> cpy_map(ft_map);
+	
+	//ft_map.print_tree();
+	//cpy_map.print_tree();
 
 //	ft::map<int, int> cpy_map(ft_map);
 	
