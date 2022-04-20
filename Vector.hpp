@@ -303,14 +303,14 @@ namespace ft
 
 			iterator erase( iterator first, iterator last )
 			{
-				difference_type offset = std::distance(this->_first, this->_last);
+				difference_type offset = std::distance(first, last);
 				for (iterator it = first; it + offset != this->end(); ++it)
 					*it = *(it + offset);
-				pointer now = this->_last;
-				while (now != (this->_last - offset))
+				pointer now = last;
+				while (now != (last - offset))
 					this->_alloc.destroy(--now);
-				this->_last = (this->_last - offset);
-				return (this->_first);
+				last = (last - offset);
+				return (first);
 			}
 
 			void push_back( const value_type & value )
