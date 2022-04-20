@@ -54,7 +54,7 @@ namespace ft
 					clear();
 					_compare = other._compare;
 					for (iterator i = other.begin(); i != other.end(); ++i)
-						this.insert(i);
+						insert(i);
 				}
 				return(*this);
 			}
