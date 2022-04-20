@@ -254,12 +254,14 @@ namespace ft
 
 			void swap( tree & other )
 			{
+				//print_tree();
 				swappy(_nil, other._nil);
             	swappy(_begin, other._begin);
             	swappy(_end, other._end);
             	swappy(_compare, other._compare);
             	swappy(_alloc, other._alloc);
             	swappy(_size, other._size);
+				//print_tree();
 			}
 
 			// Element access

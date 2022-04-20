@@ -26,12 +26,25 @@ int main()
 		std::cout << it_b.base()->value.first << "\n";
 		it_b++;
 	}
+	ft::map<int, int> swappy;
+	swappy.insert(ft::pair<int, int>(15, 3));
+	swappy.insert(ft::pair<int, int>(1, 19));
+	swappy.insert(ft::pair<int, int>(18, 6));
+	swappy.insert(ft::pair<int, int>(8, 78));
+	swappy.insert(ft::pair<int, int>(11, 3));
+	swappy.insert(ft::pair<int, int>(2, 4));
+	swappy.insert(ft::pair<int, int>(16, 6));
+	//swappy.print_tree();
+	swappy.swap(ft_map);
+	//ft_map.print_tree();
 
-
-	ft::map<int, int> cpy_map(ft_map);
+	//ft::map<int, int> cpy_map(ft_map);
 	
-	ft_map.print_tree();
-	cpy_map.print_tree();
+	//ft_map.print_tree();
+	//cpy_map.print_tree();
+
+	
+	
 	/* ft::map<int, int>::iterator it = ft_map.lower_bound(0);
 	std::cout << "iterator : " << it.base()->value.first << "\n"; */
 	/* std::cout << "size before : " << ft_map.size();
