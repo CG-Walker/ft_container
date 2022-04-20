@@ -46,6 +46,18 @@ int main()
 
 	ft_map.print_tree();
 	map_to_swap.print_tree();
+
+	ft_map.at(51);
+	
+	ft::map<int, int>::iterator it_first = ft_map.begin();
+	ft::map<int, int>::iterator it_last = it_first;
+	it_last++;
+	it_last++;
+
+	ft::map<int, int> map_to_insert(it_first, it_last);
+
+	map_to_insert.print_tree();
+
 	/* ft::map<int, int>::iterator it = ft_map.lower_bound(0);
 	std::cout << "iterator : " << it.base()->value.first << "\n"; */
 	/* std::cout << "size before : " << ft_map.size();

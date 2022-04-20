@@ -1,5 +1,4 @@
-- Vérifier le binz avec value_compare
-- Faire le dernier constructeur de map
+- Vérifier le binz avec value_compare (Comprendre la classe)
 - Mettre au propre
 - Tout tester
   

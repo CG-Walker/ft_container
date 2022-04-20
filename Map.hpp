@@ -78,8 +78,8 @@ namespace ft
 			//map() {};
 			explicit map( const key_compare & comp = key_compare(), const allocator_type & alloc = allocator_type() ) : _key_comp(comp), _value_comp(value_compare(comp)), _tree(tree_compare(comp), alloc) {};
 			
-			/* template <class InputIt>
-			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) {}; */
+			template <class InputIt>
+			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) : _key_comp(comp), _value_comp(value_compare(comp)), _tree(tree_compare(comp), alloc) { this->insert(first, last); };
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
