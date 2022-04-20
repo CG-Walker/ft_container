@@ -6,6 +6,7 @@
 # include "Iterator.hpp"
 # include "tree_iterator.hpp"
 # include "Utils.hpp"
+# include "Map.hpp"
 # include <limits>
 # include <iostream>
 
@@ -251,7 +252,15 @@ namespace ft
 				return(1);
 			}
 
-			//void swap( map & other );
+			void swap( tree & other )
+			{
+				swappy(_nil, other._nil);
+            	swappy(_begin, other._begin);
+            	swappy(_end, other._end);
+            	swappy(_compare, other._compare);
+            	swappy(_alloc, other._alloc);
+            	swappy(_size, other._size);
+			}
 
 			// Element access
 			iterator find(const key_type & key)
@@ -323,7 +332,14 @@ namespace ft
 				this->_alloc.construct(this->_end, ptr_empty);
 				this->_begin = this->_end;
 			}
-
+			template<class SW>
+			void swappy(SW first, SW second)
+			{
+				SW	tmp;
+				tmp = first;
+				first = second;
+				second = tmp;
+			}
             void copy_tree(const link_type node_to_copy, const link_type nil)
 			{
                 insert(node_to_copy->value);

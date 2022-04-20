@@ -130,7 +130,7 @@ namespace ft
 			void erase( iterator pos ) { return (this->_tree.erase(pos)); };
 			void erase( iterator first, iterator last ) { return (this->_tree.erase(first, last)); };
 			size_type erase( const Key & key ) { return (this->_tree.erase(key)); };
-			//void swap( map & other );
+			void swap( map & other ) {_tree.swap(other._tree);};
 
 			// Element access
 			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) ;};
