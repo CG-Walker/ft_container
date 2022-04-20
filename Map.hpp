@@ -2,6 +2,7 @@
 # define FT_MAP_HPP
 
 #include <functional>
+#include <stdexcept>
 //#include "Iterator.hpp"
 #include "ReverseIterator.hpp"
 #include "Utils.hpp"
@@ -89,12 +90,12 @@ namespace ft
 					it = insert(value_type(key, mapped_type())).first;
 				return (it->second);
 			}
-/*
+
 			T & at( const Key & key ) 
 			{
 				iterator it = find(key);
 				if (it == end())
-					throw (std::out_of_range());
+					throw (std::out_of_range("Element not found"));
 				return (it->second);
 			}
 
@@ -102,10 +103,10 @@ namespace ft
 			{
 				iterator it = find(key);
 				if (it == end())
-					throw (std::out_of_range());
+					throw (std::out_of_range("Element not found"));
 				return (it->second);
 			}
-*/
+
 			// Iterators
 			iterator begin() { return (this->_tree.begin()); };
 			const_iterator begin() const { return (this->_tree.begin()); };

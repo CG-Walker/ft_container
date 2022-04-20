@@ -267,19 +267,32 @@ namespace ft
 			iterator find(const key_type & key)
 			{
 				link_type root = this->_current;
+				bool is_nil = false;
+
 				while (true)
 				{
-					if (this->_current == this->_nil)
+					if (is_nil)
 						break ;
 					if (this->_current->value.first == key)
 					{
+						link_type tmp = this->_current;
 						this->_current = root;
-						return (iterator(this->_current, this->_nil));
+						return (iterator(tmp, this->_nil));
 					}
 					else if (this->_compare(key, this->_current->value))
-						this->_current = this->_current->left;
-					else if (!(this->_compare(key, this->_current->value)))
+					{
+						if (this->_current->left == this->_nil)
+							is_nil = true;
+						else
+							this->_current = this->_current->left;
+					}
+					else
+					{
+						if (this->_current->right == this->_nil)
+							is_nil = true;
+						else
 						this->_current = this->_current->right;
+					}
 				}
 				this->_current = root;
 				return (this->end());
