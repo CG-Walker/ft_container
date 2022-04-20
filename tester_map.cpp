@@ -9,6 +9,7 @@ int main()
 {
 	std::map<int, int> std_map;
 	ft::map<int, int> ft_map;
+	ft::map<int, int> map_to_swap;
 
 	ft_map.insert(ft::pair<int, int>(10, 1));
 	ft_map.insert(ft::pair<int, int>(9, 1));
@@ -18,20 +19,29 @@ int main()
 	ft_map.insert(ft::pair<int, int>(12, 5));
 	ft_map.insert(ft::pair<int, int>(13, 4));
 
-	ft::map<int, int>::iterator it_b = ft_map.begin();
+	map_to_swap.insert(ft::pair<int, int>(15, 6));
+	map_to_swap.insert(ft::pair<int, int>(51, 2));
+	map_to_swap.insert(ft::pair<int, int>(16, 42));
+
+/* 	ft::map<int, int>::iterator it_b = ft_map.begin();
 	ft::map<int, int>::iterator it_e = ft_map.end();
 
 	while (it_b != it_e)
 	{
 		std::cout << it_b.base()->value.first << "\n";
 		it_b++;
-	}
+	} */
 
 
-	ft::map<int, int> cpy_map(ft_map);
+//	ft::map<int, int> cpy_map(ft_map);
 	
 	ft_map.print_tree();
-	cpy_map.print_tree();
+	map_to_swap.print_tree();
+
+	ft_map.swap(map_to_swap);
+
+	ft_map.print_tree();
+	map_to_swap.print_tree();
 	/* ft::map<int, int>::iterator it = ft_map.lower_bound(0);
 	std::cout << "iterator : " << it.base()->value.first << "\n"; */
 	/* std::cout << "size before : " << ft_map.size();

@@ -254,12 +254,15 @@ namespace ft
 
 			void swap( tree & other )
 			{
+				std::cout << "current : " << this->_current->value.first << std::endl;
+				swappy(this->_current, other._current);
+				std::cout << "current : " << this->_current->value.first << std::endl;
 				swappy(_nil, other._nil);
-            	swappy(_begin, other._begin);
-            	swappy(_end, other._end);
-            	swappy(_compare, other._compare);
-            	swappy(_alloc, other._alloc);
-            	swappy(_size, other._size);
+				swappy(_begin, other._begin);
+				swappy(_end, other._end);
+				swappy(_compare, other._compare);
+				swappy(_alloc, other._alloc);
+				swappy(_size, other._size);
 			}
 
 			// Element access
@@ -333,7 +336,7 @@ namespace ft
 				this->_begin = this->_end;
 			}
 			template<class SW>
-			void swappy(SW first, SW second)
+			void swappy(SW & first, SW & second)
 			{
 				SW	tmp;
 				tmp = first;
