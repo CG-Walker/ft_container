@@ -41,7 +41,6 @@ namespace ft
 			tree(const tree & tree) : _current(NULL), _compare(tree._compare), _size(0), _alloc(tree._alloc)
 			{
                 initialize();
-				std::cout << "Constructeur par copie appelé\n";
 				iterator it = tree.end();
 				link_type root_to_copy = it.base()->left;
 				copy_tree(root_to_copy, tree.get_nil());
@@ -322,7 +321,11 @@ namespace ft
 			link_type get_nil() const { return (this->_nil); };
 	
 			// DEBUG
-			void	print_tree() { printBT("", this->_current, false); };
+			void	print_tree(std::string name)
+			{
+				std::cout << "\n--- " << name << " ---" << std::endl;
+				printBT("", this->_current, false);
+			}
 
 		private:
 			link_type			_current;
