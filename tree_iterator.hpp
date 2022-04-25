@@ -93,7 +93,7 @@ namespace ft
 				if (this->_current->left) 
 				{
 					this->_current = this->_current->left;
-					while (this->_current->right)
+					while (this->_current->right != this->_nil)
 						this->_current = this->_current->right;
 				} 
 				else

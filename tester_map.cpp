@@ -37,9 +37,9 @@ void	tests_iterators()
 
 	// Ne fonctionne pas
 	r_it = map_iterators.rbegin();
-	//std::cout << "rbegin() : " << r_it->first << std::endl;
+	std::cout << "rbegin() : " << r_it->first << std::endl;
 	r_it = map_iterators.rend();
-	//std::cout << "rend() : " << r_it.base() << std::endl;
+	std::cout << "rend() : " << r_it.base() << std::endl;
 
 	std::cout << "\n";
 }
