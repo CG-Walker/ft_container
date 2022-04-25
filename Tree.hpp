@@ -204,44 +204,67 @@ namespace ft
 
 			void erase( iterator pos )
 			{
-				iterator begin = begin();
+                link_type root = this->_current;
 				link_type node;
-				link_type replaced_node;
+				//link_type replaced_node;
 				if (pos == end())
 					return;
-				if (pos == begin())
-					_begin = begin.next();
-				node = pos.base();
+                node = pos.base();
 				if (node->left == _nil && node->right == _nil)
 				{
-					replace_parent_node(node, _nil);
-					delete_node(node);
+                    if (node != root)
+					    replace_parent_node(node, _nil);
+                    else
+                        node->parent->left = _nil;
 				}
 				else if (node->left != _nil && node->right == _nil)
 				{
-					replace_parent_node(node, node->left);
+                    if (node != root)
+					    replace_parent_node(node, node->left);
+                    else
+                        node->parent->left = node->left;
 					node->left->parent = node->parent;
-					delete_node(node);
+					
 				}
 				else if (node->left == _nil && node->right != _nil)
 				{
-					replace_parent_node(node, node->right);
+                    if (node != root)
+					    replace_parent_node(node, node->right);
+                    else
+                        node->parent->left = node->right;
 					node->right->parent = node->parent;
-					delete_node(node);
+					
 				}
 				else
 				{
-					replace_parent_node(node, node->right);
+                    if (node != root)
+					    replace_parent_node(node, node->right);
+                    else
+                        node->parent->left = node->right;
 					node->left->parent = node->right;
 					node->right->left = node->left;
 					node->right->parent = node->parent;
-					delete_node(node);
+					
 				}
+                if(node == root)
+                {
+                    if(node->right != _nil)
+                        _current = node->right;
+                    else
+                        _current = node->left;
+                }
+                if(node)
+                {
+                    delete_node(node);
+                    _size--;
+                    if(_size == 0)
+                        _current = NULL;
+                }
 			}
 
 			void erase( iterator first, iterator last )
 			{
-				while (first <= last)
+				while (first != last)
 					erase(first++);
 			}
 

@@ -86,8 +86,10 @@ void	tests_modifiers()
 
 	// Ne fonctionne pas
 	std::cout << "erase()...\n";
-	//map_modifiers.erase(map_modifiers.begin());
-	//map_modifiers.erase(8);
+	map_modifiers.erase(map_modifiers.begin());
+	map_modifiers.erase(10);
+    //map_modifiers.erase(map_modifiers.begin(), map_modifiers.end());
+    map_modifiers.erase(9);
 
 	map_modifiers.print_tree("map_modifiers");
 
