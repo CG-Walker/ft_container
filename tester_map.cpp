@@ -40,9 +40,9 @@ void	tests_iterators()
     std::cout << "std_it end() : " << std_it->first << std::endl;
     
     stdr_it = std_map.rbegin();
-    std::cout << "stdr rbegin() : " << std_it->first << std::endl;
+    std::cout << "stdr rbegin() : " << stdr_it->first << std::endl;
     stdr_it = std_map.rend();
-    std::cout << "stdr rend() : " << std_it->first << std::endl;
+    std::cout << "stdr rend() : " << stdr_it->first << std::endl;
 
 	// Ne fonctionne pas
 	r_it = map_iterators.rbegin();
@@ -86,8 +86,10 @@ void	tests_modifiers()
 
 	// Ne fonctionne pas
 	std::cout << "erase()...\n";
-	//map_modifiers.erase(map_modifiers.begin());
-	//map_modifiers.erase(8);
+	map_modifiers.erase(map_modifiers.begin());
+	map_modifiers.erase(10);
+    //map_modifiers.erase(map_modifiers.begin(), map_modifiers.end());
+    map_modifiers.erase(9);
 
 	map_modifiers.print_tree("map_modifiers");
 
