@@ -12,8 +12,6 @@ template <typename Iter>
 	private:
 		Iter _base;
 
-	//	reverse_iterator();
-
 	public:
 		typedef Iter iterator_type;
 		typedef typename iterator_traits<Iter>::difference_type difference_type;
@@ -22,7 +20,7 @@ template <typename Iter>
 		typedef typename iterator_traits<Iter>::reference reference;
 		typedef typename iterator_traits<Iter>::iterator_category iterator_category;
 		
-        //reverse_iterator() : _base(0){};
+        reverse_iterator() : _base(){};
 		reverse_iterator(Iter base) : _base(base){};
 		reverse_iterator(const reverse_iterator<Iter> &other) : _base(other._base){};
 		~reverse_iterator() {};

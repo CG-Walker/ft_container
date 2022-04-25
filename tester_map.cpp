@@ -32,7 +32,7 @@ void	tests_iterators()
     
     std_it = std_map.rbegin();
     std::cout << "std rbegin() : " << std_it->first << std::endl;
-     std_it = std_map.rend();
+    std_it = std_map.rend();
     std::cout << "std rend() : " << std_it->first << std::endl;
 
 	// Ne fonctionne pas
