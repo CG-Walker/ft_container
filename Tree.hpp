@@ -79,10 +79,13 @@ namespace ft
 			// Modifiers
 			void clear()
 			{
-				this->delete_branch(this->_current);
-				this->_size = 0;
-				this->_begin = this->_end;
-				this->_current = NULL;
+				if (this->_size != 0)
+				{
+					this->delete_branch(this->_current);
+					this->_size = 0;
+					this->_begin = this->_end;
+					this->_current = NULL;
+				}
 			}
 
 			ft::pair<iterator, bool> insert(const value_type & value)

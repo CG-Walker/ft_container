@@ -65,7 +65,7 @@ void	tests_modifiers()
 	map_modifiers.print_tree("map_modifiers");
 
 	// Ne fonctionne pas
-	std::cout << "erase()...\n";
+	std::cout << "\nerase()...\n";
 	//map_modifiers.erase(map_modifiers.begin());
 	//map_modifiers.erase(8);
 
@@ -82,8 +82,7 @@ void	tests_modifiers()
 	map_modifiers.print_tree("map_modifiers");
 	map_modifiers_swap.print_tree("map_modifiers_swap");
 
-	// Crash when calling clear on a empty map
-	//map_modifiers.clear();
+	map_modifiers.clear();
 	map_modifiers_swap.clear();
 
 	map_modifiers.print_tree("map_modifiers");
@@ -105,7 +104,7 @@ void	tests_element_access()
 	map_element_access.insert(ft::pair<int, int>(8, 1));
 	
 	// Ne fonctionne pas
-	//std::cout << "count(8) : " << map_element_access.count(8) << std::endl;
+	std::cout << "count(8) : " << map_element_access.count(8) << std::endl;
 	//std::cout << "count(5) : " << map_element_access.count(5) << std::endl;
 
 	// Vérifier la valeur de it
