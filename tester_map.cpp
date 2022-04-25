@@ -127,24 +127,23 @@ void	tests_element_access()
 	map_element_access.insert(ft::pair<int, int>(8, 1));
 	
 	// Ne fonctionne pas
-	//std::cout << "count(8) : " << map_element_access.count(8) << std::endl;
+	//std::cout << "count(5) : " << map_element_access.count(8) << std::endl;
 	//std::cout << "count(5) : " << map_element_access.count(5) << std::endl;
 
-	// Vérifier la valeur de it
 	it = map_element_access.find(8);
-	std::cout << "find(8) : " << it.base() << std::endl;
+	std::cout << "find(8) : " << it->first << std::endl;
 	it = map_element_access.find(42);
-	std::cout << "find(42) : " << it.base() << std::endl;
+	std::cout << "find(42) : " << it->first << std::endl;
 
 	// Ne fonctionne pas
 	//map_pair = map_element_access.equal_range(9);
 	//std::cout << "equal_range(9) : " << map_pair.first << std::endl;
 
 	// Ne fonctionne pas
-	//it = map_element_access.lower_bound(8);
-	//std::cout << "lower_bound(8) : " << it.base() << std::endl;
+	it = map_element_access.lower_bound(8);
+	std::cout << "lower_bound(8) : " << it->first << std::endl;
 	//it = map_element_access.upper_bound(9);
-	//std::cout << "upper_bound(9) : " << it.base() << std::endl;
+	//std::cout << "upper_bound(9) : " << it->first << std::endl;
 
 	std::cout << "\n";
 }

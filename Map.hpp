@@ -135,9 +135,9 @@ namespace ft
 			void swap( map & other ) { this->_tree.swap(other._tree); };
 
 			// Element access
-			size_type count( const Key & key ) const { return (this->_tree.find(key) == this->end() ? 0 : 1) ;};
-			iterator find(const key_type & key) { return (this->_tree.find(key)); };
-			const_iterator find(const key_type & key) const { return (this->_tree.find(key)); };
+			size_type count( const key_type & key ) const { return (this->find(key) == this->end() ? 0 : 1) ;};
+			iterator find( const key_type & key ) { return (this->_tree.find(key)); };
+			const_iterator find( const key_type & key ) const { return (this->_tree.find(key)); };
 			ft::pair<iterator,iterator> equal_range( const Key & key ) { return (this->_tree.equal_range(key)); };
 			ft::pair<const_iterator,const_iterator> equal_range( const Key & key ) const { return (this->_tree.equal_range(key)); };
 			iterator lower_bound( const Key & key ) { return (this->_tree.lower_bound(key)); };

@@ -110,7 +110,7 @@ namespace ft
 					//delete_node(new_node);
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
 				}
-				while (true)
+				while (true) // Ajout du nouveau node au bon endroit dans l'arbre
 				{
 					if (is_nil)
 					{	
@@ -160,7 +160,7 @@ namespace ft
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
-								while (true)
+				while (true)
 				{
 					if (is_nil)
 					{	
@@ -204,12 +204,14 @@ namespace ft
 
 			void erase( iterator pos )
 			{
-                link_type root = this->_current;
+				link_type root = this->_current;
 				link_type node;
-				//link_type replaced_node;
+
 				if (pos == end())
-					return;
-                node = pos.base();
+					return ;
+
+				node = pos.base();
+				// Réorganisation de l'arbre
 				if (node->left == _nil && node->right == _nil)
 				{
                     if (node != root)
@@ -233,7 +235,6 @@ namespace ft
                     else
                         node->parent->left = node->right;
 					node->right->parent = node->parent;
-					
 				}
 				else
 				{
@@ -246,18 +247,19 @@ namespace ft
 					node->right->parent = node->parent;
 					
 				}
-                if(node == root)
+				// Si le node à supprimer est le root
+                if (node == root)
                 {
                     if(node->right != _nil)
                         _current = node->right;
                     else
                         _current = node->left;
                 }
-                if(node)
+                if (node)
                 {
                     delete_node(node);
                     _size--;
-                    if(_size == 0)
+                    if (_size == 0) // L'arbre est désormais vide
                         _current = NULL;
                 }
 			}
