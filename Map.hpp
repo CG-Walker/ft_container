@@ -48,8 +48,7 @@ namespace ft
 			typedef const value_type &									const_reference;
 			typedef typename Allocator::pointer							pointer;
 			typedef typename Allocator::const_pointer					const_pointer;
-			typedef ft::reverse_iterator<T>								reverse_iterator;
-			typedef ft::reverse_iterator<const T>						const_reverse_iterator;
+			
 		
 		private:
 			typedef map_value_compare<key_type, value_type, key_compare>				tree_compare;
@@ -58,6 +57,8 @@ namespace ft
 		public:
 			typedef typename tree_type::iterator								iterator; // PAS BON
 			typedef typename tree_type::const_iterator							const_iterator; // PAS BON
+            typedef ft::reverse_iterator<iterator>								reverse_iterator;
+			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 
 		public:
 

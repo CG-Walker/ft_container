@@ -11,7 +11,7 @@ void	tests_iterators()
 
 	ft::map<int, int> map_iterators;
 	ft::map<int, int>::iterator it;
-	ft::map<int, int>::reverse_iterator r_it;
+	ft::map<int, int>::reverse_iterator  r_it = map_iterators.begin();
 
 	map_iterators.insert(ft::pair<int, int>(10, 1));
 	map_iterators.insert(ft::pair<int, int>(9, 1));
@@ -25,10 +25,10 @@ void	tests_iterators()
 	std::cout << "end() : " << it.base() << std::endl;
 
 	// Ne fonctionne pas
-	/* r_it = map_iterators.rbegin();
+	 r_it = map_iterators.rbegin();
 	std::cout << "rbegin() : " << r_it.base() << std::endl;
 	r_it = map_iterators.rend();
-	std::cout << "rend() : " << r_it.base() << std::endl; */
+	std::cout << "rend() : " << r_it.base() << std::endl;
 
 	std::cout << "\n";
 }
