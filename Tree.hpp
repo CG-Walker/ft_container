@@ -102,7 +102,7 @@ namespace ft
 					this->_size += 1;
 					this->_begin = new_node;
 					this->_current->parent = this->_end;
-					this->_end->left = this->_current;
+					this->_end->left = this->_current; // Left de end pointe toujours sur root
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
