@@ -150,9 +150,15 @@ void	tests_element_access()
 
 void	tests_observers()
 {
-	// TODO
-}
+	ft::map<int, int> map_iterators;
+    map_iterators.insert(ft::pair<int, int>(10, 1));
+	map_iterators.insert(ft::pair<int, int>(9, 1));
+	map_iterators.insert(ft::pair<int, int>(11, 1));
+    map_iterators.insert(ft::pair<int, int>(7, 1));
 
+    ft::map<int, int>::value_compare value = map_iterators.value_comp();
+    ft::map<int, int>::key_compare key = map_iterators.key_comp();   
+}
 
 int main()
 {
@@ -160,6 +166,7 @@ int main()
 	tests_capacity();
 	tests_modifiers();
 	tests_element_access();
+    tests_observers();
 
 	/* ft::map<int, int> ft_map;
 	ft::map<char, int> ft_map_char;
