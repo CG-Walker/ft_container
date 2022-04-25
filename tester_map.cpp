@@ -40,9 +40,9 @@ void	tests_iterators()
     std::cout << "std_it end() : " << std_it->first << std::endl;
     
     stdr_it = std_map.rbegin();
-    std::cout << "stdr rbegin() : " << std_it->first << std::endl;
+    std::cout << "stdr rbegin() : " << stdr_it->first << std::endl;
     stdr_it = std_map.rend();
-    std::cout << "stdr rend() : " << std_it->first << std::endl;
+    std::cout << "stdr rend() : " << stdr_it->first << std::endl;
 
 	// Ne fonctionne pas
 	r_it = map_iterators.rbegin();
