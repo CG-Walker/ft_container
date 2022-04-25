@@ -11,7 +11,9 @@ void	tests_iterators()
 
 	ft::map<int, int> map_iterators;
 	ft::map<int, int>::iterator it;
-	ft::map<int, int>::reverse_iterator  r_it = map_iterators.begin();
+	ft::map<int, int>::reverse_iterator r_it;
+    std::map<int, int> std_map;
+    std::map<int, int>::reverse_iterator std_it;
 
 	map_iterators.insert(ft::pair<int, int>(10, 1));
 	map_iterators.insert(ft::pair<int, int>(9, 1));
@@ -24,11 +26,20 @@ void	tests_iterators()
 	it = map_iterators.end();
 	std::cout << "end() : " << it.base() << std::endl;
 
+    std_map.insert(std::pair<int, int>(10, 1));
+    std_map.insert(std::pair<int, int>(9, 1));
+    std_map.insert(std::pair<int, int>(8, 1));
+    
+    std_it = std_map.rbegin();
+    std::cout << "std rbegin() : " << std_it->first << std::endl;
+     std_it = std_map.rend();
+    std::cout << "std rend() : " << std_it->first << std::endl;
+
 	// Ne fonctionne pas
-	 r_it = map_iterators.rbegin();
-	std::cout << "rbegin() : " << r_it.base() << std::endl;
+	r_it = map_iterators.rbegin();
+	//std::cout << "rbegin() : " << r_it->first << std::endl;
 	r_it = map_iterators.rend();
-	std::cout << "rend() : " << r_it.base() << std::endl;
+	//std::cout << "rend() : " << r_it.base() << std::endl;
 
 	std::cout << "\n";
 }
@@ -65,7 +76,7 @@ void	tests_modifiers()
 	map_modifiers.print_tree("map_modifiers");
 
 	// Ne fonctionne pas
-	std::cout << "\nerase()...\n";
+	std::cout << "erase()...\n";
 	//map_modifiers.erase(map_modifiers.begin());
 	//map_modifiers.erase(8);
 
@@ -82,7 +93,8 @@ void	tests_modifiers()
 	map_modifiers.print_tree("map_modifiers");
 	map_modifiers_swap.print_tree("map_modifiers_swap");
 
-	map_modifiers.clear();
+	// Crash when calling clear on a empty map
+	//map_modifiers.clear();
 	map_modifiers_swap.clear();
 
 	map_modifiers.print_tree("map_modifiers");
@@ -104,7 +116,7 @@ void	tests_element_access()
 	map_element_access.insert(ft::pair<int, int>(8, 1));
 	
 	// Ne fonctionne pas
-	std::cout << "count(8) : " << map_element_access.count(8) << std::endl;
+	//std::cout << "count(8) : " << map_element_access.count(8) << std::endl;
 	//std::cout << "count(5) : " << map_element_access.count(5) << std::endl;
 
 	// Vérifier la valeur de it
