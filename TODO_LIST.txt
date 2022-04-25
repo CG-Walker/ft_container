@@ -3,11 +3,11 @@
 - Tout tester
   
 - Comment accèder aux valeurs avec les iterators ?
-- reverse_iterator n'a pas l'air de fonctionner
+- reverse_iterator n'a pas l'air de fonctionner -done
 - Vérifier la valeur de max_size()
 - Tester toutes les fonctions insert()
 - Erase() ne fonctionne pas
-- clear() crash lorsque c'est appelé sur une map vide
+- clear() crash lorsque c'est appelé sur une map vide -done
 - count() ne fonctionne pas
 - equal_range(), lower_bound() et upper_bound() n'ont pas l'air de fonctionner
 
