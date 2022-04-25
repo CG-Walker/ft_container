@@ -13,33 +13,42 @@ void	tests_iterators()
 	ft::map<int, int>::iterator it;
 	ft::map<int, int>::reverse_iterator r_it;
     std::map<int, int> std_map;
-    std::map<int, int>::reverse_iterator std_it;
+    std::map<int, int>::iterator std_it;
+
+    std::map<int, int>::reverse_iterator stdr_it;
 
 	map_iterators.insert(ft::pair<int, int>(10, 1));
 	map_iterators.insert(ft::pair<int, int>(9, 1));
 	map_iterators.insert(ft::pair<int, int>(8, 1));
+    map_iterators.insert(ft::pair<int, int>(7, 1));
 
 	map_iterators.print_tree("map_iterators");
 
 	it = map_iterators.begin();
-	std::cout << "\nbegin() : " << it.base() << std::endl;
+	std::cout << "\nbegin() : " << it->first << std::endl;
 	it = map_iterators.end();
-	std::cout << "end() : " << it.base() << std::endl;
+	std::cout << "end() : " << it->first << std::endl;
 
     std_map.insert(std::pair<int, int>(10, 1));
     std_map.insert(std::pair<int, int>(9, 1));
     std_map.insert(std::pair<int, int>(8, 1));
+    std_map.insert(std::pair<int, int>(7, 1));
+    std_map.insert(std::pair<int, int>(11, 1));
+    std_it = std_map.begin();
+    std::cout << "\n std_it begin() : " << std_it->first << std::endl;
+    std_it = std_map.end();
+    std::cout << "std_it end() : " << std_it->first << std::endl;
     
-    std_it = std_map.rbegin();
-    std::cout << "std rbegin() : " << std_it->first << std::endl;
-    std_it = std_map.rend();
-    std::cout << "std rend() : " << std_it->first << std::endl;
+    stdr_it = std_map.rbegin();
+    std::cout << "stdr rbegin() : " << std_it->first << std::endl;
+    stdr_it = std_map.rend();
+    std::cout << "stdr rend() : " << std_it->first << std::endl;
 
 	// Ne fonctionne pas
 	r_it = map_iterators.rbegin();
 	std::cout << "rbegin() : " << r_it->first << std::endl;
 	r_it = map_iterators.rend();
-	std::cout << "rend() : " << r_it.base() << std::endl;
+	std::cout << "rend() : " << r_it->first << std::endl;
 
 	std::cout << "\n";
 }
