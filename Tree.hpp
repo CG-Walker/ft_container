@@ -344,8 +344,10 @@ namespace ft
 
 			iterator upper_bound( const Key & key )
 			{
-				reverse_iterator it = this->rbegin();
-				while (this->_compare(*it, key) && this->rend())
+				iterator it = this->begin();
+				while (this->_compare(*it, key) && it != this->end())
+					it++;
+				if (*it == key)
 					it++;
 				return (it);
 			}
