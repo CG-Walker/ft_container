@@ -4,8 +4,8 @@
 # include <memory>
 # include <stdexcept>
 # include <limits>
-
 # include <iostream>
+# include <iterator>
 	
 # include "Iterator.hpp"
 # include "ReverseIterator.hpp"
