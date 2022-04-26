@@ -230,7 +230,7 @@ namespace ft
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
 					this->_last = this->_first + old_size + count;
-					this->_capacity = this->_first + new_size;
+					this->_capacity = *this->_first + new_size;
 				}
 				else
 				{
@@ -276,7 +276,7 @@ namespace ft
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
 					this->_last = this->_first + old_size + count;
-					this->_capacity = this->_first + new_size;
+					this->_capacity = *this->_first + new_size;
 				}
 				else
 				{
