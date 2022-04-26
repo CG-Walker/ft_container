@@ -62,7 +62,7 @@ namespace ft
 
 			template <class Tn, class ContainerN>
 				friend bool operator>= (const ft::stack<Tn, ContainerN>& lhs, const ft::stack<Tn, ContainerN>& rhs);
-		private:
+		protected:
 			Container c;
 	}; // Class Vector
 

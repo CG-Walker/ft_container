@@ -156,8 +156,8 @@ void	tests_observers()
 	map_iterators.insert(ft::pair<int, int>(11, 1));
     map_iterators.insert(ft::pair<int, int>(7, 1));
 
-    ft::map<int, int>::value_compare value = map_iterators.value_comp();
-    ft::map<int, int>::key_compare key = map_iterators.key_comp();   
+    //ft::map<int, int>::value_compare value = map_iterators.value_comp();
+   // ft::map<int, int>::key_compare key = map_iterators.key_comp();   
 }
 
 int main()
