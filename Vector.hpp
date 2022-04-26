@@ -254,9 +254,9 @@ namespace ft
 				}
 			}
 
-			template <class InputIt>
-			void insert( iterator pos, InputIt first, InputIt last )
-			{
+			template <class InputIterator>
+        	void insert(iterator position, InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last)
+        	{
 				size_type count = std::distance(first, last);
 				size_type new_size = this->size() + count;
 				size_type offset = pos - begin();
