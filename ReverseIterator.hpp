@@ -82,6 +82,18 @@ template <typename Iter>
 			_base += offset;
 			return *this;
 		}
+
+        reverse_iterator<Iter> &operator+(difference_type offset)
+		{
+			_base = _base - offset;
+			return *this;
+		}
+
+		reverse_iterator<Iter> &operator-(difference_type offset)
+		{
+			_base = _base + offset;
+			return *this;
+		}
     };
 }
 

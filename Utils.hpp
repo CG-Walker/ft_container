@@ -93,6 +93,14 @@ namespace ft
 		return !(lhs < rhs);
 	}
 	
+
+    // IS_INTEGRAL
+	// see https://www.sandordargo.com/blog/2021/04/07/what-are-type-traits for the best implementation tuto
+	///
+
+	// first remove_cv template to remove the const or volatile
+	// NB : The volatile keyword is intended to prevent the compiler
+	// from applying any optimizations on objects that can change in ways that cannot be determined by the compiler.
 	// Simple copie non-comprise pour l'instant !!
 	template <class T>
 	struct remove_cv
