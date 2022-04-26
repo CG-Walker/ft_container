@@ -347,7 +347,7 @@ namespace ft
 				iterator it = this->begin();
 				while (this->_compare(*it, key) && it != this->end())
 					it++;
-				if (*it == key)
+				if (it->first == key)
 					it++;
 				return (it);
 			}
