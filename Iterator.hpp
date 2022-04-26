@@ -50,6 +50,11 @@ namespace ft
 				return (ret);
 			}
 			
+            _iterator operator+(size_t n)
+			{
+				_iterator ret = this->_ptr + n;
+				return (ret);
+			}
 			// Prefix increment
 			_iterator & operator++()
 			{
