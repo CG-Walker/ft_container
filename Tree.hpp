@@ -106,10 +106,7 @@ namespace ft
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-				{
-					//delete_node(new_node);
 					return (ft::make_pair(iterator(new_node, this->_nil), false));
-				}
 				while (true) // Ajout du nouveau node au bon endroit dans l'arbre
 				{
 					if (is_nil)
@@ -150,17 +147,24 @@ namespace ft
 				link_type root = this->_current;
 				link_type new_node = create_node(value);
 				bool is_nil = false;
-	
-				while (this->_current->value != *hint)
+
+				if (this->_current == NULL) // Signifie que l'arbe est vide
 				{
-					if (this->_compare(this->_current->value, *hint))
-						this->_current = this->_current->right;
-					else
-						this->_current = this->_current->left;
+					this->_current = new_node;
+					this->_current->left->parent = this->_current;
+					this->_current->right->parent = this->_current;
+					this->_size += 1;
+					this->_begin = new_node;
+					this->_current->parent = this->_end;
+					this->_end->left = this->_current; // Left de end pointe toujours sur root
+					return (ft::make_pair(iterator(new_node, this->_nil), true).first);
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-					return (ft::make_pair(iterator(new_node, this->_nil), false));
-				while (true)
+				{
+					//delete_node(new_node);
+					return (ft::make_pair(iterator(new_node, this->_nil), false).first);
+				}
+				while (true) // Ajout du nouveau node au bon endroit dans l'arbre
 				{
 					if (is_nil)
 					{	
@@ -192,7 +196,7 @@ namespace ft
 					}
 				}
 				this->_current = root;
-				return (ft::make_pair(iterator(new_node, this->_nil), true));
+				return (ft::make_pair(iterator(new_node, this->_nil), true).first);
 			}
 
 			template <class InputIt>
