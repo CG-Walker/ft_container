@@ -95,6 +95,18 @@ namespace ft
 				return (*this);
 			}
 
+			_iterator & operator+=(size_t n)
+			{
+				this->_ptr += n;
+				return (*this);
+			}
+
+			_iterator & operator-=(size_t n)
+			{
+				this->_ptr -= n;
+				return (*this);
+			}
+
 			reference operator*() { return(*_ptr); };
 			reference operator[](difference_type n) const { return *(this + n);	};
 			pointer operator->() { return(_ptr); };

@@ -27,8 +27,7 @@ namespace ft
 		private:
 			// Member types
 			typedef Key															key_type;
-			// T = value_type de map = ft::pair<const Key, T> 
-			typedef T															value_type;
+			typedef T															value_type;	// T = value_type de map = ft::pair<const Key, T> 
 			typedef ft::node<T> *												link_type;
 			typedef const ft::node<T> *											const_link_type;
 			typedef typename Allocator::size_type 								size_type;
@@ -63,11 +62,11 @@ namespace ft
 			iterator begin() { return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
 			iterator end() { return iterator(this->_end, this->_nil); }
-			const_iterator end() const { return const_iterator(this->_end, this->_nil); }; // A corriger
-			reverse_iterator rbegin() {return reverse_iterator(end());};
-			const_reverse_iterator rbegin() const {return const_reverse_iterator(end());};
-			reverse_iterator rend() {return reverse_iterator(begin());};
-			const_reverse_iterator rend() const {return const_reverse_iterator(begin());};
+			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
+			reverse_iterator rbegin() { return reverse_iterator(end()); };
+			const_reverse_iterator rbegin() const { return const_reverse_iterator(end()); };
+			reverse_iterator rend() { return reverse_iterator(begin()); };
+			const_reverse_iterator rend() const { return const_reverse_iterator(begin()); };
 
 			// Capacity
 			size_type size() const { return (this->_size); };
