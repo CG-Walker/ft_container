@@ -32,6 +32,12 @@ namespace ft
 				return (*this);
 			}
 
+            _iterator & operator=(_iterator & other)
+			{
+				_ptr = other._ptr;
+				return (*this);
+			}
+
 			difference_type operator+(_iterator const & other)
 			{
 				difference_type ret = this->_ptr + other._ptr;
@@ -101,8 +107,8 @@ namespace ft
 
 		template <typename _T>
 		friend bool operator==(const iterator<_T> &lhs, const iterator<_T> &rhs);
-		template <typename _T>
-		friend bool operator!=(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		template <class Iterator1, class Iterator2>
+		friend bool operator!=(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs);
 		template <typename _T>
 		friend bool operator>(const iterator<_T> &lhs, const iterator<_T> &rhs);
 		template <typename _T>
@@ -120,11 +126,13 @@ namespace ft
 	{
 		return (lhs._ptr == rhs._ptr);
 	}
-	template <typename T>
-	bool operator!=(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr != rhs._ptr);
-	}
+    template <class Iterator1, class Iterator2>
+    bool operator!=(const iterator<Iterator1> &lhs,
+                    const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() != rhs.base();
+    }
+
 	template <typename T>
 	bool operator>(const iterator<T> &lhs, const iterator<T> &rhs)
 	{
