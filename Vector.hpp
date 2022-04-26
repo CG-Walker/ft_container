@@ -10,6 +10,7 @@
 # include "Iterator.hpp"
 # include "ReverseIterator.hpp"
 # include "Utils.hpp"
+# include "IteratorTrait.hpp"
 
 namespace ft
 {

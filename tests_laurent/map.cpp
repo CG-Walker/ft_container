@@ -6,7 +6,6 @@
 #include "../Map.hpp"
 #include <map>
 
-
 int main()
 {
 	std::map<int, std::string> test01;

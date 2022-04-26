@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 13:49:51 by ldavids           #+#    #+#             */
-/*   Updated: 2022/04/26 15:54:04 by user42           ###   ########.fr       */
+/*   Updated: 2022/04/26 16:08:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int main()
 	std::cout << "*it5 == " << *it5 << std::endl;
 
 	std::cout << "rbegin() with const_reverse_iterator" << std::endl;
-	ft::vector<int>::const_reverse_iterator	it6 = test3.rbegin();
-	std::cout << "*it6 == " << *it6 << std::endl;
+	//ft::vector<int>::const_reverse_iterator	it6 = test3.rbegin();
+	//std::cout << "*it6 == " << *it6 << std::endl;
 	std::cout << "rend() with const_reverse_iterator" << std::endl;
 	ft::vector<int>::reverse_iterator	it7 = test3.rend();
 	it7--;
