@@ -16,119 +16,118 @@ namespace ft
             typedef typename ft::iterator_traits<T*>::reference			reference;
 			typedef typename ft::iterator_traits<const T*>::reference	const_reference;
 			typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
-			typedef iterator<T> 										_iterator;
 
 			// Constructors and Destructor
 			iterator(void) : _ptr(NULL) {};
 			iterator(pointer elem) : _ptr(elem) {};
-			iterator(const _iterator & other)  : _ptr(other._ptr){};
+			iterator(const iterator & other)  : _ptr(other._ptr){};
 			~iterator(void) {};
 
             pointer base() const {return (_ptr);};
 
-			_iterator & operator=(_iterator const & other)
+			iterator & operator=(iterator const & other)
 			{
 				_ptr = other._ptr;
 				return (*this);
 			}
 
-            _iterator & operator=(_iterator & other)
+            iterator & operator=(iterator & other)
 			{
 				_ptr = other._ptr;
 				return (*this);
 			}
 
-			difference_type operator+(_iterator const & other)
+			difference_type operator+(iterator const & other)
 			{
 				difference_type ret = this->_ptr + other._ptr;
 				return (ret);
 			}
 
-			difference_type operator-(_iterator const & other)
+			difference_type operator-(iterator const & other)
 			{
 				difference_type ret = this->_ptr - other._ptr;
 				return (ret);
 			}
 
-			_iterator operator-(size_t n)
+			iterator operator-(size_t n)
 			{
-				_iterator ret = this->_ptr - n;
+				iterator ret = this->_ptr - n;
 				return (ret);
 			}
 			
-            _iterator operator+(size_t n)
+            iterator operator+(size_t n)
 			{
-				_iterator ret = this->_ptr + n;
+				iterator ret = this->_ptr + n;
 				return (ret);
 			}
 			// Prefix increment
-			_iterator & operator++()
+			iterator & operator++()
 			{
 				++(this)->_ptr;
 				return(*this);
 			}
 
-			_iterator & operator--()
+			iterator & operator--()
 			{
 				--(this)->_ptr;
 				return(*this);
 			}
 
 			// Postfix increment
-			_iterator operator++(int)
+			iterator operator++(int)
 			{
 				iterator ite = *this;
 				++this->_ptr;
-				return ite;
+				return (ite);
 			}
 	
-			_iterator operator--(int)
+			iterator operator--(int)
 			{
 				iterator ite = *this;
 				--this->_ptr;
-				return(*ite);
+				return (ite);
 			}
 
-			_iterator & operator+=(const _iterator & other)
+			iterator & operator+=(const iterator & other)
 			{
 				this->_ptr += other->_ptr;
 				return (*this);
 			}
 
-			_iterator & operator-=(const _iterator & other)
+			iterator & operator-=(const iterator & other)
 			{
 				this->_ptr -= other->_ptr;
 				return (*this);
 			}
 
-			_iterator & operator+=(size_t n)
+			iterator & operator+=(size_t n)
 			{
 				this->_ptr += n;
 				return (*this);
 			}
 
-			_iterator & operator-=(size_t n)
+			iterator & operator-=(size_t n)
 			{
 				this->_ptr -= n;
 				return (*this);
 			}
 
-			reference operator*() { return(*_ptr); };
+			reference operator*() { return (*_ptr); };
 			reference operator[](difference_type n) const { return *(this + n);	};
-			pointer operator->() { return(_ptr); };
+			pointer operator->() { return (_ptr); };
 
 		template <typename _T>
-		friend bool operator==(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		friend bool operator==(const iterator<_T> & lhs, const iterator<_T> & rhs);
 		template <class Iterator1, class Iterator2>
-		friend bool operator!=(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs);
+		friend bool operator!=(const iterator<Iterator1> & lhs, const iterator<Iterator2> & rhs);
 		template <typename _T>
-		friend bool operator>(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		friend bool operator>(const iterator<_T> & lhs, const iterator<_T> & rhs);
 		template <typename _T>
-		friend bool operator<(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		friend bool operator<(const iterator<_T> & lhs, const iterator<_T> & rhs);
 		template <typename _T>
-		friend bool operator>=(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		friend bool operator>=(const iterator<_T> & lhs, const iterator<_T> & rhs);
 		template <typename _T>
-		friend bool operator<=(const iterator<_T> &lhs, const iterator<_T> &rhs);
+		friend bool operator<=(const iterator<_T> & lhs, const iterator<_T> & rhs);
 
 		protected:
 			pointer _ptr;

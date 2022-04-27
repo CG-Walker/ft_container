@@ -259,7 +259,7 @@ namespace ft
         	{
 				size_type count = std::distance(first, last);
 				size_type new_size = this->size() + count;
-				size_type offset = pos - begin();
+				size_type offset = position - begin();
 				
 				if (new_size > this->_capacity)
 				{
@@ -268,9 +268,9 @@ namespace ft
 					size_type old_size = this->size();
 					pointer new_first = this->_alloc.allocate(new_size);
 
-					std::uninitialized_copy(this->begin(), pos, new_first);
+					std::uninitialized_copy(this->begin(), position, new_first);
 					std::uninitialized_copy(first, last, new_first + offset);
-					std::uninitialized_copy(pos, this->end(), new_first + offset + count);
+					std::uninitialized_copy(position, this->end(), new_first + offset + count);
 
 					clear();
 					this->_alloc.deallocate(this->_first, old_capacity);
@@ -307,10 +307,10 @@ namespace ft
 				difference_type offset = std::distance(first, last);
 				for (iterator it = first; it + offset != this->end(); ++it)
 					*it = *(it + offset);
-				pointer now = last;
-				while (now != (last - offset))
+				pointer now = this->_last;
+				while (now != (this->_last - offset))
 					this->_alloc.destroy(--now);
-				last = (last - offset);
+				this->_last = this->_last - offset;
 				return (first);
 			}
 
