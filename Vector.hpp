@@ -29,8 +29,8 @@ namespace ft
 			typedef typename allocator_type::const_pointer		const_pointer;
 			typedef ft::iterator<T>								iterator;
 			typedef ft::iterator<const T>						const_iterator;
-			typedef ft::reverse_iterator<iterator>						reverse_iterator;
-			typedef ft::reverse_iterator<const iterator>				const_reverse_iterator;
+			typedef ft::reverse_iterator<iterator>				reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 			// Constructors & Destructor
 			explicit vector( const Allocator & alloc = allocator_type()) : _alloc(alloc), _first(NULL), _last(NULL), _capacity(0) {};
