@@ -212,46 +212,60 @@ namespace ft
 
 			void insert( iterator pos, size_type count, const value_type & value )
 			{
+                std::cout << "enter insert"<< std::endl;
 				size_type new_size = this->size() + count;
 				size_type offset = pos - begin();
 				
 				if (new_size > this->_capacity)
 				{
+                    std::cout << "enter 1 if"<< std::endl;
 					new_size = calc_new_capacity(new_size);
 					size_type old_capacity = this->_capacity;
 					size_type old_size = this->size();
 					pointer new_first = this->_alloc.allocate(new_size);
+                    std::cout << "enter 2 if"<< std::endl;
 
 					std::uninitialized_copy(this->begin(), pos, new_first);
 					std::uninitialized_fill_n(new_first + offset, count, value);
 					std::uninitialized_copy(pos, this->end(), new_first + offset + count);
-
+                    std::cout << "enter 3 if"<< std::endl;
 					clear();
+                    std::cout << "enter 4 if"<< std::endl;
 					this->_alloc.deallocate(this->_first, old_capacity);
+                    std::cout << "enter 5 if"<< std::endl;
 					this->_first = new_first;
+                    std::cout << "enter 6 if"<< std::endl;
 					this->_last = this->_first + old_size + count;
+                    std::cout << "enter 7 if"<< std::endl;
 					this->_capacity = *this->_first + new_size;
+                    
 				}
 				else
 				{
+                    std::cout << "enter 1 else"<< std::endl;
 					size_type old_size = this->size();
 					for (size_type i = 0; i < old_size - offset; i++)
 					{
+                        std::cout << "enter for 1"<< std::endl;
 						if (new_size - i > old_size)
 							this->_alloc.construct(&this->_first[new_size - i - 1], this->_first[old_size - i - 1]);
 						else
 							this->_first[new_size - i - 1] = this->_first[old_size - i - 1];
+                        std::cout << "exit for 1"<< std::endl;
 					}
 					for (size_type i = 0; i < count; i++)
 					{
+                        std::cout << "enter for 2"<< std::endl;
 						if (offset + i >= size())
 							this->_alloc.construct(&this->_first[offset + i, *this->_first]);
 						else
 							this->_first[offset + i] = *this->_first;
 						++this->_first;
+                        std::cout << "exit for 1"<< std::endl;
 					}
 					this->_last += count;
 				}
+                std::cout << "exit insert"<< std::endl;
 			}
 
 			template <class InputIterator>
