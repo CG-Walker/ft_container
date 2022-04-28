@@ -116,54 +116,43 @@ namespace ft
 			reference operator[](int n) const { return (*(this->_ptr + n));	};
 			pointer operator->() { return (_ptr); };
 
-		template <typename _T>
-		friend bool operator==(const iterator<_T> & lhs, const iterator<_T> & rhs);
-		template <class Iterator1, class Iterator2>
-		friend bool operator!=(const iterator<Iterator1> & lhs, const iterator<Iterator2> & rhs);
-		template <typename _T>
-		friend bool operator>(const iterator<_T> & lhs, const iterator<_T> & rhs);
-		template <typename _T>
-		friend bool operator<(const iterator<_T> & lhs, const iterator<_T> & rhs);
-		template <typename _T>
-		friend bool operator>=(const iterator<_T> & lhs, const iterator<_T> & rhs);
-		template <typename _T>
-		friend bool operator<=(const iterator<_T> & lhs, const iterator<_T> & rhs);
-
 		protected:
 			pointer _ptr;
 	};
-	template <typename T>
-	bool operator==(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr == rhs._ptr);
-	}
+
+	template <class Iterator1, class Iterator2>
+    bool operator==(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() == rhs.base();
+    }
     template <class Iterator1, class Iterator2>
-    bool operator!=(const iterator<Iterator1> &lhs,
-                    const iterator<Iterator2> &rhs)
+    bool operator!=(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
     {
         return lhs.base() != rhs.base();
     }
 
-	template <typename T>
-	bool operator>(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr > rhs._ptr);
-	}
-	template <typename T>
-	bool operator<(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr < rhs._ptr);
-	}
-	template <typename T>
-	bool operator>=(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr >= rhs._ptr);
-	}
-	template <typename T>
-	bool operator<=(const iterator<T> &lhs, const iterator<T> &rhs)
-	{
-		return (lhs._ptr <= rhs._ptr);
-	}
+	template <class Iterator1, class Iterator2>
+    bool operator>(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() > rhs.base();
+    }
+	
+	template <class Iterator1, class Iterator2>
+    bool operator<(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() < rhs.base();
+    }
+
+	template <class Iterator1, class Iterator2>
+    bool operator>=(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() >= rhs.base();
+    }
+	template <class Iterator1, class Iterator2>
+    bool operator<=(const iterator<Iterator1> &lhs, const iterator<Iterator2> &rhs)
+    {
+        return lhs.base() <= rhs.base();
+    }
 }
 
 #endif

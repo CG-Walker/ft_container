@@ -100,36 +100,37 @@ template <typename Iter>
 		}
     };
 
-    template< class T, class Alloc >
-	bool operator==( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+   	template< class Iterator1, class Iterator2 >
+	bool operator==( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() == rhs.base());
 	}
-	template< class T, class Alloc >
-	bool operator!=( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+
+	template< class Iterator1, class Iterator2 >
+	bool operator!=( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() != rhs.base());
 	}
-	template< class T, class Alloc >
-	bool operator<( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+	template< class Iterator1, class Iterator2 >
+	bool operator<( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() < rhs.base());
 	}
 
-	template< class T, class Alloc >
-	bool operator<( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+	template< class Iterator1, class Iterator2 >
+	bool operator<=( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() <= rhs.base());
 	}
 
-  	template< class T, class Alloc >
-	bool operator<( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+  	template< class Iterator1, class Iterator2 >
+	bool operator>( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() > rhs.base());
 	}
 
-  	template< class T, class Alloc >
-	bool operator<( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs )
+  	template< class Iterator1, class Iterator2 >
+	bool operator>=( const reverse_iterator<Iterator1>& lhs, const reverse_iterator<Iterator2>& rhs )
 	{
 		return(lhs.base() >= rhs.base());
 	}
