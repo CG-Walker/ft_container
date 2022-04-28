@@ -20,7 +20,11 @@ namespace ft
 			// Constructors and Destructor
 			iterator(void) : _ptr(NULL) {};
 			iterator(pointer elem) : _ptr(elem) {};
-			iterator(const iterator & other)  : _ptr(other._ptr){};
+			template <class Iter>
+			iterator(const iterator<Iter> & other)
+			{
+				*this = other;
+			}
 			~iterator(void) {};
 
             pointer base() const {return (_ptr);};
