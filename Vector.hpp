@@ -169,8 +169,7 @@ namespace ft
 
 			size_type size() const { return (this->_last - this->_first); };
 
-			size_type max_size() const
-			{
+			size_type max_size() const {
 				return (std::min(static_cast<size_type>(std::numeric_limits<difference_type>::max()), this->_alloc.max_size()));
 			}
 
@@ -203,98 +202,89 @@ namespace ft
 				this->_last = this->_first;
 			}
 
-			iterator insert( iterator pos, const value_type & value )
+			iterator insert( iterator pos, const value_type & value ) // Insert value before pos
 			{
 				size_type offset = pos - this->begin();
 				insert(pos, 1, value);
 				return (this->begin() + offset);
 			}
 
-			void insert( iterator pos, size_type count, const value_type & value )
+			void insert( iterator pos, size_type count, const value_type & value ) // Insert count value before pos
 			{
-                std::cout << "enter insert"<< std::endl;
 				size_type new_size = this->size() + count;
 				size_type offset = pos - begin();
 				
-				if (new_size > this->_capacity)
+				if (new_size > this->_capacity) // Si le nombre d'élements à ajouter font passer la size au delà de la capacity
 				{
-                    std::cout << "enter 1 if"<< std::endl;
-					new_size = calc_new_capacity(new_size);
 					size_type old_capacity = this->_capacity;
 					size_type old_size = this->size();
+									
+					new_size = calc_new_capacity(new_size);
 					pointer new_first = this->_alloc.allocate(new_size);
-                    std::cout << "enter 2 if"<< std::endl;
 
-					std::uninitialized_copy(this->begin(), pos, new_first);
-					std::uninitialized_fill_n(new_first + offset, count, value);
-					std::uninitialized_copy(pos, this->end(), new_first + offset + count);
-                    std::cout << "enter 3 if"<< std::endl;
-					clear();
-                    std::cout << "enter 4 if"<< std::endl;
+					std::uninitialized_copy(this->begin(), pos, new_first); // Copie les nombres de begin à pos dans le nouvel espace mémoire réservé
+					std::uninitialized_fill_n(new_first + offset, count, value); // Remplit cet espace mémoire avec count x value
+					std::uninitialized_copy(pos, this->end(), new_first + offset + count); // Copie les anciens élements
+
+					clear(); // On destroy l'ancienne mémoire
 					this->_alloc.deallocate(this->_first, old_capacity);
-                    std::cout << "enter 5 if"<< std::endl;
 					this->_first = new_first;
-                    std::cout << "enter 6 if"<< std::endl;
 					this->_last = this->_first + old_size + count;
-                    std::cout << "enter 7 if"<< std::endl;
 					this->_capacity = *this->_first + new_size;
-                    
 				}
-				else
+				else // Si la capacity est suffisante pour ajouter les nouveaux élements
 				{
-                    std::cout << "enter 1 else"<< std::endl;
 					size_type old_size = this->size();
+					new_size = old_size + count;
+
 					for (size_type i = 0; i < old_size - offset; i++)
 					{
-                        std::cout << "enter for 1"<< std::endl;
 						if (new_size - i > old_size)
 							this->_alloc.construct(&this->_first[new_size - i - 1], this->_first[old_size - i - 1]);
 						else
 							this->_first[new_size - i - 1] = this->_first[old_size - i - 1];
-                        std::cout << "exit for 1"<< std::endl;
 					}
 					for (size_type i = 0; i < count; i++)
 					{
-                        std::cout << "enter for 2"<< std::endl;
 						if (offset + i >= size())
-							this->_alloc.construct(&this->_first[offset + i, *this->_first]);
+							this->_alloc.construct(&this->_first[offset + i], value);
 						else
-							this->_first[offset + i] = *this->_first;
-						++this->_first;
-                        std::cout << "exit for 1"<< std::endl;
+							this->_first[offset + i] = value;
 					}
 					this->_last += count;
 				}
-                std::cout << "exit insert"<< std::endl;
 			}
 
 			template <class InputIterator>
-        	void insert(iterator position, InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last)
+        	void insert( iterator position, InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last )
         	{
 				size_type count = std::distance(first, last);
 				size_type new_size = this->size() + count;
 				size_type offset = position - begin();
 				
-				if (new_size > this->_capacity)
+				if (new_size > this->_capacity) // Si le nombre d'élements à ajouter font passer la size au delà de la capacity
 				{
-					new_size = calc_new_capacity(new_size);
 					size_type old_capacity = this->_capacity;
 					size_type old_size = this->size();
+
+					new_size = calc_new_capacity(new_size);
 					pointer new_first = this->_alloc.allocate(new_size);
 
-					std::uninitialized_copy(this->begin(), position, new_first);
-					std::uninitialized_copy(first, last, new_first + offset);
-					std::uninitialized_copy(position, this->end(), new_first + offset + count);
+					std::uninitialized_copy(this->begin(), position, new_first); // Copie les nombres de begin à pos dans le nouvel espace mémoire réservé
+					std::uninitialized_copy(first, last, new_first + offset); // Remplit cet espace mémoire avec count x value
+					std::uninitialized_copy(position, this->end(), new_first + offset + count); // Copie les anciens élements
 
-					clear();
+					clear(); // On destroy l'ancienne mémoire
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
 					this->_last = this->_first + old_size + count;
 					this->_capacity = *this->_first + new_size;
 				}
-				else
+				else // Si la capacity est suffisante pour ajouter les nouveaux élements
 				{
 					size_type old_size = this->size();
+					new_size = old_size + count;
+
 					for (size_type i = 0; i < old_size - offset; i++)
 					{
 						if (new_size - i > old_size)
@@ -305,10 +295,10 @@ namespace ft
 					for (size_type i = 0; i < count; i++)
 					{
 						if (offset + i >= size())
-							this->_alloc.construct(&this->_first[offset + i, *this->_first]);
+							this->_alloc.construct(&this->_first[offset + i], *first);
 						else
-							this->_first[offset + i] = *this->_first;
-						++this->_first;
+							this->_first[offset + i] = *first;
+						++first;
 					}
 					this->_last += count;
 				}
@@ -357,7 +347,6 @@ namespace ft
 
 			void swap( vector & other )
 			{
-
 				pointer buffer_first = other._first;
 				pointer buffer_last = other._last;
 				size_type buffer_capacity = other._capacity;
