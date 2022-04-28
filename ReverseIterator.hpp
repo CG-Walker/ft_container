@@ -7,9 +7,9 @@
 namespace ft
 {
 template <typename Iter>
-	class reverse_iterator 
+	class reverse_iterator
 	{
-	private:
+	protected:
 		Iter _base;
 
 	public:
@@ -20,15 +20,18 @@ template <typename Iter>
 		typedef typename iterator_traits<Iter>::iterator_category	iterator_category;
 		
         reverse_iterator() : _base() {};
-		reverse_iterator(Iter base) : _base(base) {};
-		reverse_iterator(const reverse_iterator<Iter> & other) : _base(other._base) {};
-		~reverse_iterator() {};
-
-		Iter base() const { return (this->_base); };
-
-		reverse_iterator<Iter> & operator=(const reverse_iterator<Iter> & other)
+		explicit reverse_iterator(Iter base) : _base(base) {};
+       template<class U>
+		reverse_iterator(const reverse_iterator<U> &other)
 		{
-			this->_base = other._base;
+			_base = other.base();
+		}
+		~reverse_iterator() {};
+		Iter base() const { return (this->_base); };
+        template<class U>
+		reverse_iterator &operator=(reverse_iterator<U> const &other)
+		{
+			_base = other.base();
 			return (*this);
 		}
 
@@ -46,16 +49,18 @@ template <typename Iter>
 
 		reference operator*() const
 		{
-			Iter ite(this->_base);
-			--ite;
-			return (*ite);
+			Iter	tmp = _base;
+			return *(--tmp);
 		}
 
 		pointer operator->() const
 		{
-			Iter ite(this->_base);
-			--ite;
-			return (ite.operator->());
+			return (&(operator*()));
+		}
+        
+        reference operator[](difference_type n) const
+		{
+			return (base()[-n-1]);
 		}
 
 		reverse_iterator<Iter> & operator--()

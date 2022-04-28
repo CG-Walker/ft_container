@@ -25,7 +25,7 @@ namespace ft
 
             pointer base() const {return (_ptr);};
 
-			iterator & operator=(iterator const & other)
+			iterator &operator=(iterator const & other)
 			{
 				_ptr = other._ptr;
 				return (*this);
@@ -113,7 +113,7 @@ namespace ft
 			}
 
 			reference operator*() { return (*_ptr); };
-			reference operator[](difference_type n) const { return *(this + n);	};
+			reference operator[](int n) const { return (*(this->_ptr + n));	};
 			pointer operator->() { return (_ptr); };
 
 		template <typename _T>
