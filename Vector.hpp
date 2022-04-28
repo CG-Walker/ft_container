@@ -333,13 +333,13 @@ namespace ft
 				this->_last--;
 			}
 
-			void resize( size_type count, T value = T() )
+			void resize( size_type count, value_type value = value_type() )
 			{
-				if (count < size())
+				if (count < size()) // Si la nouvelle size est plus petite que celle actuelle
 				{
 					this->erase(this->begin() + count, this->end());
 				}
-				else if (count > this->size())
+				else if (count > this->size()) // Si la nouvelle size est plus grande que celle actuelle
 				{
 					insert(this->end(), count - this->size(), value);
 				}
