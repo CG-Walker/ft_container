@@ -2,10 +2,10 @@ CPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = ft_container
-SRC_STACK = tester_stack.cpp
-SRC_VECTOR = tester_vector.cpp
-SRC_MAP = tester_map.cpp
-SRC_ALL = all_test.cpp
+SRC_STACK = Testers/tester_stack.cpp
+SRC_VECTOR = Testers/tester_vector.cpp
+SRC_MAP = Testers/tester_map.cpp
+SRC_ALL = Testers/all_test.cpp
 
 all: $(NAME)
 
