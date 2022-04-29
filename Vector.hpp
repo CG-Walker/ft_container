@@ -279,7 +279,7 @@ namespace ft
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
 					this->_last = this->_first + old_size + count;
-					this->_capacity = *this->_first + new_size;
+					this->_capacity = new_size;
 				}
 				else // Si la capacity est suffisante pour ajouter les nouveaux élements
 				{
@@ -378,7 +378,8 @@ namespace ft
 			if (cap >= max_cap / 2)
 				return max_cap;
 			//std::cout << "cap * 2 : " << cap * 2 << " | new_cap : " << new_cap << std::endl;
-			return std::max(cap * 2, new_cap);
+			//std::cout << "max : " << std::max((cap * 2), new_cap) <<  std::endl;
+			return std::max((cap * 2), new_cap);
        	}
 	}; // class Vector
 
