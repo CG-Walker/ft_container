@@ -1,9 +1,9 @@
-
 #ifndef REVERSEITERATOR_HPP
-#define REVERSEITERATOR_HPP
+# define REVERSEITERATOR_HPP
 
-#include "Iterator.hpp"
 # include <iomanip>
+
+# include "IteratorTrait.hpp"
 
 namespace ft
 {

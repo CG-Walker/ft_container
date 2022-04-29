@@ -1,11 +1,10 @@
 #ifndef TREE_ITERATOR_HPP
 # define TREE_ITERATOR_HPP
 
-# include "../Utils/Utils.hpp"
-# include "VectorIterator.hpp"
-# include "../Utils/Tree.hpp"
-# include "IteratorTrait.hpp"
 # include <iostream>
+
+# include "IteratorTrait.hpp"
+# include "../Utils/Utils.hpp"
 
 namespace ft
 {

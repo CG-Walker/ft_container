@@ -4,8 +4,6 @@
 # include <functional>
 # include <stdexcept>
 
-# include "../Iterators/IteratorTrait.hpp"
-# include "../Iterators/MapIterator.hpp"
 # include "../Iterators/ReverseIterator.hpp"
 # include "../Utils/Utils.hpp"
 # include "../Utils/Tree.hpp"
@@ -56,8 +54,8 @@ namespace ft
 			typedef ft::tree<key_type, value_type, tree_compare, allocator_type>		tree_type;
 
 		public:
-			typedef typename tree_type::iterator								iterator; // PAS BON
-			typedef typename tree_type::const_iterator							const_iterator; // PAS BON
+			typedef typename tree_type::iterator								iterator;
+			typedef typename tree_type::const_iterator							const_iterator;
             typedef ft::reverse_iterator<iterator>								reverse_iterator;
 			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
 

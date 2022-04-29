@@ -1,8 +1,8 @@
 #include <map>
-#include "Map.hpp"
 #include <string>
-#include "Utils.hpp"
 #include <iostream>
+
+#include "../Includes/Containers/Map.hpp"
 
 // TEST DES FONCTIONS ITERATORS
 void	tests_iterators()
@@ -35,16 +35,15 @@ void	tests_iterators()
     std_map.insert(std::pair<int, int>(7, 1));
     std_map.insert(std::pair<int, int>(11, 1));
     std_it = std_map.begin();
-    std::cout << "\n std_it begin() : " << std_it->first << std::endl;
+    std::cout << "\nstd_it begin() : " << std_it->first << std::endl;
     std_it = std_map.end();
     std::cout << "std_it end() : " << std_it->first << std::endl;
     
     stdr_it = std_map.rbegin();
     std::cout << "stdr rbegin() : " << stdr_it->first << std::endl;
-    stdr_it = std_map.rend();
-    std::cout << "stdr rend() : " << stdr_it->first << std::endl;
+    //stdr_it = std_map.rend();
+    //std::cout << "stdr rend() : " << stdr_it->first << std::endl;
 
-	// Ne fonctionne pas
 	r_it = map_iterators.rbegin();
 	std::cout << "rbegin() : " << r_it->first << std::endl;
 	r_it = map_iterators.rend();
@@ -105,7 +104,7 @@ void	tests_modifiers()
 	map_modifiers_swap.print_tree("map_modifiers_swap");
 
 	// Crash when calling clear on a empty map
-	//map_modifiers.clear();
+	map_modifiers.clear();
 	map_modifiers_swap.clear();
 
 	map_modifiers.print_tree("map_modifiers");

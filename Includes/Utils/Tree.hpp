@@ -2,15 +2,12 @@
 # define TREE_HPP
 
 # include <memory>
-
-# include "Iterator.hpp"
-# include "tree_iterator.hpp"
-# include "Utils.hpp"
-# include "Map.hpp"
 # include <limits>
 # include <iostream>
-
 # include <cmath>
+
+# include "../Iterators/MapIterator.hpp"
+# include "../Utils/Utils.hpp"
 
 namespace ft
 {
@@ -458,6 +455,6 @@ namespace ft
 					node->parent->right = new_node;
 			}
 	};
-}
+} // namespace ft
 
 #endif
