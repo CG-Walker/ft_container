@@ -7,7 +7,7 @@
 #define RESET "\033[0m"
 #define YELLOW "\033[0;33m"
 
-void test_constructors(void);
+//void test_constructors(void);
 void test_assignment_operator(void);
 
 void test_begin_end(void);
@@ -45,7 +45,7 @@ int main(void)
 		outputfile.open("output.std.out");
 
 	outputfile << YELLOW "CONSTRUCTORS" RESET "\n";
-	test_constructors();
+	//test_constructors();
 	outputfile << YELLOW "ASSIGNMENT OPERATOR" RESET "\n";
 	test_assignment_operator();
 
@@ -103,7 +103,7 @@ struct classcomp
 	}
 };
 
-void test_constructors(void)
+/* void test_constructors(void)
 {
 
 	NAMESPACE::map<char, int> first;
@@ -139,12 +139,14 @@ void test_constructors(void)
 	outputfile << "fifth\n";
 	for (NAMESPACE::map<char, int>::iterator it = second.begin(); it != second.end(); ++it)
 		outputfile << it->first << " => " << it->second << '\n';
-}
+} */
 
 void test_assignment_operator(void)
 {
 	NAMESPACE::map<char, int> first;
 	NAMESPACE::map<char, int> second;
+
+	std::cout << "TEST\n";
 
 	first['x'] = 8;
 	first['y'] = 16;
