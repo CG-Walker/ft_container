@@ -83,6 +83,12 @@ namespace ft
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
+			map&	operator=(const map &src)
+			{
+				_tree = src._tree;
+				return (*this);
+			}
+			
 			T & operator[]( const Key & key )
 			{
 				iterator it = find(key);
