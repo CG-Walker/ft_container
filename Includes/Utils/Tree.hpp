@@ -296,34 +296,68 @@ namespace ft
 			iterator find(const key_type & key)
 			{
 				link_type root = this->_current;
+				link_type current = this->_current;
 				bool is_nil = false;
 
 				while (true)
 				{
 					if (is_nil)
 						break ;
-					if (this->_current->value.first == key)
+					if (current->value.first == key)
 					{
-						link_type tmp = this->_current;
-						this->_current = root;
+						link_type tmp = current;
+						current = root;
 						return (iterator(tmp, this->_nil));
 					}
-					else if (this->_compare(key, this->_current->value))
+					else if (this->_compare(key, current->value))
 					{
-						if (this->_current->left == this->_nil)
+						if (current->left == this->_nil)
 							is_nil = true;
 						else
-							this->_current = this->_current->left;
+							current = current->left;
 					}
 					else
 					{
-						if (this->_current->right == this->_nil)
+						if (current->right == this->_nil)
 							is_nil = true;
 						else
-						this->_current = this->_current->right;
+						current = current->right;
 					}
 				}
-				this->_current = root;
+				return (this->end());
+			}
+
+			const_iterator find(const key_type & key) const
+			{
+				link_type root = this->_current;
+				link_type current = this->_current;
+				bool is_nil = false;
+
+				while (true)
+				{
+					if (is_nil)
+						break ;
+					if (current->value.first == key)
+					{
+						link_type tmp = current;
+						current = root;
+						return (const_iterator(tmp, this->_nil));
+					}
+					else if (this->_compare(key, current->value))
+					{
+						if (current->left == this->_nil)
+							is_nil = true;
+						else
+							current = current->left;
+					}
+					else
+					{
+						if (current->right == this->_nil)
+							is_nil = true;
+						else
+						current = current->right;
+					}
+				}
 				return (this->end());
 			}
 
