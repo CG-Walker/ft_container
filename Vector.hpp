@@ -71,14 +71,9 @@ namespace ft
 				this->_alloc.deallocate(this->_first, this->_capacity);
 			}
 
-			vector & operator=( const vector & other )
+			vector					&operator=(const vector &other)
 			{
-				this->clear();
-				size_type new_size = other.size();
-				this->_first = this->_alloc.allocate(new_size);
-				this->_last = this->_first + new_size;
-				this->_capacity = new_size;
-				std::uninitialized_copy(other._first, other._last, this->_first);
+				assign(other._first, other._last);
 				return (*this);
 			}
 
@@ -86,7 +81,7 @@ namespace ft
 
 			void assign( size_type count, const T & value )
 			{
-				if (count > this->_capacity)
+				if (count > capacity())
 				{
 					this->clear();
 					this->reserve(count);
@@ -94,7 +89,7 @@ namespace ft
 				}
 				else
 				{
-					this->clear();
+					//this->clear();
 					std::fill_n(this->_first, count, value);
 				}
 				this->_last = this->_first + count;
@@ -104,7 +99,7 @@ namespace ft
 			void assign( InputIt first, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type last )
 			{
 				size_type new_size = std::distance(first, last);
-				if (new_size > this->_capacity)
+				if (new_size > capacity())
 				{
 					this->clear();
 					this->reserve(new_size);
@@ -112,7 +107,7 @@ namespace ft
 				}
 				else
 				{
-					this->clear();
+					//->clear();
 					std::copy(first, last, this->_first);
 					this->_last = this->_first + new_size;
 				}
