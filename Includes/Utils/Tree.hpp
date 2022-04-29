@@ -146,7 +146,7 @@ namespace ft
 				link_type new_node = create_node(value);
 				bool is_nil = false;
 
-				if (this->_current == NULL) // Signifie que l'arbe est vide
+				if (hint == begin() && this->_current == NULL) // Signifie que l'arbe est vide
 				{
 					this->_current = new_node;
 					this->_current->left->parent = this->_current;
