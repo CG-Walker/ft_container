@@ -52,7 +52,7 @@ int main(void)
 	outputfile << YELLOW "BEGIN | END" RESET "\n";
 	test_begin_end();
 	outputfile << YELLOW "RBEGIN | REND" RESET "\n";
-	test_rbegin_rend();
+	test_rbegin_rend(); // BOUCLE INFINIE ICI
 
 	outputfile << YELLOW "EMPTY" RESET "\n";
 	test_empty();
