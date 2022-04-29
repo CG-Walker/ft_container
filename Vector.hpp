@@ -74,6 +74,8 @@ namespace ft
 			vector					&operator=(const vector &other)
 			{
 				assign(other._first, other._last);
+				//std::cout << "this size: " << this->size() << std::endl;
+				//std::cout << "dist : " << std::distance(_first, _last) << std::endl;
 				return (*this);
 			}
 
@@ -99,6 +101,7 @@ namespace ft
 			void assign( InputIt first, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type last )
 			{
 				size_type new_size = std::distance(first, last);
+				
 				if (new_size > capacity())
 				{
 					this->clear();
@@ -109,8 +112,8 @@ namespace ft
 				{
 					//->clear();
 					std::copy(first, last, this->_first);
-					this->_last = this->_first + new_size;
 				}
+				this->_last = this->_first + new_size;
 			}
 
 			// Element access
@@ -215,6 +218,7 @@ namespace ft
 					size_type old_size = this->size();
 									
 					new_size = calc_new_capacity(new_size);
+					//std::cout << "1 new_size : " << new_size << std::endl;
 					pointer new_first = this->_alloc.allocate(new_size);
 
 					std::uninitialized_copy(this->begin(), pos, new_first); // Copie les nombres de begin à pos dans le nouvel espace mémoire réservé
@@ -225,7 +229,9 @@ namespace ft
 					this->_alloc.deallocate(this->_first, old_capacity);
 					this->_first = new_first;
 					this->_last = this->_first + old_size + count;
-					this->_capacity = *this->_first + new_size;
+					//std::cout << "2 new_size : " << new_size << std::endl;
+					this->_capacity = new_size;
+					//std::cout << "capacity : " << this->_capacity << std::endl;
 				}
 				else // Si la capacity est suffisante pour ajouter les nouveaux élements
 				{
@@ -371,6 +377,7 @@ namespace ft
 			size_type cap = this->_capacity;
 			if (cap >= max_cap / 2)
 				return max_cap;
+			//std::cout << "cap * 2 : " << cap * 2 << " | new_cap : " << new_cap << std::endl;
 			return std::max(cap * 2, new_cap);
        	}
 	}; // class Vector
