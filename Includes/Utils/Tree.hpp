@@ -50,10 +50,12 @@ namespace ft
 					clear();
 					_compare = other._compare;
 					for (iterator i = other.begin(); i != other.end(); ++i)
-						insert(i);
+						insert(*i);
 				}
 				return(*this);
 			}
+
+			Allocator get_allocator() const { return (this->_alloc); };
 	
 			// Iterators
 			iterator begin() { return (iterator(this->_begin, this->_nil)); }
@@ -138,7 +140,7 @@ namespace ft
 				return (ft::make_pair(iterator(new_node, this->_nil), true));
 			}
 
-			iterator insert( iterator hint, const value_type & value ) // À vérifier (Si arbre vide ?)
+			iterator insert( iterator hint, const value_type & value )
 			{
 				link_type root = this->_current;
 				link_type new_node = create_node(value);

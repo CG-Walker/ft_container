@@ -57,7 +57,7 @@ namespace ft
 			typedef typename tree_type::iterator								iterator;
 			typedef typename tree_type::const_iterator							const_iterator;
             typedef ft::reverse_iterator<iterator>								reverse_iterator;
-			typedef ft::reverse_iterator<const iterator>						const_reverse_iterator;
+			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
 		public:
 
@@ -71,7 +71,7 @@ namespace ft
 				typedef value_type	first_argument_type;
 				typedef value_type	second_argument_type;
 
-				bool operator()(const value_type &lhs, const value_type &rhs) const { return (comp(lhs.first, rhs.first)); }
+				bool operator()(const value_type & lhs, const value_type & rhs) const { return (comp(lhs.first, rhs.first)); }
 			};
 						
 			// Constructors & Destructor
@@ -107,6 +107,8 @@ namespace ft
 				return (it->second);
 			}
 
+			allocator_type get_allocator() const { return (this->_tree.get_allocator()); };
+
 			// Iterators
 			iterator begin() { return (this->_tree.begin()); };
 			const_iterator begin() const { return (this->_tree.begin()); };
@@ -134,7 +136,7 @@ namespace ft
 			void swap( map & other ) { this->_tree.swap(other._tree); };
 
 			// Element access
-			size_type count( const key_type & key ) const { return (this->find(key) == this->end() ? 0 : 1) ;};
+			size_type count( const key_type & key ) const { return (this->find(key) == this->end() ? 0 : 1); };
 			iterator find( const key_type & key ) { return (this->_tree.find(key)); };
 			const_iterator find( const key_type & key ) const { return (this->_tree.find(key)); };
 			ft::pair<iterator,iterator> equal_range( const Key & key ) { return (this->_tree.equal_range(key)); };
