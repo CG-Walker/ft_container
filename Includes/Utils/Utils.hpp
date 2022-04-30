@@ -1,6 +1,8 @@
 #ifndef UTILS_HPP
 # define UTILS_HPP
 
+# include <cstddef>
+
 namespace ft
 {
 	template <class Input1, class Input2>

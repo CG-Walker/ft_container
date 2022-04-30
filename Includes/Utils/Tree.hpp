@@ -24,7 +24,8 @@ namespace ft
 		private:
 			// Member types
 			typedef Key															key_type;
-			typedef T															value_type;	// T = value_type de map = ft::pair<const Key, T> 
+			typedef T															value_type;	// T = value_type de map = ft::pair<const Key, T>
+			typedef Compare														key_compare;
 			typedef ft::node<T> *												link_type;
 			typedef const ft::node<T> *											const_link_type;
 			typedef typename Allocator::size_type 								size_type;
@@ -32,6 +33,21 @@ namespace ft
 			typedef typename node_allocator_type::difference_type 				difference_type;
 
 		public:
+			class value_compare : std::binary_function<value_type, value_type, bool>
+			{
+			//class tree;
+			public:
+				key_compare	comp;
+				value_compare(Compare c) : comp(c) {}
+
+				typedef bool 		result_type;
+				typedef value_type	first_argument_type;
+				typedef value_type	second_argument_type;
+
+				bool operator()(const first_argument_type & lhs, const second_argument_type & rhs) const { return (comp(lhs.first, rhs.first)); }
+			};
+
+
 			// Constructors & Destructor
 			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 			tree(const tree & tree) : _current(NULL), _compare(tree._compare), _size(0), _alloc(tree._alloc)
