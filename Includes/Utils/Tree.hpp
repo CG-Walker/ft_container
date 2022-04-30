@@ -44,12 +44,20 @@ namespace ft
 				typedef value_type	first_argument_type;
 				typedef value_type	second_argument_type;
 
-				bool operator()(const first_argument_type & lhs, const second_argument_type & rhs) const { return (comp(lhs.first, rhs.first)); }
+				bool operator()(const value_type & lhs, const value_type & rhs) const { 
+					std::cout << "value/value\n";
+					return (comp(lhs.first, rhs.first)); }
+				bool operator()(const Key & lhs, const value_type & rhs) const { 
+					std::cout << "key/value\n";
+					return (comp(lhs, rhs.first)); }
+				bool operator()(const value_type & lhs, const Key & rhs) const { 
+					std::cout << "value/key\n";
+					return (comp(lhs.first, rhs)); }
 			};
 
 
 			// Constructors & Destructor
-			tree(const Compare & compare, const Allocator & allocator)  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
+			tree(const key_compare & compare = key_compare(), const Allocator & allocator = Allocator())  : _current(NULL), _compare(compare), _size(0), _alloc(node_allocator_type(allocator)) { initialize(); };
 			tree(const tree & tree) : _current(NULL), _compare(tree._compare), _size(0), _alloc(tree._alloc)
 			{
                 initialize();
@@ -303,7 +311,7 @@ namespace ft
 				swappy(_nil, other._nil);
 				swappy(_begin, other._begin);
 				swappy(_end, other._end);
-				swappy(_compare, other._compare);
+				//swappy(_compare, other._compare);
 				swappy(_alloc, other._alloc);
 				swappy(_size, other._size);
 			}
@@ -317,16 +325,19 @@ namespace ft
 
 				while (true)
 				{
+					std::cout << "TEST10\n";
 					if (is_nil)
 						break ;
 					if (current->value.first == key)
 					{
+						std::cout << "TEST11\n";
 						link_type tmp = current;
 						current = root;
 						return (iterator(tmp, this->_nil));
 					}
 					else if (this->_compare(key, current->value))
 					{
+						std::cout << "TEST12\n";
 						if (current->left == this->_nil)
 							is_nil = true;
 						else
@@ -334,12 +345,14 @@ namespace ft
 					}
 					else
 					{
+						std::cout << "TEST13\n";
 						if (current->right == this->_nil)
 							is_nil = true;
 						else
 						current = current->right;
 					}
 				}
+				std::cout << "TEST15\n";
 				return (this->end());
 			}
 
@@ -414,7 +427,7 @@ namespace ft
 			link_type			_nil;
 			link_type			_begin;
 			link_type			_end;
-			Compare				_compare;
+			value_compare		_compare;
 			size_type			_size;
 			node_allocator_type	_alloc;
 

@@ -103,7 +103,7 @@ struct classcomp
 	}
 };
 
-/* void test_constructors(void)
+void test_constructors(void)
 {
 
 	NAMESPACE::map<char, int> first;
@@ -139,7 +139,7 @@ struct classcomp
 	outputfile << "fifth\n";
 	for (NAMESPACE::map<char, int>::iterator it = second.begin(); it != second.end(); ++it)
 		outputfile << it->first << " => " << it->second << '\n';
-} */
+}
 
 void test_assignment_operator(void)
 {
@@ -147,7 +147,6 @@ void test_assignment_operator(void)
 	NAMESPACE::map<char, int> second;
 
 	std::cout << "TEST\n";
-
 	first['x'] = 8;
 	first['y'] = 16;
 	first['z'] = 32;

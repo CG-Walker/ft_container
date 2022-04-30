@@ -35,8 +35,7 @@ namespace ft
 	class map
 	{
 		public:
-        
-			// Member types
+        	// Member types
 			typedef Key													key_type;
 			typedef T													mapped_type;
 			typedef typename ft::pair<const Key, T>						value_type;
@@ -62,10 +61,10 @@ namespace ft
 		public:				
 			// Constructors & Destructor
 			//map() {};
-			explicit map( const key_compare & comp = key_compare(), const allocator_type & alloc = allocator_type() ) : _key_comp(comp), _value_comp(value_compare(comp)), _tree(key_compare(comp), alloc) {};
+			explicit map( const key_compare & comp = key_compare(), const allocator_type & alloc = allocator_type() ) : _key_comp(comp), _value_comp(comp), _tree(comp, alloc) {};
 			
 			template <class InputIt>
-			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) : _key_comp(comp), _value_comp(value_compare(comp)), _tree(key_compare(comp), alloc) { this->insert(first, last); };
+			map( InputIt first, InputIt last, const Compare & comp = Compare(), const Allocator & alloc = Allocator() ) : _key_comp(comp), _value_comp(comp), _tree(comp, alloc) { this->insert(first, last); };
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
@@ -77,9 +76,12 @@ namespace ft
 			
 			T & operator[]( const Key & key )
 			{
+				std::cout << "TEST2\n";
 				iterator it = find(key);
+				std::cout << "TEST3\n";
 				if (it == end())
 					it = insert(value_type(key, mapped_type())).first;
+				std::cout << "TEST4\n";
 				return (it->second);
 			}
 
