@@ -10,7 +10,7 @@
 
 namespace ft
 {
-	template <class Key, class Value, class Compare> // Pas encore compris
+    template <class Key, class Value, class Compare> // Pas encore compris
 	class map_value_compare : private Compare
 	{
 		public:
@@ -30,11 +30,12 @@ namespace ft
 				return static_cast<const Compare &>(*this)(lhs, rhs.first);
 			}
 	};
-
+    
 	template <class Key, class T, class Compare = std::less<Key>, class Allocator = std::allocator<ft::pair<const Key, T> > >
 	class map
 	{
 		public:
+        
 			// Member types
 			typedef Key													key_type;
 			typedef T													mapped_type;
@@ -60,7 +61,6 @@ namespace ft
 			typedef ft::reverse_iterator<const_iterator>						const_reverse_iterator;
 
 		public:
-
 			class value_compare : std::binary_function<value_type, value_type, bool>
 			{
 			public:
@@ -163,6 +163,7 @@ namespace ft
 			key_compare		_key_comp;
 			value_compare	_value_comp;
 			tree_type		_tree;
+            
 	};
 
 	// Non-member functions
