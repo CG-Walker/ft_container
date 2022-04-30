@@ -35,6 +35,7 @@ namespace ft
 	class map
 	{
 		public:
+        
 			// Member types
 			typedef Key													key_type;
 			typedef T													mapped_type;
@@ -148,6 +149,7 @@ namespace ft
 			key_compare		_key_comp;
 			value_compare	_value_comp;
 			tree_type		_tree;
+            
 	};
 
 	// Non-member functions

@@ -2,6 +2,8 @@
 # define ITERATORTRAIT_HPP
 
 # include "../Utils/Utils.hpp"
+#include <cstddef>
+
 
 namespace ft
 {

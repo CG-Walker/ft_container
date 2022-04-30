@@ -507,6 +507,7 @@ namespace ft
 					node->parent->right = new_node;
 			}
 	};
+    
 } // namespace ft
 
 #endif
