@@ -44,15 +44,9 @@ namespace ft
 				typedef value_type	first_argument_type;
 				typedef value_type	second_argument_type;
 
-				bool operator()(const value_type & lhs, const value_type & rhs) const { 
-					std::cout << "value/value\n";
-					return (comp(lhs.first, rhs.first)); }
-				bool operator()(const Key & lhs, const value_type & rhs) const { 
-					std::cout << "key/value\n";
-					return (comp(lhs, rhs.first)); }
-				bool operator()(const value_type & lhs, const Key & rhs) const { 
-					std::cout << "value/key\n";
-					return (comp(lhs.first, rhs)); }
+				bool operator()(const value_type & lhs, const value_type & rhs) const { return (comp(lhs.first, rhs.first)); }
+				bool operator()(const Key & lhs, const value_type & rhs) const { return (comp(lhs, rhs.first)); }
+				bool operator()(const value_type & lhs, const Key & rhs) const { return (comp(lhs.first, rhs)); }
 			};
 
 
@@ -82,14 +76,14 @@ namespace ft
 			Allocator get_allocator() const { return (this->_alloc); };
 	
 			// Iterators
-			iterator begin() { return (iterator(this->_begin, this->_nil)); }
+			iterator begin() { 
+				std::cout << "IN BEGIN\n";
+				return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
-			iterator end() { return iterator(this->_end, this->_nil); }
+			iterator end() { 
+				std::cout << "IN REND\n";
+				return iterator(this->_end, this->_nil); }
 			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
-			reverse_iterator rbegin() { return reverse_iterator(end()); };
-			const_reverse_iterator rbegin() const { return const_reverse_iterator(end()); };
-			reverse_iterator rend() { return reverse_iterator(begin()); };
-			const_reverse_iterator rend() const { return const_reverse_iterator(begin()); };
 
 			// Capacity
 			size_type size() const { return (this->_size); };
@@ -325,19 +319,16 @@ namespace ft
 
 				while (true)
 				{
-					std::cout << "TEST10\n";
 					if (is_nil)
 						break ;
 					if (current->value.first == key)
 					{
-						std::cout << "TEST11\n";
 						link_type tmp = current;
 						current = root;
 						return (iterator(tmp, this->_nil));
 					}
 					else if (this->_compare(key, current->value))
 					{
-						std::cout << "TEST12\n";
 						if (current->left == this->_nil)
 							is_nil = true;
 						else
@@ -345,14 +336,12 @@ namespace ft
 					}
 					else
 					{
-						std::cout << "TEST13\n";
 						if (current->right == this->_nil)
 							is_nil = true;
 						else
 						current = current->right;
 					}
 				}
-				std::cout << "TEST15\n";
 				return (this->end());
 			}
 
@@ -505,7 +494,6 @@ namespace ft
 			{
 				if (node != this->_nil)
 				{
-					std::cout << "Deleting (" << node->value.first << ":" << node->value.second << ") ...\n";
 					delete_branch(node->left);
 					delete_branch(node->right);
 					delete_node(node);

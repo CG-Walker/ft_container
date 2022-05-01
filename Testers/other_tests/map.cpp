@@ -7,7 +7,7 @@
 #define RESET "\033[0m"
 #define YELLOW "\033[0;33m"
 
-//void test_constructors(void);
+void test_constructors(void);
 void test_assignment_operator(void);
 
 void test_begin_end(void);
@@ -45,7 +45,7 @@ int main(void)
 		outputfile.open("output.std.out");
 
 	outputfile << YELLOW "CONSTRUCTORS" RESET "\n";
-	//test_constructors();
+	test_constructors();
 	outputfile << YELLOW "ASSIGNMENT OPERATOR" RESET "\n";
 	test_assignment_operator();
 
@@ -53,6 +53,7 @@ int main(void)
 	test_begin_end();
 	outputfile << YELLOW "RBEGIN | REND" RESET "\n";
 	test_rbegin_rend(); // BOUCLE INFINIE ICI
+	std::cout << "TEST2\n";
 
 	outputfile << YELLOW "EMPTY" RESET "\n";
 	test_empty();
@@ -174,15 +175,19 @@ void test_begin_end(void)
 void test_rbegin_rend(void)
 {
 	NAMESPACE::map<char, int> mymap;
-
+	
+	std::cout << "TEST RBEGIN REND 1\n";
 	mymap['x'] = 100;
 	mymap['y'] = 200;
 	mymap['z'] = 300;
+	std::cout << "TEST RBEGIN REND 2\n";
 
 	// show content:
 	NAMESPACE::map<char, int>::reverse_iterator rit;
-	for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit)
+	std::cout << "TEST RBEGIN REND 3\n";
+	for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit) // BOUCLE INFINIE ICI (Le rend) J'imagine que rit n'arrive jamais à end
 		outputfile << rit->first << " => " << rit->second << '\n';
+	std::cout << "TEST RBEGIN REND 4\n";
 }
 
 void test_empty(void)

@@ -76,13 +76,14 @@ namespace ft
 			
 			T & operator[]( const Key & key )
 			{
-				std::cout << "TEST2\n";
+		/* 		std::cout << "TEST2\n";
 				iterator it = find(key);
 				std::cout << "TEST3\n";
 				if (it == end())
 					it = insert(value_type(key, mapped_type())).first;
 				std::cout << "TEST4\n";
-				return (it->second);
+				return (it->second); */
+				return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
 			}
 
 			T & at( const Key & key ) 
@@ -110,7 +111,9 @@ namespace ft
 			const_iterator end() const { return (this->_tree.end()); };
 			reverse_iterator rbegin() { return (reverse_iterator(this->end())); };
 			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); };
-			reverse_iterator rend() { return (reverse_iterator(this->begin())); };
+			reverse_iterator rend() { 
+				std::cout << "IN MAP REND\n";
+				return (reverse_iterator(this->begin())); };
 			const_reverse_iterator rend() const { return (const_reverse_iterator(this->begin())); };
 
 			// Capacity
