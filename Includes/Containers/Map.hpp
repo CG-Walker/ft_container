@@ -141,7 +141,7 @@ namespace ft
 			value_compare value_comp() const { return (this->_value_comp); };
 
 			// DEBUG
-			void print_tree(std::string name) { this->_tree.print_tree(name); };
+			//void print_tree(std::string name) { this->_tree.print_tree(name); };
 
 		private:
 			key_compare		_key_comp;

@@ -416,12 +416,13 @@ namespace ft
 			link_type get_nil() const { return (this->_nil); };
 	
 			// DEBUG
+            /*
 			void	print_tree(std::string name)
 			{
 				std::cout << "\n--- " << name << " ---" << std::endl;
 				printBT("", this->_current, false);
 			}
-
+            */
 		private:
 			link_type			_current; // Pointe toujours sur le root
 			link_type			_nil;
