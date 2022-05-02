@@ -68,7 +68,7 @@ namespace ft
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
-			map&	operator=(const map &src)
+			map&	operator=(const map & src)
 			{
 				_tree = src._tree;
 				return (*this);
@@ -112,7 +112,7 @@ namespace ft
 			reverse_iterator rbegin() { return (reverse_iterator(this->end())); };
 			const_reverse_iterator rbegin() const { return (const_reverse_iterator(this->end())); };
 			reverse_iterator rend() { 
-				std::cout << "IN MAP REND\n";
+				//std::cout << "IN MAP REND\n";
 				return (reverse_iterator(this->begin())); };
 			const_reverse_iterator rend() const { return (const_reverse_iterator(this->begin())); };
 

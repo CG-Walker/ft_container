@@ -52,11 +52,11 @@ int main(void)
 	outputfile << YELLOW "BEGIN | END" RESET "\n";
 	test_begin_end();
 	outputfile << YELLOW "RBEGIN | REND" RESET "\n";
-	test_rbegin_rend(); // BOUCLE INFINIE ICI
-	std::cout << "TEST2\n";
+	test_rbegin_rend();
 
 	outputfile << YELLOW "EMPTY" RESET "\n";
-	test_empty();
+	test_empty(); // CRASH
+	std::cout << "TEST2\n";
 	outputfile << YELLOW "SIZE" RESET "\n";
 	test_size();
 	outputfile << YELLOW "MAX SIZE" RESET "\n";
@@ -147,7 +147,6 @@ void test_assignment_operator(void)
 	NAMESPACE::map<char, int> first;
 	NAMESPACE::map<char, int> second;
 
-	std::cout << "TEST\n";
 	first['x'] = 8;
 	first['y'] = 16;
 	first['z'] = 32;
@@ -176,18 +175,16 @@ void test_rbegin_rend(void)
 {
 	NAMESPACE::map<char, int> mymap;
 	
-	std::cout << "TEST RBEGIN REND 1\n";
 	mymap['x'] = 100;
 	mymap['y'] = 200;
 	mymap['z'] = 300;
-	std::cout << "TEST RBEGIN REND 2\n";
 
 	// show content:
 	NAMESPACE::map<char, int>::reverse_iterator rit;
-	std::cout << "TEST RBEGIN REND 3\n";
-	for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit) // BOUCLE INFINIE ICI (Le rend) J'imagine que rit n'arrive jamais à end
+	for (rit = mymap.rbegin(); rit != mymap.rend(); ++rit) 
+	{
 		outputfile << rit->first << " => " << rit->second << '\n';
-	std::cout << "TEST RBEGIN REND 4\n";
+	}
 }
 
 void test_empty(void)

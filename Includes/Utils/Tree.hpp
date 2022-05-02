@@ -77,11 +77,11 @@ namespace ft
 	
 			// Iterators
 			iterator begin() { 
-				std::cout << "IN BEGIN\n";
+				//std::cout << "IN BEGIN\n";
 				return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
 			iterator end() { 
-				std::cout << "IN REND\n";
+				//std::cout << "IN REND\n";
 				return iterator(this->_end, this->_nil); }
 			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
 

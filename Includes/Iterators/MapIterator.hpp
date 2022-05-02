@@ -6,6 +6,9 @@
 # include "IteratorTrait.hpp"
 # include "../Utils/Utils.hpp"
 
+#include <chrono>
+#include <thread>
+
 namespace ft
 {
 	template <class T>
@@ -55,7 +58,7 @@ namespace ft
 			reference operator*() const {return _current->value;};
 			pointer operator->() const {return &_current->value;};
 			
-			// Postfix increment
+			// Préfix increment
 			tree_iterator & operator++()
 			{
 				this->next();
@@ -67,8 +70,7 @@ namespace ft
 				return (*this);
 			}
 
-			// Préfix increment
-			
+			// Postfix increment
 			tree_iterator operator++(int)
 			{
 				tree_iterator tmp(*this);
@@ -81,23 +83,30 @@ namespace ft
 				--(*this);
 				return (tmp);
 			}
-			
 
 		private:
 			link_type _current;
 			link_type _nil;
 
-			void prev()
+			void prev() // Commence à end -> begin
 			{
-				if (this->_current->left) 
+				/* std::chrono::milliseconds timespan(1000); // or whatever
+				std::this_thread::sleep_for(timespan);
+				std::cout << "_current : " << this->_current->value.first << std::endl;			
+				std::cout << "_current->left : " << this->_current->left->value.first << std::endl;
+				std::cout << "_current->right : " << this->_current->right->value.first << std::endl;  */
+
+				if (this->_current->left != this->_nil) // pointe sur root
 				{
 					this->_current = this->_current->left;
+					//std::cout << "_current : " << this->_current->value.first << std::endl; 
 					while (this->_current->right != this->_nil)
 						this->_current = this->_current->right;
 				} 
 				else
 					this->_current = this->_current->parent;
 			}
+
 			void next() 
 			{
 				if (this->_current->right != this->_nil) 
