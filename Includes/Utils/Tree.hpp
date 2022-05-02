@@ -118,7 +118,7 @@ namespace ft
 					return (ft::make_pair(iterator(new_node, this->_nil), true));
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-					return (ft::make_pair(iterator(new_node, this->_nil), false));
+					return (ft::make_pair(this->find(value.first), false));
 				while (true) // Ajout du nouveau node au bon endroit dans l'arbre
 				{
 					if (is_nil)
@@ -172,10 +172,7 @@ namespace ft
 					return (ft::make_pair(iterator(new_node, this->_nil), true).first);
 				}
 				if (this->find(value.first) != this->end())	// Signifie que la clé existe déjà
-				{
-					//delete_node(new_node);
-					return (ft::make_pair(iterator(new_node, this->_nil), false).first);
-				}
+					return (ft::make_pair(this->find(value.first), false).first);
 				while (true) // Ajout du nouveau node au bon endroit dans l'arbre
 				{
 					if (is_nil)

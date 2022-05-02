@@ -68,7 +68,7 @@ namespace ft
 			map( const map & other ) : _key_comp(other._key_comp), _value_comp(other._value_comp), _tree(other._tree) {};
 			~map() {};
 
-			map&	operator=(const map & src)
+			map & operator=(const map & src)
 			{
 				_tree = src._tree;
 				return (*this);
@@ -83,7 +83,8 @@ namespace ft
 					it = insert(value_type(key, mapped_type())).first;
 				std::cout << "TEST4\n";
 				return (it->second); */
-				return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
+				//return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
+				return (this->insert(ft::make_pair(key, mapped_type())).first->second);
 			}
 
 			T & at( const Key & key ) 
