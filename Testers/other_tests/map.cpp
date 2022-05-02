@@ -45,50 +45,49 @@ int main(void)
 		outputfile.open("output.std.out");
 
 	outputfile << YELLOW "CONSTRUCTORS" RESET "\n";
-	//test_constructors();
+	test_constructors();
 	outputfile << YELLOW "ASSIGNMENT OPERATOR" RESET "\n";
-	//test_assignment_operator();
+	test_assignment_operator();
 
 	outputfile << YELLOW "BEGIN | END" RESET "\n";
-	test_begin_end(); // <- 0 leaks
+	test_begin_end();
 	outputfile << YELLOW "RBEGIN | REND" RESET "\n";
-	test_rbegin_rend(); // <- 0 leaks
+	test_rbegin_rend();
 
 	outputfile << YELLOW "EMPTY" RESET "\n";
-	//test_empty();
+	test_empty();
 	outputfile << YELLOW "SIZE" RESET "\n";
-	test_size(); // <- 0 leaks
+	test_size();
 	outputfile << YELLOW "MAX SIZE" RESET "\n";
-	test_max_size(); // <- 0 leaks
+	test_max_size();
 
 	outputfile << YELLOW "OPERATOR[]" RESET "\n";
-	//test_element_access_operator();
-
+	test_element_access_operator();
 	outputfile << YELLOW "INSERT" RESET "\n";
-	//test_insert();
+	test_insert();
 	outputfile << YELLOW "ERASE" RESET "\n";
-	test_erase(); //<- 0 leaks
+	test_erase();
 	outputfile << YELLOW "SWAP" RESET "\n";
-	test_swap(); // <- 0 leaks
+	test_swap();
 	outputfile << YELLOW "CLEAR" RESET "\n";
-	test_clear(); // <- 0 leaks
+	test_clear();
 
 	outputfile << YELLOW "KEY COMP" RESET "\n";
-	test_key_comp(); // <- 0 leaks
+	test_key_comp();
 	outputfile << YELLOW "VALUE COMP" RESET "\n";
-	test_value_comp();  // <- 0 leaks
+	test_value_comp();
 
 	outputfile << YELLOW "FIND" RESET "\n";
-	test_find(); // <- 0 leaks
+	test_find();
 	outputfile << YELLOW "COUNT" RESET "\n";
-	test_count(); // <- 0 leqks
+	test_count();
 	outputfile << YELLOW "LOWER | UPPER BOUND" RESET "\n";
-	test_lower_upper_bound(); // <- 0leaks
+	test_lower_upper_bound();
 	outputfile << YELLOW "EQUAL RANGE" RESET "\n";
-	test_equal_range(); // <- 0 leaks
+	test_equal_range();
 
 	outputfile << YELLOW "GET ALLOCATOR" RESET "\n";
-	//test_get_allocator();
+	test_get_allocator();
 
 	return 0;
 }
