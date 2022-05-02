@@ -76,13 +76,9 @@ namespace ft
 			Allocator get_allocator() const { return (this->_alloc); };
 	
 			// Iterators
-			iterator begin() { 
-				//std::cout << "IN BEGIN\n";
-				return (iterator(this->_begin, this->_nil)); }
+			iterator begin() { return (iterator(this->_begin, this->_nil)); }
 			const_iterator begin() const { return const_iterator(this->_begin, this->_nil); }
-			iterator end() { 
-				//std::cout << "IN REND\n";
-				return iterator(this->_end, this->_nil); }
+			iterator end() { return iterator(this->_end, this->_nil); }
 			const_iterator end() const { return const_iterator(this->_end, this->_nil); };
 
 			// Capacity
@@ -268,20 +264,26 @@ namespace ft
 					
 				}
 				// Si le node à supprimer est le root
-                if (node == root)
-                {
-                    if(node->right != _nil)
-                        _current = node->right;
-                    else
-                        _current = node->left;
-                }
-                if (node)
-                {
-                    delete_node(node);
-                    _size--;
-                    if (_size == 0) // L'arbre est désormais vide
-                        _current = NULL;
-                }
+				if (node == root)
+				{
+					if (this->_begin == this->_current)
+						this->_begin = this->_current->right;
+					if (node->right != this->_nil)
+						this->_current = node->right;
+					else if (node->left != this->_nil)
+						this->_current = node->left;
+					this->_end->left = this->_current;
+				}
+				if (node)
+				{
+					delete_node(node);
+					this->_size--;
+					if (_size == 0) // L'arbre est désormais vide
+					{
+						this->_current = NULL;
+						this->_begin = this->_end;
+					}
+				}
 			}
 
 			void erase( iterator first, iterator last )
@@ -412,10 +414,10 @@ namespace ft
 			}
 
 		private:
-			link_type			_current;
+			link_type			_current; // Pointe toujours sur le root
 			link_type			_nil;
-			link_type			_begin;
-			link_type			_end;
+			link_type			_begin; // Pointe toujours sur le début de l'espace réservé
+			link_type			_end; // Pointe toujours sur end
 			value_compare		_compare;
 			size_type			_size;
 			node_allocator_type	_alloc;

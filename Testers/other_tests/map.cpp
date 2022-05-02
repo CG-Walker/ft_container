@@ -55,8 +55,7 @@ int main(void)
 	test_rbegin_rend();
 
 	outputfile << YELLOW "EMPTY" RESET "\n";
-	test_empty(); // CRASH
-	std::cout << "TEST2\n";
+	test_empty();
 	outputfile << YELLOW "SIZE" RESET "\n";
 	test_size();
 	outputfile << YELLOW "MAX SIZE" RESET "\n";

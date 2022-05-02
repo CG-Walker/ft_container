@@ -6,9 +6,6 @@
 # include "IteratorTrait.hpp"
 # include "../Utils/Utils.hpp"
 
-#include <chrono>
-#include <thread>
-
 namespace ft
 {
 	template <class T>
@@ -88,18 +85,11 @@ namespace ft
 			link_type _current;
 			link_type _nil;
 
-			void prev() // Commence à end -> begin
+			void prev()
 			{
-				/* std::chrono::milliseconds timespan(1000); // or whatever
-				std::this_thread::sleep_for(timespan);
-				std::cout << "_current : " << this->_current->value.first << std::endl;			
-				std::cout << "_current->left : " << this->_current->left->value.first << std::endl;
-				std::cout << "_current->right : " << this->_current->right->value.first << std::endl;  */
-
-				if (this->_current->left != this->_nil) // pointe sur root
+				if (this->_current->left != this->_nil)
 				{
 					this->_current = this->_current->left;
-					//std::cout << "_current : " << this->_current->value.first << std::endl; 
 					while (this->_current->right != this->_nil)
 						this->_current = this->_current->right;
 				} 
