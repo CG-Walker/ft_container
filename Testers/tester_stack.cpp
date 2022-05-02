@@ -3,16 +3,6 @@
 #include <stack>
 #include <iostream>
 
-/* template <class T>
-void SHOW(ft::stack<T> stack, std::string stack_name, std::string msg)
-{
-	std::cout << msg << std::endl;
-	std::cout << stack_name << " : [ ";
-	for (ft::iterator<T> it = stack.begin(); it != stack.end(); it++)
-		std::cout << *it << ", ";
-	std::cout << "]" << std::endl << std::endl;
-} */
-
 int main(void)
 {
 	std::stack<int> std_stack;
@@ -48,8 +38,6 @@ int main(void)
 
     tmp = ft_stack;
 	std::cout << "tmp top() : " << tmp.top() << std::endl;
-
-	//SHOW(tmp, "tmp", "<<< tmp after assignation >>>");
 
 	std::cout << "___TEST OPERATOR = ___" << std::endl;
 	std::cout << tmp.size() << std::endl;

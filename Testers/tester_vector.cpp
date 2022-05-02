@@ -1,9 +1,11 @@
-#include "Vector.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iterator>
 #include <typeinfo>
+
+#include "../Includes/Containers/Vector.hpp"
+
 
 template <class T>
 void SHOW(ft::vector<T> vector, std::string vector_name, std::string msg)
@@ -105,15 +107,10 @@ int main()
 	std::cout << "is ft_vector_1 empty() ?" << ft_vector_1.empty() << std::endl;
 	std::cout << std::endl;
 
-	// TEST DE INSERT // NE FONCTIONNE PAS
-/* 	std::cout << "========== TEST DE INSERT ==========\n";
+	std::cout << "========== TEST DE INSERT ==========\n";
 	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 before insert() >>>");
 	ft_vector_2.insert(ft_vector_2.end(), 56);
-	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after insert(4, 8) >>>"); */
-	/* ft_vector_2.insert();
 	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after insert(4, 8) >>>");
-	ft_vector_2.insert();
-	SHOW(ft_vector_2, "ft_vector_2", "<<< ft_vector_2 after insert(4, 8) >>>"); */
 
 	// TEST D'ASSIGNATION
 	std::cout << "========== TEST D'ASSIGNATION ==========\n";
