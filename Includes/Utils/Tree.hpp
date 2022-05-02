@@ -59,7 +59,15 @@ namespace ft
 				link_type root_to_copy = it.base()->left;
 				copy_tree(root_to_copy, tree.get_nil());
 			}
-			~tree()	{};
+			~tree()	
+			{
+				if (this->_size != 0)
+				{
+					delete_branch(this->_current);
+					delete_node(this->_nil);
+					delete_node(this->_end);
+				}
+			}
 
 			tree & operator=( const tree & other )
 			{
@@ -293,9 +301,9 @@ namespace ft
 			{
 				iterator ite = find(key);
 				if (ite == end())
-					return(0);
+					return (0);
 				erase(ite);
-				return(1);
+				return (1);
 			}
 
 			void swap( tree & other )

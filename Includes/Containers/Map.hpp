@@ -76,14 +76,6 @@ namespace ft
 			
 			T & operator[]( const Key & key )
 			{
-		/* 		std::cout << "TEST2\n";
-				iterator it = find(key);
-				std::cout << "TEST3\n";
-				if (it == end())
-					it = insert(value_type(key, mapped_type())).first;
-				std::cout << "TEST4\n";
-				return (it->second); */
-				//return ((*((this->insert(ft::make_pair(key,mapped_type()))).first)).second);
 				return (this->insert(ft::make_pair(key, mapped_type())).first->second);
 			}
 
