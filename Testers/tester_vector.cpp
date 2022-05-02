@@ -116,11 +116,16 @@ int main()
 	std::cout << "========== TEST D'ASSIGNATION ==========\n";
 	ft::vector<int>		ft_vector_3;
 	ft::vector<int>		ft_vector_4;
+    std::vector<int>    std_vector_3;
+    std::vector<int>    std_vector_4;
 
 	for (size_t i = 0; i < 3; i++)
 		ft_vector_3.push_back(i);
 	ft_vector_4.push_back(1);
-		
+	
+    for (size_t i = 0; i < 3; i++)
+		std_vector_3.push_back(i);
+	std_vector_4.push_back(1);
 
 	SHOW(ft_vector_3, "ft_vector_3", "<<< ft_vector_3 after 3 push_back() >>>");
 	SHOW(ft_vector_4, "ft_vector_4", "<<< ft_vector_4 after 1 push_back() >>>");
@@ -132,10 +137,20 @@ int main()
 		std::cout << "ft_vector_3 == ft_vector_3 : True" << std::endl;
 	if (ft_vector_3 != ft_vector_4)
 		std::cout << "ft_vector_3 != ft_vector_4 : True" << std::endl;
-	if (ft_vector_3 > ft_vector_4)
+	if (ft_vector_3 < ft_vector_4)
 		std::cout << "ft_vector_3 > ft_vector_4 : True" << std::endl;
-	if (ft_vector_4 < ft_vector_3)
-		std::cout << "ft_vector_4 < ft_vector_3 : True" << std::endl;
+	if (ft_vector_4 > ft_vector_3)
+		std::cout << "ft_vector_4 < ft_vector_3 : True\n" << std::endl;
+    // TEST COMPARAISONS STD
+    if (std_vector_3 == std_vector_3)
+		std::cout << "std_vector_3 == std_vector_3 : True" << std::endl;
+	if (std_vector_3 != std_vector_4)
+		std::cout << "std_vector_3 != std_vector_4 : True" << std::endl;
+	if (std_vector_3 < std_vector_4)
+		std::cout << "std_vector_3 > std_vector_4 : True" << std::endl;
+	if (std_vector_4 > std_vector_3)
+		std::cout << "std_vector_4 < std_vector_3 : True\n" << std::endl;
+    
 	std::cout << "<<< assignation de ft_vector_4 avec ft_vector_3 (ft_vector_4 = ft_vector_3) >>>" << std::endl;
 	ft_vector_4 = ft_vector_3;
 

@@ -22,7 +22,7 @@ void	tests_iterators()
 	map_iterators.insert(ft::pair<int, int>(8, 1));
     map_iterators.insert(ft::pair<int, int>(7, 1));
 
-	map_iterators.print_tree("map_iterators");
+	//map_iterators.print_tree("map_iterators");
 
 	it = map_iterators.begin();
 	std::cout << "\nbegin() : " << it->first << std::endl;
@@ -77,7 +77,7 @@ void	tests_modifiers()
 	map_modifiers.insert(ft::pair<int, int>(9, 1));
 	map_modifiers.insert(ft::pair<int, int>(8, 1));
 
-	map_modifiers.print_tree("map_modifiers");
+	//map_modifiers.print_tree("map_modifiers");
 
 	std::cout << "erase()...\n";
 	map_modifiers.erase(map_modifiers.begin());
@@ -85,7 +85,7 @@ void	tests_modifiers()
     //map_modifiers.erase(map_modifiers.begin(), map_modifiers.end());
     map_modifiers.erase(9);
 
-	map_modifiers.print_tree("map_modifiers");
+	//map_modifiers.print_tree("map_modifiers");
 
 	ft::map<int, int> map_modifiers_swap;
 
@@ -95,14 +95,14 @@ void	tests_modifiers()
 
 	map_modifiers_swap.swap(map_modifiers);
 
-	map_modifiers.print_tree("map_modifiers");
-	map_modifiers_swap.print_tree("map_modifiers_swap");
+	//map_modifiers.print_tree("map_modifiers");
+	//map_modifiers_swap.print_tree("map_modifiers_swap");
 
 	map_modifiers.clear();
 	map_modifiers_swap.clear();
 
-	map_modifiers.print_tree("map_modifiers");
-	map_modifiers_swap.print_tree("map_modifiers_swap");
+	//map_modifiers.print_tree("map_modifiers");
+	//map_modifiers_swap.print_tree("map_modifiers_swap");
 
 	std::cout << "\n";
 }
@@ -141,17 +141,6 @@ void	tests_element_access()
 	std::cout << "\n";
 }
 
-void	tests_observers()
-{
-	ft::map<int, int> map_iterators;
-    map_iterators.insert(ft::pair<int, int>(10, 1));
-	map_iterators.insert(ft::pair<int, int>(9, 1));
-	map_iterators.insert(ft::pair<int, int>(11, 1));
-    map_iterators.insert(ft::pair<int, int>(7, 1));
-
-    ft::map<int, int>::value_compare value = map_iterators.value_comp();
-	ft::map<int, int>::key_compare key = map_iterators.key_comp();
-}
 
 int main()
 {
@@ -159,7 +148,6 @@ int main()
 	tests_capacity();
 	tests_modifiers();
 	tests_element_access();
-    tests_observers();
 	
 	return(0);
 }
